@@ -18,7 +18,7 @@ Description:
 Payload:
 
 | Key | Value | Restrictions |
-| -- | -- | |
+| -- | -- | -- |
 | name | string | |
 | email | string | |
 | password | string | |
