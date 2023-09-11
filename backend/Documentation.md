@@ -57,7 +57,7 @@ Description:
 Payload:
 
 | Key | Value | Restrictions |
-| -- | -- | |
+| -- | -- | -- |
 | email | string | OPTIONAL |
 
 Response Examples:
@@ -91,7 +91,7 @@ Description:
 Payload:
 
 | Key | Value | Restrictions |
-| -- | -- | |
+| -- | -- | -- |
 | email | string | |
 | password | string | |
 
@@ -140,7 +140,7 @@ Description:
 Payload:
 
 | Key | Value | Restrictions |
-| -- | -- | |
+| -- | -- | -- |
 | email | string | |
 | password | string | |
 
@@ -180,7 +180,7 @@ Description:
 Payload:
 
 | Key | Value | Restrictions |
-| -- | -- | |
+| -- | -- | -- |
 | email | string | |
 | password | string | |
 | new_password | string | |
@@ -222,7 +222,7 @@ Description:
 Payload:
 
 | Key | Value | Restrictions |
-| -- | -- | |
+| -- | -- | -- |
 | email | string | |
 | name | string | "" |
 | content | map | {} |
