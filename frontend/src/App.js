@@ -1,23 +1,35 @@
-import logo from './logo.svg';
+
+import React from 'react';
+import { useState } from 'react';
 import './App.css';
+import LoginContent from './components/LoginContent';
+import Header from './components/Header';
+import Footer from './components/Footer';
 
 function App() {
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+
   return (
+
+/*Esto aun no lo puedo hacer funcar
+    <Router>
+      <Routes>
+        <Route path="/">
+          <Header />
+          <LoginContent email={email} password={password} />
+          <Footer/>
+        </Route>
+        <Route path="/register">
+          <FormRegister/>
+        </Route>
+      </Routes>
+    </Router> 
+*/
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <Header />
+      <LoginContent />
+      <Footer />
     </div>
   );
 }
