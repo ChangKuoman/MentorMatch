@@ -28,7 +28,11 @@ const LoginContent = () => {
 
   // Función para manejar cambios en el campo de contraseña
   const handlePasswordChange = (e) => {
-    setPassword(e.target.value);
+    setPassword(limpiarDatos(e.target.value));
+  };
+
+  const mostrarError = (mensaje) => {
+    alert(mensaje);
   };
 
   // Función para manejar el envío del formulario
@@ -55,6 +59,21 @@ const LoginContent = () => {
     }
 
     // Envía los datos de inicio de sesión al servidor o realiza la autenticación
+
+    const usuarios = require("./data.json")
+
+    const correo = email;
+    const contraseña =  password;
+
+    const usuarioEncontrado = usuarios.find((usuario) => {
+      return usuario.correo === correo && usuario.contraseña === contraseña;
+    });
+    if (usuarioEncontrado) {
+      console.log("Incio de sesion exitoso de: " + email)
+    } else {
+      alert('El correo no existe.');
+    }
+
   };
 
   return (
