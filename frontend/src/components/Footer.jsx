@@ -1,6 +1,6 @@
 import React from 'react';
 import Title from './Title';
-import logo from '../LogoBlanco.svg';
+import logo from '../css/LogoBlanco-removebg-preview.png';
 import '../css/footer.css';
 
 const Footer = () => {

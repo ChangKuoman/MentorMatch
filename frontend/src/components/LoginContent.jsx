@@ -31,22 +31,19 @@ const LoginContent = () => {
     setPassword(limpiarDatos(e.target.value));
   };
 
-  const mostrarError = (mensaje) => {
-    alert(mensaje);
+  const handleRegistrarse = () => {
+    
   };
 
   // Función para manejar el envío del formulario
   const handleSubmit = (e) => {
     e.preventDefault();
-    // Aquí puedes agregar la lógica para enviar los datos de inicio de sesión al servidor o realizar la autenticación.
-    // Puedes usar 'email' y 'password' para eso.
-
-    // Valida los datos de entrada del formulario
+    // validacion si está ingresando un correo
     if (!email.trim()) {
       alert('Debe ingresar un correo electrónico.');
       return;
     }
-
+    // validacion si está ingresando una contraseña
     if (!password.trim()) {
       alert('Debe ingresar una contraseña.');
       return;
@@ -56,24 +53,41 @@ const LoginContent = () => {
     if (!email.includes('@utec.edu.pe')) {
       alert('El correo ingresado no es un correo institucional.');
       return;
-    }
+    }    
 
-    // Envía los datos de inicio de sesión al servidor o realiza la autenticación
+    // prueba de conexion con la api de la bd
+    console.log("prueba ",email,password);
+    const url = `https://fjmjpibq48.execute-api.us-east-1.amazonaws.com/test/login`;
+    const body = {
+      'email': email,
+      'password': password,
+    };
 
-    const usuarios = require("./data.json")
+    console.log(body);
+    const headers = {
+      'Content-Type': 'application/json',
+    };
+    
+    fetch(url, {
+      method: 'POST',
+      headers,
+      body: JSON.stringify({
+        'email': email,
+        'password': password,
+      }),
+    }).then(response => response.json())
+      .then(data=> {
+        console.log(data);
+        if (data.status === 200){
 
-    const correo = email;
-    const contraseña =  password;
-
-    const usuarioEncontrado = usuarios.find((usuario) => {
-      return usuario.correo === correo && usuario.contraseña === contraseña;
-    });
-    if (usuarioEncontrado) {
-      console.log("Incio de sesion exitoso de: " + email)
-    } else {
-      alert('El correo no existe.');
-    }
-
+        } else {
+          alert ('El correo no existe');
+        }
+      })
+      .catch(error => {
+        // Muestra un mensaje de error
+        alert(error);
+      });
   };
 
   return (
@@ -106,6 +120,7 @@ const LoginContent = () => {
           />
         </div>
         <button className='btn' type="submit">Iniciar Sesión</button>
+        <p>Aun no te has registrado?<a href='/register' className='btn btn-link' onClick={handleRegistrarse}>Registrate aquí</a> </p>
       </form>
     </div>
   );

@@ -1,8 +1,10 @@
 
 import React from 'react';
 import { useState } from 'react';
+import { Routes, Route, Router, BrowserRouter } from 'react-router-dom';
 import './App.css';
 import LoginContent from './components/LoginContent';
+import FormRegister from './components/FormRegister';
 import Header from './components/Header';
 import Footer from './components/Footer';
 
@@ -11,26 +13,24 @@ function App() {
   const [password, setPassword] = useState('');
 
   return (
-
-/*Esto aun no lo puedo hacer funcar
-    <Router>
-      <Routes>
-        <Route path="/">
-          <Header />
-          <LoginContent email={email} password={password} />
-          <Footer/>
-        </Route>
-        <Route path="/register">
-          <FormRegister/>
-        </Route>
-      </Routes>
-    </Router> 
-*/
+    /*
     <div className="App">
       <Header />
       <LoginContent />
       <Footer />
     </div>
+    */
+
+    <div className='App'>
+    <Header />
+    <BrowserRouter>
+      <Routes >
+        <Route path='/' element={<LoginContent />} />
+        <Route path='/register' element = {<FormRegister />} />
+      </Routes >
+      <Footer />
+    </BrowserRouter>
+  </div>
   );
 }
 
