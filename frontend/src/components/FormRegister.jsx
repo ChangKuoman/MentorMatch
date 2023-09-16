@@ -88,10 +88,20 @@ const FormRegister = () => {
 
         setValidDocument((tipoDocumento === "DNI" && nroDocumento.length === 8)? true : (tipoDocumento === "CE" && nroDocumento.length === 9) ? true : false);
 
-        terminos === null ? setTerminos(false) : null;
-        clave === '' ? setPasswordValid(false) : null;
-        confirmClave === '' ? setPasswordIgual(false) : null;
-        nombre === '' ? setValidNombre(false) : setValidNombre(true);
+        if (terminos === null) {
+            setTerminos(false);
+          }
+        if (clave === '') {
+        setPasswordValid(false);
+        }
+        if (confirmClave === '') {
+        setPasswordIgual(false);
+        }
+        if (nombre === '') {
+        setValidNombre(false);
+        } else {
+        setValidNombre(true);
+        }
 
         if (emailValido && passwordValido && passwordIgual && terminos && validDocument && nombreValido) {
             console.log("Form enviado");
