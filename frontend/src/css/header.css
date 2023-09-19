@@ -1,0 +1,35 @@
+.header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 90px;
+  background-color: #97CADB;
+}
+
+.header-container {
+  display: flex;
+  align-items: center;
+}
+
+.logo {
+  width: 100px;
+  height: auto;
+  margin-right: 10px;
+}
+
+.title {
+  font-size: 24px;
+  font-weight: bold;
+  color: #ffffff;
+  margin-left: 10px;
+}
+
+@media (max-width: 768px) {
+  .logo {
+    width: 50px;
+  }
+
+  .title {
+    font-size: 18px;
+  }
+}

@@ -1,0 +1,8 @@
+.no-mostrar {
+    display: none;
+}
+
+.mostrar {
+    color: red;
+    font-size: x-small;
+}

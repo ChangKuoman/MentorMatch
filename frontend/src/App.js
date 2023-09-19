@@ -1,24 +1,36 @@
-import logo from './logo.svg';
+
+import React from 'react';
+import { useState } from 'react';
+import { Routes, Route, Router, BrowserRouter } from 'react-router-dom';
 import './App.css';
+import LoginContent from './components/LoginContent';
+import FormRegister from './components/FormRegister';
+import Header from './components/Header';
+import Footer from './components/Footer';
 
 function App() {
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+
   return (
+    /*
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <Header />
+      <LoginContent />
+      <Footer />
     </div>
+    */
+
+    <div className='App'>
+    <Header />
+    <BrowserRouter>
+      <Routes >
+        <Route path='/' element={<LoginContent />} />
+        <Route path='/register' element = {<FormRegister />} />
+      </Routes >
+      <Footer />
+    </BrowserRouter>
+  </div>
   );
 }
 
