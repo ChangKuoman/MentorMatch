@@ -53,6 +53,7 @@ Lambda Function Associated: mentor-match-qualification-get <br>
 Description:
 - Scans all dynamodb table mentor-match-qualification
 - Calculates the mean of qualifications
+- If there are 0 qualifications, returns total of -1
 
 Payload: No payload required
 
@@ -63,6 +64,12 @@ Response Examples:
 | status | int | 200 |
 | text | string | "Ok" |
 | total | float | [0:5] |
+
+| Key | Value | Restrictions |
+| -- | -- | -- |
+| status | int | 200 |
+| text | string | "Ok" |
+| total | float | -1 |
 
 | Key | Value | Restrictions |
 | -- | -- | -- |

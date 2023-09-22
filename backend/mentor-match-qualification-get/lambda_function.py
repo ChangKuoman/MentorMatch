@@ -4,10 +4,16 @@ def lambda_handler(event, context):
     try:
         dynamodb = boto3.resource('dynamodb')
         table = dynamodb.Table('mentor-match-qualification')
-        
+
         response = table.scan()
         value = 0
         if (response["ResponseMetadata"]["HTTPStatusCode"] == 200):
+            if(len(response["Items"]) == 0):
+                return {
+                    "status": 200,
+                    "text": "Ok",
+                    "total": -1
+                }
             for element in response["Items"]:
                 value += element["number"]
             return {
