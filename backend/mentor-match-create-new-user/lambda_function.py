@@ -15,24 +15,24 @@ def lambda_handler(event, context):
         password = event["password"]
         typeDocument = event["typeDocument"]
         nroDocument = event["nroDocument"]
-    
+
         # conexión con dynamodb
         dynamodb = boto3.resource('dynamodb')
         table_user = dynamodb.Table('mentor-match-user')
-        
+
         # verificar si existe el mismo email
         email_exists = False
         response = table_user.get_item(Key={'email': email})
         if 'Item' in response:
             email_exists = True
-        
+
         # verificar si existe el mismo (typeDoc, nroDoc)
         document_exists = False
         response = table_user.scan()
         for item in response['Items']:
             if item["document"] == [typeDocument, nroDocument]:
                 document_exists = True
-    
+
         if email_exists or document_exists:
             return {
                 "status": 400,
@@ -40,7 +40,7 @@ def lambda_handler(event, context):
                 "email_exists": email_exists,
                 "document_exists": document_exists
             }
-        
+
         # creamos items
         item_user = {
             "email": {"S": email},
@@ -50,13 +50,16 @@ def lambda_handler(event, context):
             "unlockDate": {"S": ""},
             "attemps": {"N": "0"},
         }
-        
+
         item_data = {
             "email": {"S": email},
             "name": {"S": name},
-            "content": {"M": {}},
+            "content": {"M": {
+                "events-g": {"L": []},
+                "events-r": {"L": []}
+            }},
         }
-        
+
         client = boto3.client('dynamodb')
         transacciones = client.transact_write_items(TransactItems=[
             {
@@ -72,7 +75,7 @@ def lambda_handler(event, context):
                 }
             },
         ])
-        
+
         if transacciones["ResponseMetadata"]["HTTPStatusCode"] == 200:
             return {
                 "status": 200,
@@ -84,11 +87,11 @@ def lambda_handler(event, context):
                 "status": 500,
                 "text": "Internal Server Error"
             }
-    
+
     except:
         return {
             "status": 500,
             "text": "Internal Server Error"
         }
 
-    
+
