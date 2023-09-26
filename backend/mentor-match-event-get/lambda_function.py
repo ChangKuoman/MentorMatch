@@ -7,7 +7,7 @@ def lambda_handler(event, context):
         # Connection to dynamodb
         dynamodb = boto3.resource('dynamodb')
         table = dynamodb.Table('mentor-match-event')
-        
+
         # CASO 1: obtenemos event por el uuid
         if "uuid" in event:
             uuidv4 = event["uuid"]
@@ -15,6 +15,7 @@ def lambda_handler(event, context):
             return {
                 "status": 200,
                 "text": "Ok",
+                "total": 1,
                 "events": [response["Item"]]
             }
         # CASO 2: obtenemos TODOS los eventos de email con curso
@@ -33,13 +34,14 @@ def lambda_handler(event, context):
             return {
                 "status": 200,
                 "text": "Ok",
+                "total": len(response["Items"]),
                 "events": response["Items"]
             }
-            
+
         # CASO 3: obtenemos TODOS los eventos de email
         if "email" in event:
             email = event["email"]
-            
+
             response = table.query(
                 IndexName='email_receiver-course-index',
                 KeyConditionExpression=Key('email_receiver').eq(email),
@@ -47,9 +49,10 @@ def lambda_handler(event, context):
             return {
                 "status": 200,
                 "text": "Ok",
+                "total": len(response["Items"]),
                 "events": response["Items"]
             }
-        
+
         return {
             "status": 400,
             "text": "Bad Request"

@@ -58,6 +58,7 @@ Response Examples:
 | -- | -- | -- |
 | status | int | 200 |
 | text | string | "Ok" |
+| total | int | |
 | events | list | |
 
 | Key | Value | Restrictions |
