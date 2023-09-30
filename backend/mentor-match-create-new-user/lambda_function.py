@@ -56,7 +56,8 @@ def lambda_handler(event, context):
             "name": {"S": name},
             "content": {"M": {
                 "events-g": {"L": []},
-                "events-r": {"L": []}
+                "events-r": {"L": []},
+                "chats": {"L": []}
             }},
         }
 
