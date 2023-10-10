@@ -299,6 +299,7 @@ Payload:
 | :-- | :-- | --: |
 | email | string | |
 | qualification | number | |
+| event | string | |
 
 Response Examples:
 
@@ -307,6 +308,7 @@ Response Examples:
 | status | int | 200 |
 | text | string | "Ok" |
 | users | list | |
+| event | list | |
 | total | int | |
 
 Error Handling: 400, 404, 500
