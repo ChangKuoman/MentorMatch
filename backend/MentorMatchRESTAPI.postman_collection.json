@@ -1,0 +1,700 @@
+{
+	"info": {
+		"_postman_id": "060225f2-8426-40a0-ab41-13dfedeef98b",
+		"name": "MentorMatchRESTAPI",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "29632724"
+	},
+	"item": [
+		{
+			"name": "register-1",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"email\": \"jane-doe@gmail.com\",\r\n  \"name\": \"Jane\",\r\n  \"surname\": \"Doe\",\r\n  \"documentType\": \"DNI\",\r\n  \"documentNro\": \"22222222\",\r\n  \"password\": \"123\",\r\n  \"birthDate\": \"2000/09/09\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://oo3m2to3bi.execute-api.us-east-1.amazonaws.com/test/register",
+					"protocol": "https",
+					"host": [
+						"oo3m2to3bi",
+						"execute-api",
+						"us-east-1",
+						"amazonaws",
+						"com"
+					],
+					"path": [
+						"test",
+						"register"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "register-2",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"email\": \"john-doe@gmail.com\",\r\n  \"name\": \"John\",\r\n  \"surname\": \"Doe\",\r\n  \"documentType\": \"DNI\",\r\n  \"documentNro\": \"11111111\",\r\n  \"password\": \"123\",\r\n  \"birthDate\": \"2000/10/10\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://oo3m2to3bi.execute-api.us-east-1.amazonaws.com/test/register",
+					"protocol": "https",
+					"host": [
+						"oo3m2to3bi",
+						"execute-api",
+						"us-east-1",
+						"amazonaws",
+						"com"
+					],
+					"path": [
+						"test",
+						"register"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "register-3",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"email\": \"samanta.chang@utec.edu.pe\",\r\n  \"name\": \"Samanta\",\r\n  \"surname\": \"Chang\",\r\n  \"documentType\": \"DNI\",\r\n  \"documentNro\": \"74872844\",\r\n  \"password\": \"123\",\r\n  \"birthDate\": \"2003/10/04\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://oo3m2to3bi.execute-api.us-east-1.amazonaws.com/test/register",
+					"protocol": "https",
+					"host": [
+						"oo3m2to3bi",
+						"execute-api",
+						"us-east-1",
+						"amazonaws",
+						"com"
+					],
+					"path": [
+						"test",
+						"register"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "login",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"email\": \"jane-doe@gmail.com\",\r\n  \"password\": \"123\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://oo3m2to3bi.execute-api.us-east-1.amazonaws.com/test/login",
+					"protocol": "https",
+					"host": [
+						"oo3m2to3bi",
+						"execute-api",
+						"us-east-1",
+						"amazonaws",
+						"com"
+					],
+					"path": [
+						"test",
+						"login"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "change-password",
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"email\": \"samanta.chang@utec.edu.pe\",\r\n  \"old_password\": \"123\",\r\n  \"new_password\": \"456\"\r\n}"
+				},
+				"url": {
+					"raw": "https://oo3m2to3bi.execute-api.us-east-1.amazonaws.com/test/change-password",
+					"protocol": "https",
+					"host": [
+						"oo3m2to3bi",
+						"execute-api",
+						"us-east-1",
+						"amazonaws",
+						"com"
+					],
+					"path": [
+						"test",
+						"change-password"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "delete-user",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"email\": \"samanta.chang@utec.edu.pe\",\r\n  \"password\": \"456\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://oo3m2to3bi.execute-api.us-east-1.amazonaws.com/test/delete-user",
+					"protocol": "https",
+					"host": [
+						"oo3m2to3bi",
+						"execute-api",
+						"us-east-1",
+						"amazonaws",
+						"com"
+					],
+					"path": [
+						"test",
+						"delete-user"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "get-users-1",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"emails\": [\r\n    \"jane-doe@gmail.com\",\r\n    \"john-doe@gmail.com\"\r\n  ]\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://oo3m2to3bi.execute-api.us-east-1.amazonaws.com/test/get-users",
+					"protocol": "https",
+					"host": [
+						"oo3m2to3bi",
+						"execute-api",
+						"us-east-1",
+						"amazonaws",
+						"com"
+					],
+					"path": [
+						"test",
+						"get-users"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "get-users-2",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"emails\": []\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://oo3m2to3bi.execute-api.us-east-1.amazonaws.com/test/get-users",
+					"protocol": "https",
+					"host": [
+						"oo3m2to3bi",
+						"execute-api",
+						"us-east-1",
+						"amazonaws",
+						"com"
+					],
+					"path": [
+						"test",
+						"get-users"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "user-description",
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"email\": \"jane-doe@gmail.com\",\r\n  \"description\": \"I'am a very happy girl that likes to teach and so\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://oo3m2to3bi.execute-api.us-east-1.amazonaws.com/test/user-description",
+					"protocol": "https",
+					"host": [
+						"oo3m2to3bi",
+						"execute-api",
+						"us-east-1",
+						"amazonaws",
+						"com"
+					],
+					"path": [
+						"test",
+						"user-description"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "user-pfp",
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"email\": \"jane-doe@gmail.com\",\r\n  \"profile_picture\": \"0010asd21das0das1d2a\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://oo3m2to3bi.execute-api.us-east-1.amazonaws.com/test/user-pfp",
+					"protocol": "https",
+					"host": [
+						"oo3m2to3bi",
+						"execute-api",
+						"us-east-1",
+						"amazonaws",
+						"com"
+					],
+					"path": [
+						"test",
+						"user-pfp"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "user-tags",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"email\": \"jane-doe@gmail.com\",\r\n  \"tags\": [\r\n    \"CS2041\",\r\n    \"CS1011\",\r\n    \"CS2011\"\r\n  ]\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://oo3m2to3bi.execute-api.us-east-1.amazonaws.com/test/user-tags",
+					"protocol": "https",
+					"host": [
+						"oo3m2to3bi",
+						"execute-api",
+						"us-east-1",
+						"amazonaws",
+						"com"
+					],
+					"path": [
+						"test",
+						"user-tags"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "user-tags",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"email\": \"jane-doe@gmail.com\",\r\n  \"tags\": [\r\n    \"CS1011\",\r\n    \"CS2011\"\r\n  ]\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://oo3m2to3bi.execute-api.us-east-1.amazonaws.com/test/user-tags",
+					"protocol": "https",
+					"host": [
+						"oo3m2to3bi",
+						"execute-api",
+						"us-east-1",
+						"amazonaws",
+						"com"
+					],
+					"path": [
+						"test",
+						"user-tags"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "qualification",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"email\": \"jane-doe@gmail.com\",\r\n  \"qualification\": 5,\r\n  \"comment\": \"I really enjoy the app\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://oo3m2to3bi.execute-api.us-east-1.amazonaws.com/test/qualification",
+					"protocol": "https",
+					"host": [
+						"oo3m2to3bi",
+						"execute-api",
+						"us-east-1",
+						"amazonaws",
+						"com"
+					],
+					"path": [
+						"test",
+						"qualification"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "qualification",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://oo3m2to3bi.execute-api.us-east-1.amazonaws.com/test/qualification",
+					"protocol": "https",
+					"host": [
+						"oo3m2to3bi",
+						"execute-api",
+						"us-east-1",
+						"amazonaws",
+						"com"
+					],
+					"path": [
+						"test",
+						"qualification"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "new-event-1",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"email_giver\": \"john-doe@gmail.com\",\r\n  \"email_receiver\": \"jane-doe@gmail.com\",\r\n  \"tag\": \"CS2041\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://oo3m2to3bi.execute-api.us-east-1.amazonaws.com/test/new-event",
+					"protocol": "https",
+					"host": [
+						"oo3m2to3bi",
+						"execute-api",
+						"us-east-1",
+						"amazonaws",
+						"com"
+					],
+					"path": [
+						"test",
+						"new-event"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "new-event-2",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"email_giver\": \"samanta.chang@utec.edu.pe\",\r\n  \"email_receiver\": \"jane-doe@gmail.com\",\r\n  \"tag\": \"CS1111\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://oo3m2to3bi.execute-api.us-east-1.amazonaws.com/test/new-event",
+					"protocol": "https",
+					"host": [
+						"oo3m2to3bi",
+						"execute-api",
+						"us-east-1",
+						"amazonaws",
+						"com"
+					],
+					"path": [
+						"test",
+						"new-event"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "new-event-3",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"email_giver\": \"samanta.chang@utec.edu.pe\",\r\n  \"email_receiver\": \"john-doe@gmail.com\",\r\n  \"tag\": \"CS2041\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://oo3m2to3bi.execute-api.us-east-1.amazonaws.com/test/new-event",
+					"protocol": "https",
+					"host": [
+						"oo3m2to3bi",
+						"execute-api",
+						"us-east-1",
+						"amazonaws",
+						"com"
+					],
+					"path": [
+						"test",
+						"new-event"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "event-state",
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"uuid\": \"3e9715de-5ded-4cb0-a57a-6e9054894569\",\r\n  \"new_state\": 1\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://oo3m2to3bi.execute-api.us-east-1.amazonaws.com/test/event-state",
+					"protocol": "https",
+					"host": [
+						"oo3m2to3bi",
+						"execute-api",
+						"us-east-1",
+						"amazonaws",
+						"com"
+					],
+					"path": [
+						"test",
+						"event-state"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "get-events",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"events\": [\r\n    \"3e9715de-5ded-4cb0-a57a-6e9054894569\"\r\n  ]\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://oo3m2to3bi.execute-api.us-east-1.amazonaws.com/test/get-events",
+					"protocol": "https",
+					"host": [
+						"oo3m2to3bi",
+						"execute-api",
+						"us-east-1",
+						"amazonaws",
+						"com"
+					],
+					"path": [
+						"test",
+						"get-events"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "get-chats",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"chats\": [\r\n    \"c5536400-cc80-43b0-b2ab-7590c354ab09\"\r\n  ]\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://oo3m2to3bi.execute-api.us-east-1.amazonaws.com/test/get-chats",
+					"protocol": "https",
+					"host": [
+						"oo3m2to3bi",
+						"execute-api",
+						"us-east-1",
+						"amazonaws",
+						"com"
+					],
+					"path": [
+						"test",
+						"get-chats"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "user-qualify",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"email\": \"john-doe@gmail.com\",\r\n  \"qualification\": 3,\r\n  \"event\": \"3e9715de-5ded-4cb0-a57a-6e9054894569\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://oo3m2to3bi.execute-api.us-east-1.amazonaws.com/test/user-qualify",
+					"protocol": "https",
+					"host": [
+						"oo3m2to3bi",
+						"execute-api",
+						"us-east-1",
+						"amazonaws",
+						"com"
+					],
+					"path": [
+						"test",
+						"user-qualify"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "get-matching-users",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"email\": \"samanta.chang@utec.edu.pe\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://oo3m2to3bi.execute-api.us-east-1.amazonaws.com/test/get-matching-users",
+					"protocol": "https",
+					"host": [
+						"oo3m2to3bi",
+						"execute-api",
+						"us-east-1",
+						"amazonaws",
+						"com"
+					],
+					"path": [
+						"test",
+						"get-matching-users"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
