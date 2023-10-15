@@ -105,9 +105,9 @@ const Card = () => {
 
     return (
         <div>
-            <div>Filtro de cursos</div>
-            <div>
-                <select onChange={manejarTag}>
+            <div className="contenedor-filtro">
+                <div className="texto-filtro">Filtro de cursos</div>
+                <select className="classic" onChange={manejarTag}>
                     <option value="Todos">Todos</option>
                     <option value="Python">Python</option>
                     <option value="C++">C++</option>
@@ -122,6 +122,7 @@ const Card = () => {
                     <option value="Swift">Swift</option>
                 </select>
             </div>
+
 
             <div className="container">
             {validUsers.map((user) => (
