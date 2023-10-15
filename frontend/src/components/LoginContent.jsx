@@ -1,5 +1,8 @@
 import React, { useState, useRef } from 'react';
+import ErrorTextForm from './ErrorTextForm';
 import '../css/LoginContent.css';
+
+import Img_mentor_match from "../icons/mentor-match.png"
 
 function limpiarDatos(datos) {
   // Elimina caracteres especiales que puedan ser utilizados para inyectar código SQL
@@ -17,6 +20,8 @@ const LoginContent = () => {
   // Define estados para el correo y la contraseña
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const [correoValido, setCorreoValido] = useState(null);
+  const [contrasenaValida, setContrasenaValida] = useState(null);
 
   // Almacena una referencia al formulario
   const formRef = useRef(null);
@@ -31,6 +36,7 @@ const LoginContent = () => {
     setPassword(limpiarDatos(e.target.value));
   };
 
+  // envia a registrarse
   const handleRegistrarse = () => {
     
   };
@@ -51,12 +57,12 @@ const LoginContent = () => {
 
     // Valida que el correo contenga "@utec.edu.pe"
     if (!email.includes('@utec.edu.pe')) {
-      alert('El correo ingresado no es un correo institucional.');
+      setCorreoValido(false);
       return;
-    }    
+    }
 
     // prueba de conexion con la api de la bd
-    console.log("prueba ",email,password);
+
     const url = `https://fjmjpibq48.execute-api.us-east-1.amazonaws.com/test/login`;
     const body = {
       'email': email,
@@ -71,17 +77,26 @@ const LoginContent = () => {
     fetch(url, {
       method: 'POST',
       headers,
-      body: JSON.stringify({
-        'email': email,
-        'password': password,
-      }),
+      body: JSON.stringify(body),
     }).then(response => response.json())
       .then(data=> {
         console.log(data);
         if (data.status === 200){
+          setCorreoValido(true);
+          setContrasenaValida(true);
 
+          const user = {
+            email: email,
+            password: password,
+          };
+          localStorage.setItem('user', JSON.stringify(user));
+          localStorage.setItem('isLog', true);
+
+          window.location.href = '/home';
         } else {
-          alert ('El correo no existe');
+          console.log('El correo no existe');
+          setCorreoValido(false);
+          setContrasenaValida(false);
         }
       })
       .catch(error => {
@@ -91,37 +106,97 @@ const LoginContent = () => {
   };
 
   return (
-    <div className="login-content">
-      <h2>Iniciar Sesión</h2>
-      <form onSubmit={handleSubmit} ref={formRef}>
-        <div className="form-group">
-          <label htmlFor="email">Correo Electrónico</label>
-          <input
-            type="email"
-            id="email"
-            name="email"
-            value={email}
-            onChange={handleEmailChange}
-            placeholder= 'ejemplo@utec.edu.pe'
-            required
-          />
+    <div className="Login">
+      <div className="Frame1">
+        <h1 className="title1">BIENVENIDOS A</h1>
+      </div>
+      <div className="Frame2"></div>
+      <div className="login-content">
+        <div className="login-form-group">
+          <div className="form-header">
+            <p className="title2">INICIE SESIÓN</p>
+          </div>
+          <form className="login-form" onSubmit={handleSubmit} ref={formRef}>
+            <div>
+              <label htmlFor="email">Correo Electrónico</label>
+              <input
+                className="login-input"
+                type="email"
+                id="email"
+                name="email"
+                value={email}
+                onChange={handleEmailChange}
+                placeholder= 'ejemplo@utec.edu.pe'
+                required
+              />
+            </div >
+            <ErrorTextForm texto="Este correo no existe" boolean={ correoValido }/>
+            <div>
+              <label htmlFor="password">Contraseña</label>
+              <input
+                className="login-input"
+                type="password"
+                id="password"
+                name="password"
+                value={password}
+                onChange={handlePasswordChange}
+                placeholder = "******************"
+                required
+              />
+            </div>
+            <ErrorTextForm texto="Contraseña incorrecta" boolean={ contrasenaValida }/>
+            <button className='btn' type="submit">INICIAR SESIÓN</button>
+          </form>
+          <div className="form-footer">
+            <div className="login-form-diveder">
+              <p className="text-diveder">o</p>
+            </div>
+            <p className="text-form-footer">Aun no te has registrado? <a href='/register' onClick={handleRegistrarse}>Registrate aquí</a></p>
+          </div>
         </div>
-        <div className="form-group">
-          <label htmlFor="password">Contraseña</label>
-          <input
-            className='form-Control'
-            type="password"
-            id="password"
-            name="password"
-            value={password}
-            onChange={handlePasswordChange}
-            placeholder = "******************"
-            required
-          />
+        <div className="panel-login">
+          <p className="mentor-match-title">MENTOR MATCH</p>
+          <img src={Img_mentor_match} alt = "Imagen de Login" className="img-login"/> 
         </div>
-        <button className='btn' type="submit">Iniciar Sesión</button>
-        <p>Aun no te has registrado?<a href='/register' className='btn btn-link' onClick={handleRegistrarse}>Registrate aquí</a> </p>
-      </form>
+        <div className="inf-mentor-match">
+          <section className="inf-bloque">
+            <secion className="inf-header">
+              <p>¿Qué es Mentor Match?</p>
+            </secion>
+            <section className="inf-content">
+              <p>
+              MentorMatch es una plataforma web diseñada para fomentar la colaboración entre estudiantes en el intercambio de conocimientos, en base a sus fortalezas académicas.
+              </p>
+            </section>
+          </section>
+          <section className="inf-bloque">
+            <secion className="inf-header">
+              <p>¿Quiénes somos?</p>
+            </secion>
+            <section className="inf-content">
+              <p>
+              Somos un equipo interdiciplinario que buscamos eliminar las barreras de aprendizaje de nuestros compañeros por intermedio de un aplicativo.
+              </p>
+            </section>
+          </section>
+          <section className="inf-bloque">
+            <secion className="inf-header">
+              <p>Beneficios de Mentor Match</p>
+            </secion>
+            <section className="inf-content">
+              <p>
+              Algunos de los beneficios que se obtiene por el uso de la aplicación son:</p>
+              <ul>
+                <li>Aprendizaje colaborativo gratuito.</li>
+                <li>Fácil acceso de asesorías.</li>
+                <li>Se adapta al cronograma personal.</li>
+              </ul>
+            </section>
+          </section>
+        </div>
+      </div>
+      <div className="Frame3"></div>
+      <div className="Frame4"></div>
     </div>
   );
 };

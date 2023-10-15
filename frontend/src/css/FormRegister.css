@@ -19,12 +19,7 @@ label {
 /* Estilo para los campos de entrada */
 input[type="text"],
 input[type="number"],
-input[type="password"] {
-    width: 100%; /* Los campos de entrada ocupan todo el ancho disponible */
-    padding: 5px; /* Espaciado interior de los campos de entrada */
-    border: 1px solid #ccc; /* Borde ligero alrededor de los campos de entrada */
-    border-radius: 3px; /* Bordes redondeados */
-}
+input[type="password"],
 
 /* Chrome, Safari, Edge, Opera */
 input::-webkit-outer-spin-button,
