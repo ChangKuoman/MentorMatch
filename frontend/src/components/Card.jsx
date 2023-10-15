@@ -10,6 +10,8 @@ import Rating from '@mui/material/Rating';
 // https://github.com/Mustakim-78/tinder-card/blob/master/src/App.css
 
 const Card = () => {
+    const my_email = "samanta.chang@utec.edu.pe";
+
     function calcularEdad(fechaNacimiento) {
         // Obtener la fecha actual
         const fechaActual = new Date();
@@ -42,6 +44,7 @@ const Card = () => {
 
     const [users, setUsers] = useState([])
     const [validUsers, setValidUsers] = useState([])
+    const [tag, setTag] = useState('none')
 
     useEffect(() => {
         async function fetchData() {
@@ -49,14 +52,14 @@ const Card = () => {
                 method: 'POST',
                 headers,
                 body: JSON.stringify({
-                  'email': "samanta.chang@utec.edu.pe"
+                  'email': my_email
                 }),
               }).then(response => response.json())
                 .then(data=> {
                   if (data.status === 200){
-                    setUsers(data.users);
+                    setUsers(data.users)
                     setValidUsers(data.users)
-                  } else {
+                } else {
                   }
                 })
                 .catch(error => {
@@ -66,19 +69,36 @@ const Card = () => {
         fetchData();
         }, []);
 
-      const [userLike, setUserLike] = useState([])
-      const [userDisLike, setUserDisLike] = useState([])
-      function swiped(direction, category){
-        console.log(direction);
+      function swiped(direction, email){
+        // remove from general users
+        const newList = users.filter((user) => user.email !== email)
+        setUsers(newList)
+
         if (direction === 'right') {
-          setUserLike(userLike => [...userLike, category])
+            // RIGHT - LIKE
+            fetch(url + "/new-event", {
+                method: 'POST',
+                headers,
+                body: JSON.stringify({
+                    'email_receiver': my_email,
+                    'email_giver': email,
+                    'tag': tag
+                }),
+                }).then(response => response.json())
+                .then(data=> {
+                    if (data.status === 200){
+                    } else {
+                    }
+                })
+                .catch(error => {
+                });
         }
         else {
-          setUserDisLike(userDisLike => [...userDisLike, category])
+            // LEFT - DISLIKE
         }
       }
       function leftScreen(name){
-        console.log(name)
+        //console.log(name)
       }
 
       function setQualification(q) {
@@ -91,8 +111,9 @@ const Card = () => {
       }
 
       const manejarTag = (e) => {
+        setTag(e.target.value);
         setValidUsers([]);
-        if (e.target.value === "Todos") {
+        if (e.target.value === "none") {
             setValidUsers(users);
         } else {
             users.map((user) => {
@@ -108,7 +129,7 @@ const Card = () => {
             <div className="contenedor-filtro">
                 <div className="texto-filtro">Filtro de cursos</div>
                 <select className="classic" onChange={manejarTag}>
-                    <option value="Todos">Todos</option>
+                    <option value="none">Todos</option>
                     <option value="Python">Python</option>
                     <option value="C++">C++</option>
                     <option value="Java">Java</option>
