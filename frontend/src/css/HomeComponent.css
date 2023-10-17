@@ -1,0 +1,182 @@
+.Home{
+    margin: 0;
+    padding: 0;
+    font-family: sans-serif;
+    display: flex;
+    flex-direction: column;
+    width:100%;
+    height: 100vh;
+}
+
+.BloqueTop{
+    width: 100%;
+    height: 20%;
+    position: relative;
+    margin: 0;
+    padding: 0;
+}
+
+.BloqueMid{
+    width: 90%;
+    height: 50%;
+    position: relative;
+    margin: 0;
+    padding: 0;
+    padding-top: 5%;
+    padding-bottom: 5%;
+    padding-left: 5%;
+    padding-right: 5%;
+}
+
+.BloqueBottom{
+    width: 100%;
+    height: 20%;
+    position: relative;
+    margin: 0;
+    padding: 0
+}
+
+.HeaderHome{
+    width: 100% - 40px;
+    height: 100%;
+    padding: 0;
+    padding-left: 20px;
+    padding-right: 20px;
+    margin: 0;
+    background: linear-gradient( #018ABE, 20%, #97CADB);
+
+}
+
+.HeaderHome:before{
+    content: '';
+    position: absolute;
+    top: 70%;
+    left: 0;
+    width: 100%;
+    height: 90px;
+    background: #e2f5fc;
+    transform: skewY(2deg);
+}
+
+
+.space{
+    display: flex;
+    position: relative;
+    width: 100%;
+    height: 60%;
+    margin: 0;
+    padding: 0;
+    flex-direction: row;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.space h1{
+    color: #D6E8EE;
+    font-weight: 1000;
+    font-family: 'Courier New', Courier, monospace;
+    font-size:40px;
+}
+
+.BloqueBottom{
+    
+    background-color: #97CADB;
+}
+
+.BloqueBottom::before{
+    content: '';
+    position: absolute;
+    bottom: 70%;
+    left: 0;
+    width: 100%;
+    height: 90px;
+    background: #e2f5fc;
+    transform: skewY(2deg);
+}
+
+.BloqueMid{
+    background-color: #e2f5fc;
+    display: flex;
+    flex-direction: row;
+}
+
+.BloqueMid h{
+    color: #001B48;
+}
+
+.BloqueMidSub1{
+    margin: 0;
+    padding: 0;
+    width: 25%;
+    height: 100%;
+    display: flex;
+
+    align-items: flex-start;
+    justify-content: center;
+    text-align: center;
+}
+
+.BloqueMidSub2{
+    margin: 0;
+    padding: 0;
+    width: 25%;
+    height: 100%;
+    display: flex;
+
+    align-items: flex-end;
+    justify-content: center;
+
+    text-align: center;
+}
+
+.logoHome{
+    width: 120px;
+    height: 120px;
+    border-radius: 50%;
+    border: 0.5em solid;
+    border-color: #018ABE;
+    background-color: #ffffff;
+
+    cursor: pointer;
+    transition: opacity 0.2s ease-in-out;
+}
+
+.logoHome:hover {
+    opacity: 0.7;
+    background-color: #9bd7eca1;
+}
+
+.LogoLogOut{
+    width: 40px;
+    height: 40px;
+    cursor: pointer;
+    padding: 10px;
+    border-radius: 100%;
+    background-color: #e2f5fc;
+    object-fit:fill;
+}
+
+.LogoLogOut:hover {
+    opacity: 0.7;
+    background-color: #384b52a1;
+}
+
+.modal{
+    margin: 0;
+    padding: 0;
+    width: 150px;
+    height: 100px;
+    position: absolute;
+}
+
+.modal-content{
+    background: #e2f5fc;
+    padding: 10px;
+    border: 3px solid;
+    border-radius: 8%;
+    border-color: #157499;
+
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}

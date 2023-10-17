@@ -8,9 +8,10 @@ const FormRegister = () => {
     const [correo, setCorreo] = useState('');
     const [clave, setClave] = useState('');
     const [nroDocumento, setNroDocumento] = useState('');
+    const [tipoDocumento, setTipoDocumento] = useState('DNI');
+
     const [confirmClave, setConfirmClave] = useState('');
     const [terminos, setTerminos] = useState(null);
-    const [tipoDocumento, setTipoDocumento] = useState('DNI');
     const [emailValido, setEmailValido] = useState(null);
     const [passwordValido, setPasswordValid] = useState(null);
     const [passwordIgual, setPasswordIgual] = useState(null);
@@ -65,8 +66,6 @@ const FormRegister = () => {
         }
     }, [clave]);
 
-    console.log("Funciona hasta aqui 1")
-
     useEffect(() => {
         if (!confirmClave) {
             setPasswordIgual(null);
@@ -82,30 +81,63 @@ const FormRegister = () => {
     // form handler
     const manejarEnvio = (e) => {
         e.preventDefault();
-
+        
         const emailPattern = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/;
         (emailPattern.test(correo)) ? setEmailValido(true) : setEmailValido(false);
-
+        
         setValidDocument((tipoDocumento === "DNI" && nroDocumento.length === 8)? true : (tipoDocumento === "CE" && nroDocumento.length === 9) ? true : false);
-
+        
         if (terminos === null) {
             setTerminos(false);
           }
         if (clave === '') {
-        setPasswordValid(false);
+            setPasswordValid(false);
         }
         if (confirmClave === '') {
-        setPasswordIgual(false);
+            setPasswordIgual(false);
         }
         if (nombre === '') {
-        setValidNombre(false);
+            setValidNombre(false);
         } else {
-        setValidNombre(true);
+            setValidNombre(true);
         }
-
         if (emailValido && passwordValido && passwordIgual && terminos && validDocument && nombreValido) {
             console.log("Form enviado");
         }
+        
+        const url = `https://fjmjpibq48.execute-api.us-east-1.amazonaws.com/test/register`;
+        const body = {
+            "name" : nombre,
+            "email": correo,
+            "password": clave,
+            "typeDocument": tipoDocumento,
+            "nroDocument" : nroDocumento,
+        };
+
+        console.log(body);
+        const headers = {
+            'Content-Type': 'application/json',
+        };
+
+        fetch(url, {
+            method: 'POST',
+            headers,
+            body: JSON.stringify(body),
+        })
+        .then(response => response.json())
+        .then(data => {
+            console.log(data);
+            if(data.status === 200){
+                window.location.href = '/';
+            } else {
+                alert ('El correo no existe');
+            }
+        })
+        .catch(error => {
+            // Muestra un mensaje de error
+            alert(error);
+          });
+        
     }
 
     return (
