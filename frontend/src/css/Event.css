@@ -1,0 +1,117 @@
+
+.contenedor-tags-event {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+.box-event {
+    width: 500px;
+    background-color: #74eaf7;
+    margin: 10px;
+    padding: 10px;
+    border-radius: 10px;
+
+}
+
+.nombre {
+    text-align: left;
+    font-weight: bold;
+    margin-bottom: 0;
+    margin-right: 10px;
+}
+
+.tag-event {
+    width: fit-content;
+    padding: 5px;
+    border-radius: 5px;
+    background-color: gray;
+    font-size: 10px;
+    background-color: #9df9fc;
+    margin-left: 10px;
+    margin-bottom: 0;
+}
+
+.boton-event {
+  border-radius: 8px;
+  border-style: none;
+  box-sizing: border-box;
+  color: black;
+  cursor: pointer;
+  display: inline-block;
+  font-family: "Haas Grot Text R Web", "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-size: 14px;
+  width: 140px;
+  font-weight: bold;
+  height: 40px;
+  line-height: 20px;
+  list-style: none;
+  margin: 0;
+  outline: none;
+  padding: 10px 16px;
+  position: relative;
+  text-align: center;
+  text-decoration: none;
+  transition: color 100ms;
+  vertical-align: baseline;
+  user-select: none;
+  -webkit-user-select: none;
+  touch-action: manipulation;
+  margin-left: 10px;
+}
+
+.red {
+  background-color: red;
+}
+
+.green {
+    background-color: greenyellow;
+}
+
+.blue {
+    background-color: blue;
+}
+
+.yellow {
+    background-color: yellow;
+}
+
+.contenedor-boton {
+    display: flex;
+    justify-content: flex-end;
+    align-items: flex-end;
+    margin: 0;
+}
+
+.contenedor-evento-header {
+    display: flex;
+    justify-content: flex-start;
+}
+
+.popup-content {
+    margin: auto;
+    background: rgb(255, 255, 255);
+    width: 50%;
+    padding: 5px;
+}
+
+.contendor-evento-desc {
+    display: flex;
+    flex-direction: column;
+}
+
+.seleccionado {
+    background-color: #16437E;
+    color: #ffffff;
+  }
+
+
+.s:hover {
+  background-color: #16437E;
+  color: #ffffff;
+}
+
+.botones-elect > .boton-event > .green:hover{
+    background-color: gray;
+}
