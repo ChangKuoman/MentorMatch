@@ -25,7 +25,7 @@ const LoginContent = () => {
 
   // Almacena una referencia al formulario
   const formRef = useRef(null);
-    
+
   // Función para manejar cambios en el campo de correo
   const handleEmailChange = (e) => {
     setEmail(limpiarDatos(e.target.value));
@@ -38,7 +38,7 @@ const LoginContent = () => {
 
   // envia a registrarse
   const handleRegistrarse = () => {
-    
+
   };
 
   // Función para manejar el envío del formulario
@@ -73,7 +73,7 @@ const LoginContent = () => {
     const headers = {
       'Content-Type': 'application/json',
     };
-    
+
     fetch(url, {
       method: 'POST',
       headers,
@@ -156,13 +156,13 @@ const LoginContent = () => {
         </div>
         <div className="panel-login">
           <p className="mentor-match-title">MENTOR MATCH</p>
-          <img src={Img_mentor_match} alt = "Imagen de Login" className="img-login"/> 
+          <img src={Img_mentor_match} alt = "Imagen de Login" className="img-login"/>
         </div>
         <div className="inf-mentor-match">
           <section className="inf-bloque">
-            <secion className="inf-header">
+            <section className="inf-header">
               <p>¿Qué es Mentor Match?</p>
-            </secion>
+            </section>
             <section className="inf-content">
               <p>
               MentorMatch es una plataforma web diseñada para fomentar la colaboración entre estudiantes en el intercambio de conocimientos, en base a sus fortalezas académicas.
@@ -170,9 +170,9 @@ const LoginContent = () => {
             </section>
           </section>
           <section className="inf-bloque">
-            <secion className="inf-header">
+            <section className="inf-header">
               <p>¿Quiénes somos?</p>
-            </secion>
+            </section>
             <section className="inf-content">
               <p>
               Somos un equipo interdiciplinario que buscamos eliminar las barreras de aprendizaje de nuestros compañeros por intermedio de un aplicativo.
@@ -180,9 +180,9 @@ const LoginContent = () => {
             </section>
           </section>
           <section className="inf-bloque">
-            <secion className="inf-header">
+            <section className="inf-header">
               <p>Beneficios de Mentor Match</p>
-            </secion>
+            </section>
             <section className="inf-content">
               <p>
               Algunos de los beneficios que se obtiene por el uso de la aplicación son:</p>

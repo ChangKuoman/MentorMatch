@@ -10,17 +10,15 @@ import LoginContent from './components/LoginContent';
 import HomeComponent from './components/HomeComponent';
 import FormRegister from './components/FormRegister';
 import UserPage from './components/UserPage';
-import CoursePage from './components/CoursePage';
 
 function App() {
   return (
-    <div>      
+    <div>
         <Routes >
           <Route path='/' element={<LoginContent />} onEnter/>
           <Route path='/register' element = {<FormRegister />} />
           <Route path='/home' element = {<HomeComponent/>}/>
           <Route path='/user/' element = {<UserPage/>} />
-          <Route path='/courses' element = {<CoursePage />} />
           <Route path='/*' element={<PageNotFound/>} />
         </Routes >
     </div>
