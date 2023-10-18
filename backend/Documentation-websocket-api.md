@@ -48,7 +48,7 @@ Body Example:
 
 ### Send Message
 
-Lambda Function Associated: mentor-match-websocket-send <br>
+Lambda Function Associated: mentor-match-websocket-sendMessage <br>
 Description:
 - Saves message in dynamodb table (mentor-match-chat)
 - Sends message if user is connected

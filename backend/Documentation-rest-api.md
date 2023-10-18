@@ -622,3 +622,37 @@ Error Handling: 400, 500
 | status | int | |
 | text | string | |
 | error | string | |
+
+### Put Chat
+
+Endpoint: **/put-chat** <br>
+HTTP Request: **PUT** <br>
+Lambda Function Associated: mentor-match-rest-put-chat <br>
+Description:
+- Checks attributes are in event
+- Adds message to chat
+
+Payload:
+
+| Key | Value | Restrictions |
+| :-- | :-- | --: |
+| chat | string | |
+| message | string | |
+| user | string | |
+
+Response Examples:
+
+| Key | Value | Restrictions |
+| :-- | :-- | --: |
+| status | int | 200 |
+| text | string | "Ok" |
+| total | int | |
+| chats | list | |
+
+Error Handling: 400, 500
+
+| Key | Value | Restrictions |
+| :-- | :-- | --: |
+| status | int | |
+| text | string | |
+| error | string | |

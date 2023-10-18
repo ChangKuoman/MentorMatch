@@ -36,7 +36,7 @@ Table Name: **mentor-match-user-data**
 | birthDate | string | date |
 | description | string | |
 | verified | bool | |
-| calification | list | [int, int] |
+| qualification | list | [int, int] |
 | chats | list | contais strings |
 | tags | list | contais strings |
 | photo | string | |
@@ -78,6 +78,8 @@ Table Name: **mentor-match-chat**
 | uuid | string | Partition Key |
 | emails | list | [string, string] |
 | messages | list | contains maps: {date: string, user: string, content: string} |
+
+Index: emails-index
 
 ## Table Websocket-Connection
 
