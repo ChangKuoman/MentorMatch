@@ -82,7 +82,7 @@ const Event = () => {
         const texts = {
           0: "EN ESPERA",
           1: "EN PROCESO",
-          2: "COMPLETADO",
+          2: "CULMINADO",
           3: "RECHAZADO",
         };
 
@@ -129,6 +129,38 @@ const Event = () => {
       )
   }
 
+    function getButtonAndQualification(reserva) {
+      return (
+        <div className="botones-elect">
+        {!reserva.qualified && <Rating
+          className="estrellas"
+          value={null}
+          disabled={false}
+          onChange={(event, newValue) => {
+            // deletes rating
+            event.target.parentNode.style.display = 'none';
+            // fetch
+            fetch(url + "/user-qualify", {
+              method: 'POST',
+              headers,
+              body: JSON.stringify({
+                'event': reserva.uuid,
+                'qualification': newValue,
+                'email': reserva["email_giver"]
+              }),
+            }).then(response => response.json())
+              .then(data=> {
+                console.log(data)
+              })
+              .catch(error => {
+              });
+          }}
+        />}
+          <button className={"boton-event blue"}>CULMINADO</button>
+        </div>
+      )
+    }
+
       function setQualification(q) {
         const cant = q[0];
         const sum = q[1];
@@ -162,16 +194,22 @@ const Event = () => {
         return edad;
       }
 
-      const [userVisible, setUserVisible] = useState({
-        "name": "Pepe",
-        "surname": "El Grillo",
-        "qualification": [1, 3],
-        "description": "Nada",
-        "tags": ["CS1515"],
-        "birthDate": "2003/10/04"
-      })
+      const userLorem = {
+        "name": "Lorem",
+        "surname": "ipsum",
+        "qualification": [0, 0],
+        "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
+        "tags": ["Lorem", "ipsum", "dolor", "sit", "amet"],
+        "birthDate": "2000/01/01"
+      }
 
-      function renderElement(email) {
+      const [userVisible, setUserVisible] = useState(userLorem)
+
+      function resetElement() {
+        setUserVisible(userLorem)
+      }
+
+      function renderElement() {
         return (
           <div className="contendor-evento-desc">
               <div className="contenedor-titulo">
@@ -195,8 +233,6 @@ const Event = () => {
       }
 
     function getElement(email) {
-        // HERE GOES FETCH
-
         fetch(url + "/get-users", {
           method: 'POST',
           headers,
@@ -212,8 +248,6 @@ const Event = () => {
           })
           .catch(error => {
           });
-
-
     }
 
     const [botonSeleccionado, setBoton] = useState(true);
@@ -244,6 +278,7 @@ const Event = () => {
                                       height={20}
                                   />}
                                   onOpen={() => getElement(event["email_giver"])}
+                                  onClose={() => resetElement()}
                                   position="bottom center">
                                   {renderElement()}
                               </Popup>
@@ -254,7 +289,7 @@ const Event = () => {
                         </div>
 
                         <div className="contenedor-boton">
-                                  {getButton(event.state)}
+                            {event.state === 2 ? getButtonAndQualification(event): getButton(event.state)}
                         </div>
                     </div>
                 ))

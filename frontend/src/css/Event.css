@@ -116,6 +116,14 @@
     background-color: gray;
 }
 
+.botones-elect {
+    display: flex;
+}
+
+.estrellas {
+    align-items: center;
+}
+
 .contenedor-botones-event {
     display: flex;
     justify-content: center;
