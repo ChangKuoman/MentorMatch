@@ -1,29 +1,22 @@
-import React, {useState} from "react";
+import React, {useState, useEffect} from "react";
 import BotonBack from '../icons/deshacer 1boton-back.png';
 import BotonHome from '../icons/boton-home.png';
 import url from './url.js';
-
 import '../css/UserPage.css'
+import Rating from '@mui/material/Rating';
 
-function getUserData(email) {
-    const options = {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({
-        'email': [email]
-      }),
-    };
+const headers = {
+    'Content-Type': 'application/json',
+};
 
-    return fetch(url + "/get-users", options).then((response) => {
-      if (response.status === 200) {
-        return response.json();
-      } else {
-        throw new Error(`Error al obtener datos del usuario: ${response.status}`);
-      }
-    });
-}
+function setQualification(q) {
+    const cant = q[0];
+    const sum = q[1];
+    if (cant == 0){ return 0; }
+    else {
+        return sum / cant;
+    }
+  }
 
 const UserPage = () => {
     // Define un estado para controlar la visibilidad del nav
@@ -46,19 +39,31 @@ const UserPage = () => {
         setIsVisible(false);
     };
 
-    const user = JSON.parse(localStorage.getItem('user'));
-    const email = user.email;
-    const userData = getUserData(email);
+    const [usuario, setUsuario] = useState([])
 
-    const [nameUser, setNameUser] = useState('');
+    useEffect(() => {
+        async function fetchData() {
+            const user = JSON.parse(localStorage.getItem('user'));
+            const email = user.email;
 
-    userData.then((data) => {
-        const userD = data;
-        const dataUser = userD.data[0];
-
-        const nameUser = dataUser.name;
-        setNameUser(nameUser);
-    });
+            fetch(url + "/get-users", {
+                method: 'POST',
+                headers,
+                body: JSON.stringify({
+                  'emails': [email]
+                }),
+              }).then(response => response.json())
+                .then(data=> {
+                  if (data.status === 200){
+                    setUsuario(data.users)
+                } else {
+                  }
+                })
+                .catch(error => {
+                });
+        }
+        fetchData();
+    }, [])
 
     return (
         <div className="UserPage" onMouseLeave={handleMouseLeave}>
@@ -71,16 +76,45 @@ const UserPage = () => {
                 <img src = {BotonBack} alt = "Boton de regreso" className="boton-regreso" onClick={handleBackClick}/>
                 <img src = {BotonHome} alt = "Boton de home" className="boton-home" onClick={handleHomeClick}/>
             </div>
-            <div className="user-content">
+            {usuario.map((user)=>(
+            <div className="user-content" key={user.email}>
                 <div className="data">
                     <p>Nombre</p>
-                    <section className="info">{nameUser}</section>
+                    <section className="info">{user.name}</section>
+                </div>
+                <div className="data">
+                    <p>Apellido</p>
+                    <section className="info">{user.surname}</section>
                 </div>
                 <div className="data">
                     <p>Correo</p>
-                    <section className="info">{email}</section>
+                    <section className="info">{user.email}</section>
+                </div>
+                <div className="data">
+                    <p>Año de Nacimiento</p>
+                    <section className="info">{user.birthDate}</section>
+                </div>
+                <div className="data">
+                    <p>Descripción</p>
+                    <section className="info">{user.description}</section>
+                </div>
+                <div className="data">
+                    <p>Calificación</p>
+                    <Rating defaultValue={setQualification(user.qualification)} precision={0.5} readOnly />
+                </div>
+                <div className="data">
+                    <p>Tags</p>
+                    <div className="contenedor-tags">
+                        {user.tags.map((tag) => (
+                            <div key= {tag} className="tag">
+                                {tag}
+                            </div>
+                        ))}
+                    </div>
                 </div>
             </div>
+            ))}
+
         </div>
     )
 };
