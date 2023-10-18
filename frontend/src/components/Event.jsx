@@ -13,101 +13,63 @@ const headers = {
 
 const Event = () => {
 
-    // HERE GOES FETCH FOR EACH EVENTS
-    const events_r = [
-        {
-            "uuid": "00000000-0000-0000-0000-000000000000",
-            "date": "2023-08-04",
-            "email-r": "samanta.chang@utec.edu.pe",
-            "email-g": "pedro.perez@utec.edu.pe",
-            "state": 0,
-            "tag": "python",
-            "qualified": false
-          },
-          {
-            "uuid": "11111111-1111-1111-1111-111111111111",
-            "date": "2023-08-04",
-            "email-r": "samanta.chang@utec.edu.pe",
-            "email-g": "juan.lopez@utec.edu.pe",
-            "state": 1,
-            "tag": "java",
-            "qualified": false
-          },
-          {
-            "uuid": "22222222-2222-2222-2222-222222222222",
-            "date": "2023-08-04",
-            "email-r": "samanta.chang@utec.edu.pe",
-            "email-g": "samanta.chang@utec.edu.pe",
-            "state": 2,
-            "tag": "react",
-            "qualified": false
-          },
-          {
-            "uuid": "33333333-3333-3333-3333-333333333333",
-            "date": "2023-08-04",
-            "email-r": "samanta.chang@utec.edu.pe",
-            "email-g": "maria.gomez@utec.edu.pe",
-            "state": 3,
-            "tag": "rust",
-            "qualified": false
-          },
-          {
-            "uuid": "44444444-4444-4444-4444-444444444444",
-            "date": "2023-08-04",
-            "email-r": "samanta.chang@utec.edu.pe",
-            "email-g": "juan.lopez@utec.edu.pe",
-            "state": 0,
-            "tag": "c++",
-            "qualified": false
-          }
-    ]
-    const events_g = [
-        {
-            "uuid": "a0000000-0000-0000-0000-000000000000",
-            "date": "2023-08-06",
-            "email-r": "maria.gomez@utec.edu.pe",
-            "email-g": "samanta.chang@utec.edu.pe",
-            "state": 1,
-            "tag": "python",
-            "qualified": false
-          },
-          {
-            "uuid": "b0000000-0000-0000-0000-000000000000",
-            "date": "2023-08-06",
-            "email-r": "juan.lopez@utec.edu.pe",
-            "email-g": "samanta.chang@utec.edu.pe",
-            "state": 1,
-            "tag": "java",
-            "qualified": true
-          },
-          {
-            "uuid": "c0000000-0000-0000-0000-000000000000",
-            "date": "2023-08-06",
-            "email-r": "pedro.perez@utec.edu.pe",
-            "email-g": "samanta.chang@utec.edu.pe",
-            "state": 3,
-            "tag": "react",
-            "qualified": true
-          },
-          {
-            "uuid": "d0000000-0000-0000-0000-000000000000",
-            "date": "2023-08-06",
-            "email-r": "maria.gomez@utec.edu.pe",
-            "email-g": "samanta.chang@utec.edu.pe",
-            "state": 2,
-            "tag": "rust",
-            "qualified": false
-          },
-          {
-            "uuid": "e0000000-0000-0000-0000-000000000000",
-            "date": "2023-08-06",
-            "email-r": "juan.lopez@utec.edu.pe",
-            "email-g": "samanta.chang@utec.edu.pe",
-            "state": 0,
-            "tag": "c++",
-            "qualified": false
-          }
-    ]
+  const [events_g, setEventsG] = useState([])
+  const [events_r, setEventsR] = useState([])
+
+  useEffect(() => {
+    async function fetchData() {
+        const user = JSON.parse(localStorage.getItem('user'));
+        const email = user.email;
+
+        fetch(url + "/get-users", {
+            method: 'POST',
+            headers,
+            body: JSON.stringify({
+              'emails': [email]
+            }),
+          }).then(response => response.json())
+            .then(data=> {
+              if (data.status === 200){
+                // FETCH 1
+                fetch(url + "/get-events", {
+                  method: 'POST',
+                  headers,
+                  body: JSON.stringify({
+                    'events': data.users[0]["events-r"]
+                  }),
+                }).then(response2 => response2.json())
+                  .then(data2 => {
+                    if (data2.status === 200){
+                      setEventsR(data2.events)
+                    }
+                  })
+                  .catch(error => {
+                  });
+                  // FETCH 2
+                fetch(url + "/get-events", {
+                  method: 'POST',
+                  headers,
+                  body: JSON.stringify({
+                    'events': data.users[0]["events-g"]
+                  }),
+                }).then(response3 => response3.json())
+                  .then(data3 => {
+                    if (data3.status === 200){
+                      setEventsG(data3.events)
+                    }
+                  })
+                  .catch(error => {
+                  });
+
+            } else {
+              }
+            })
+            .catch(error => {
+            });
+    }
+
+    fetchData();
+    }, []);
 
 
     function getButton(state) {
@@ -141,6 +103,9 @@ const Event = () => {
           }),
         }).then(response => response.json())
           .then(data=> {
+            const evento = events_g.find((evento) => evento.uuid === uuid);
+            evento.state = newState;
+            setEventsG([...events_g]);
           })
           .catch(error => {
           });
@@ -149,8 +114,8 @@ const Event = () => {
     function getButtonsWaiting(uuid) {
         return (
             <div className="botones-elect">
-                <button className={"boton-event green aceptar"} onClick={nuevoEstado(uuid, 1)}>ACEPTAR</button>
-                <button className={"boton-event red rechazar"} onClick={nuevoEstado(uuid, 3)}>RECHAZAR</button>
+                <button className={"boton-event green aceptar"} onClick={() => nuevoEstado(uuid, 1)}>ACEPTAR</button>
+                <button className={"boton-event red rechazar"} onClick={() => nuevoEstado(uuid, 3)}>RECHAZAR</button>
             </div>
         )
     }
@@ -158,7 +123,7 @@ const Event = () => {
     function getButtonsCulminar(uuid) {
       return (
           <div className="botones-elect">
-              <button className={"boton-event blue culminar"} onClick={nuevoEstado(uuid, 2)}>CULMINAR</button>
+              <button className={"boton-event blue culminar"} onClick={() => nuevoEstado(uuid, 2)}>CULMINAR</button>
               <button className={"boton-event green"}>EN PROCESO</button>
           </div>
       )
@@ -206,9 +171,32 @@ const Event = () => {
         "birthDate": "2003/10/04"
       })
 
+      function renderElement(email) {
+        return (
+          <div className="contendor-evento-desc">
+              <div className="contenedor-titulo">
+                  <h3>{userVisible.name} {userVisible.surname} - {calcularEdad(userVisible.birthDate)}</h3>
+              </div>
+              <Rating value={setQualification(userVisible.qualification)} precision={0.5} readOnly />
+
+              <div className="tag-title">Acerca de mí</div>
+              <div className="contenedor-descripcion">{userVisible.description}</div>
+
+              <div className="tag-title">Cursos que domino</div>
+              <div className="contenedor-tags">
+                  {userVisible.tags.map((tag) => (
+                      <div key= {tag} className="tag">
+                          {tag}
+                      </div>
+                  ))}
+              </div>
+          </div>
+      )
+      }
+
     function getElement(email) {
         // HERE GOES FETCH
-        /*
+
         fetch(url + "/get-users", {
           method: 'POST',
           headers,
@@ -217,36 +205,15 @@ const Event = () => {
           }),
         }).then(response => response.json())
           .then(data=> {
-            console.log(data)
-
             if (data.status === 200 && data.total === 1){
               setUserVisible(data.users[0]);
           } else {
             }
           })
           .catch(error => {
-          });*/
+          });
 
-        return (
-            <div className="contendor-evento-desc">
-                <div className="contenedor-titulo">
-                    <h3>{userVisible.name} {userVisible.surname} - {calcularEdad(userVisible.birthDate)}</h3>
-                </div>
-                <Rating defaultValue={setQualification(userVisible.qualification)} precision={0.5} readOnly />
 
-                <div className="tag-title">Acerca de mí</div>
-                <div className="contenedor-descripcion">{userVisible.description}</div>
-
-                <div className="tag-title">Cursos que domino</div>
-                <div className="contenedor-tags">
-                    {userVisible.tags.map((tag) => (
-                        <div key= {tag} className="tag">
-                            {tag}
-                        </div>
-                    ))}
-                </div>
-            </div>
-        )
     }
 
     const [botonSeleccionado, setBoton] = useState(true);
@@ -268,24 +235,26 @@ const Event = () => {
                     <div className="box-event" key= {event.uuid} >
                         <div className="contenedor-evento-header">
                             <div className="nombre">
-                                {event["email-g"]}
+                                {event["email_giver"]}
                             </div>
-                            <Popup trigger=
-                                {<img
-                                    src="https://cdn.icon-icons.com/icons2/3395/PNG/512/loading_search_icon_214009.png"
-                                    width={20}
-                                    height={20}
-                                />}
-                                position="bottom center">
-                                {getElement(event["email-g"])}
-                            </Popup>
+                              <Popup trigger=
+                                  {<img
+                                      src="https://cdn.icon-icons.com/icons2/3395/PNG/512/loading_search_icon_214009.png"
+                                      width={20}
+                                      height={20}
+                                  />}
+                                  onOpen={() => getElement(event["email_giver"])}
+                                  position="bottom center">
+                                  {renderElement()}
+                              </Popup>
+
                             <div className="tag-event">
                                 {event.tag}
                             </div>
                         </div>
 
                         <div className="contenedor-boton">
-                          {event.state !== 1 ? getButton(event.state) : getButtonsCulminar(event.uuid)}
+                                  {getButton(event.state)}
                         </div>
                     </div>
                 ))
@@ -294,24 +263,25 @@ const Event = () => {
                     <div className="box-event" key= {event.uuid} >
                         <div className="contenedor-evento-header">
                             <div className="nombre">
-                                {event["email-r"]}
+                                {event["email_receiver"]}
                             </div>
                             <Popup trigger=
-                                {<img
-                                    src="https://cdn.icon-icons.com/icons2/3395/PNG/512/loading_search_icon_214009.png"
-                                    width={20}
-                                    height={20}
-                                />}
-                                position="bottom center">
-                                {getElement(event["email-g"])}
-                            </Popup>
+                                  {<img
+                                      src="https://cdn.icon-icons.com/icons2/3395/PNG/512/loading_search_icon_214009.png"
+                                      width={20}
+                                      height={20}
+                                  />}
+                                  onOpen={() => getElement(event["email_receiver"])}
+                                  position="bottom center">
+                                  {renderElement()}
+                              </Popup>
                             <div className="tag-event">
                                 {event.tag}
                             </div>
                         </div>
 
                         <div className="contenedor-boton">
-                            {event.state !== 0 ? getButton(event.state) : getButtonsWaiting(event.uuid)}
+                            {event.state === 0 ? getButtonsWaiting(event.uuid) : event.state === 1 ? getButtonsCulminar(event.uuid) : getButton(event.state)}
                         </div>
                     </div>
                 ))
