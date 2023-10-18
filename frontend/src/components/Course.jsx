@@ -6,7 +6,7 @@ import url from './url.js';
 
 const headers = {
     'Content-Type': 'application/json',
-  };
+};
 
 const Course = () => {
     const lastItemRef = useRef(null);

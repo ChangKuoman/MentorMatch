@@ -4,7 +4,12 @@ import "../css/Event.css"
 import Popup from 'reactjs-popup';
 import 'reactjs-popup/dist/index.css';
 import Rating from '@mui/material/Rating';
+import url from './url.js';
 // https://www.geeksforgeeks.org/how-to-create-popup-box-in-reactjs/
+
+const headers = {
+  'Content-Type': 'application/json',
+};
 
 const Event = () => {
 
@@ -32,7 +37,7 @@ const Event = () => {
             "uuid": "22222222-2222-2222-2222-222222222222",
             "date": "2023-08-04",
             "email-r": "samanta.chang@utec.edu.pe",
-            "email-g": "samantas.chang@utec.edu.pe",
+            "email-g": "samanta.chang@utec.edu.pe",
             "state": 2,
             "tag": "react",
             "qualified": false
@@ -114,7 +119,7 @@ const Event = () => {
         };
         const texts = {
           0: "EN ESPERA",
-          1: "ACEPTADO",
+          1: "EN PROCESO",
           2: "COMPLETADO",
           3: "RECHAZADO",
         };
@@ -126,14 +131,38 @@ const Event = () => {
         );
       };
 
-    function getButtonsWaiting() {
+      function nuevoEstado(uuid, newState) {
+        fetch(url + "/event-state", {
+          method: 'PUT',
+          headers,
+          body: JSON.stringify({
+            'uuid': uuid,
+            'new_state': newState
+          }),
+        }).then(response => response.json())
+          .then(data=> {
+          })
+          .catch(error => {
+          });
+      }
+
+    function getButtonsWaiting(uuid) {
         return (
             <div className="botones-elect">
-                <button className={"boton-event green"}>ACEPTAR</button>
-                <button className={"boton-event red"}>RECHAZAR</button>
+                <button className={"boton-event green aceptar"} onClick={nuevoEstado(uuid, 1)}>ACEPTAR</button>
+                <button className={"boton-event red rechazar"} onClick={nuevoEstado(uuid, 3)}>RECHAZAR</button>
             </div>
         )
     }
+
+    function getButtonsCulminar(uuid) {
+      return (
+          <div className="botones-elect">
+              <button className={"boton-event blue culminar"} onClick={nuevoEstado(uuid, 2)}>CULMINAR</button>
+              <button className={"boton-event green"}>EN PROCESO</button>
+          </div>
+      )
+  }
 
       function setQualification(q) {
         const cant = q[0];
@@ -168,31 +197,49 @@ const Event = () => {
         return edad;
       }
 
+      const [userVisible, setUserVisible] = useState({
+        "name": "Pepe",
+        "surname": "El Grillo",
+        "qualification": [1, 3],
+        "description": "Nada",
+        "tags": ["CS1515"],
+        "birthDate": "2003/10/04"
+      })
+
     function getElement(email) {
         // HERE GOES FETCH
+        /*
+        fetch(url + "/get-users", {
+          method: 'POST',
+          headers,
+          body: JSON.stringify({
+            'emails': [email]
+          }),
+        }).then(response => response.json())
+          .then(data=> {
+            console.log(data)
 
-        const user = {
-            "name": "Pepe",
-            "surname": "El Grillo",
-            "qualification": [1, 3],
-            "description": "Nada",
-            "tags": ["CS1515"],
-            "birthDate": "2003/10/04"
-        }
+            if (data.status === 200 && data.total === 1){
+              setUserVisible(data.users[0]);
+          } else {
+            }
+          })
+          .catch(error => {
+          });*/
 
         return (
             <div className="contendor-evento-desc">
                 <div className="contenedor-titulo">
-                    <h3>{user.name} {user.surname} - {calcularEdad(user.birthDate)}</h3>
+                    <h3>{userVisible.name} {userVisible.surname} - {calcularEdad(userVisible.birthDate)}</h3>
                 </div>
-                <Rating defaultValue={setQualification(user.qualification)} precision={0.5} readOnly />
+                <Rating defaultValue={setQualification(userVisible.qualification)} precision={0.5} readOnly />
 
                 <div className="tag-title">Acerca de mí</div>
-                <div className="contenedor-descripcion">{user.description}</div>
+                <div className="contenedor-descripcion">{userVisible.description}</div>
 
                 <div className="tag-title">Cursos que domino</div>
                 <div className="contenedor-tags">
-                    {user.tags.map((tag) => (
+                    {userVisible.tags.map((tag) => (
                         <div key= {tag} className="tag">
                             {tag}
                         </div>
@@ -238,7 +285,7 @@ const Event = () => {
                         </div>
 
                         <div className="contenedor-boton">
-                            {getButton(event.state)}
+                          {event.state !== 1 ? getButton(event.state) : getButtonsCulminar(event.uuid)}
                         </div>
                     </div>
                 ))
@@ -247,7 +294,7 @@ const Event = () => {
                     <div className="box-event" key= {event.uuid} >
                         <div className="contenedor-evento-header">
                             <div className="nombre">
-                                {event["email-g"]}
+                                {event["email-r"]}
                             </div>
                             <Popup trigger=
                                 {<img
@@ -264,7 +311,7 @@ const Event = () => {
                         </div>
 
                         <div className="contenedor-boton">
-                            {event.state !== 0 ? getButton(event.state) : getButtonsWaiting()}
+                            {event.state !== 0 ? getButton(event.state) : getButtonsWaiting(event.uuid)}
                         </div>
                     </div>
                 ))

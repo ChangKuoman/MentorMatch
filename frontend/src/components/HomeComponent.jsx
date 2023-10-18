@@ -45,6 +45,10 @@ const HomeComponent = () => {
     window.location.href = '/courses';
   }
 
+  const accessEvents = () => {
+    window.location.href = '/reservas';
+  }
+
   const handleLogout = () => {
     // Limpia los datos de la sesión del localstorage
     localStorage.removeItem('user');
@@ -61,13 +65,13 @@ const HomeComponent = () => {
               <div className="space">
                 <Logo />
                 <h1>MentorMatch</h1>
-                <img src = {LogoLogOut} 
-                    alt = "logo Log Out" 
-                    className="LogoLogOut" 
-                    onClick={OpenModal}    
+                <img src = {LogoLogOut}
+                    alt = "logo Log Out"
+                    className="LogoLogOut"
+                    onClick={OpenModal}
                 />
                 {
-                  IsOpen && 
+                  IsOpen &&
                   <div className="modal" style={{left: logOutPosition.x, top:logOutPosition.y}}>
                   <div className="overlay" onClick={OpenModal}></div>
                   <div className="modal-content">
@@ -88,7 +92,7 @@ const HomeComponent = () => {
           </div>
           <div className="BloqueMidSub2">
             <div>
-              <img src = {LogoReservas} alt = "Logo Reservas" className="logoHome" />
+              <img src = {LogoReservas} alt = "Logo Reservas" className="logoHome" onClick={accessEvents}/>
               <h2>RESERVAS</h2>
             </div>
           </div>

@@ -11,6 +11,7 @@ import HomeComponent from './components/HomeComponent';
 import FormRegister from './components/FormRegister';
 import UserPage from './components/UserPage';
 import Course from './components/Course';
+import Event from './components/Event';
 
 function App() {
   return (
@@ -22,6 +23,7 @@ function App() {
           <Route path='/user/' element = {<UserPage/>} />
           <Route path='/*' element={<PageNotFound/>} />
           <Route path='/courses' element={<Course/>} />
+          <Route path='/reservas' element={<Event />} />
         </Routes >
     </div>
   );

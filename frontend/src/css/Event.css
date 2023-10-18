@@ -115,3 +115,20 @@
 .botones-elect > .boton-event > .green:hover{
     background-color: gray;
 }
+
+.contenedor-botones-event {
+    display: flex;
+    justify-content: center;
+}
+
+.aceptar:hover {
+    background-color: #3bd145;
+}
+
+.rechazar:hover {
+    background-color: #bf3939;
+}
+
+.culminar:hover {
+    background-color: #120f8c;
+}
