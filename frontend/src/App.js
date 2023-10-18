@@ -12,6 +12,7 @@ import FormRegister from './components/FormRegister';
 import UserPage from './components/UserPage';
 import Course from './components/Course';
 import Event from './components/Event';
+import Chat from './components/Chat';
 
 function App() {
   return (
@@ -24,6 +25,7 @@ function App() {
           <Route path='/*' element={<PageNotFound/>} />
           <Route path='/courses' element={<Course/>} />
           <Route path='/reservas' element={<Event />} />
+          <Route path='/chats' element={<Chat />} />
         </Routes >
     </div>
   );
