@@ -1,22 +1,22 @@
 import React, {useState} from "react";
 import BotonBack from '../icons/deshacer 1boton-back.png';
 import BotonHome from '../icons/boton-home.png';
+import url from './url.js';
 
 import '../css/UserPage.css'
 
 function getUserData(email) {
-    const url = `https://fjmjpibq48.execute-api.us-east-1.amazonaws.com/test/users`;
     const options = {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
       },
       body: JSON.stringify({
-        email,
+        'email': [email]
       }),
     };
-  
-    return fetch(url, options).then((response) => {
+
+    return fetch(url + "/get-users", options).then((response) => {
       if (response.status === 200) {
         return response.json();
       } else {
@@ -55,7 +55,7 @@ const UserPage = () => {
     userData.then((data) => {
         const userD = data;
         const dataUser = userD.data[0];
-        
+
         const nameUser = dataUser.name;
         setNameUser(nameUser);
     });

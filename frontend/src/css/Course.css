@@ -1,3 +1,31 @@
+.icons {
+    margin-top: 3vh;
+    user-select: none;
+    z-index: 1;
+}
+
+.icons > svg {
+    width: 10vh;
+    height: 10vh;
+    max-width: 60px;
+    max-height: 60px;
+    border-radius: 50%;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+    cursor: pointer;
+}
+
+.icons > svg:nth-child(1) { fill: #fb4f68; margin-right: 2vh; }
+.icons > svg:nth-child(2) { fill: #4dca93; }
+.icons > svg > path:nth-child(1) { fill: #fff; }
+
+.frame {
+    position: relative;
+    width: 56vh;
+    height: 84vh;
+    max-width: 400px;
+    max-height: 600px;
+    z-index: 1;
+}
 h1{
     margin-left:40%;
     margin-top: 50px;
@@ -20,9 +48,11 @@ h1{
     display:flex;
     justify-content: center;
     margin-top: 5vh;
+    position:relative;
 }
 .swipe{
     position: absolute;
+    transition: 'left 0.5s';
 }
 .contenedor-titulo{
     display: flex;
@@ -52,6 +82,7 @@ h1{
 
 .div-izquierda {
     float: left;
+    width: 150px;
 }
 
 .div-derecha {
@@ -177,4 +208,20 @@ select.classic:focus {
     background-repeat: no-repeat;
     border-color: grey;
     outline: 0;
+}
+
+.contenedor-iconos-l-h {
+    position: relative;
+    margin-top: 350px;
+
+    display: flex;
+    justify-content: center;
+}
+
+.like-buton:hover {
+    box-shadow: 0px 0px 20px green;
+}
+
+.hate-buton:hover {
+    box-shadow: 0px 0px 20px red;
 }

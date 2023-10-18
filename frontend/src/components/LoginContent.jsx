@@ -1,6 +1,7 @@
 import React, { useState, useRef } from 'react';
 import ErrorTextForm from './ErrorTextForm';
 import '../css/LoginContent.css';
+import url from './url.js';
 
 import Img_mentor_match from "../icons/mentor-match.png"
 
@@ -61,9 +62,6 @@ const LoginContent = () => {
       return;
     }
 
-    // prueba de conexion con la api de la bd
-
-    const url = `https://fjmjpibq48.execute-api.us-east-1.amazonaws.com/test/login`;
     const body = {
       'email': email,
       'password': password,
@@ -74,7 +72,7 @@ const LoginContent = () => {
       'Content-Type': 'application/json',
     };
 
-    fetch(url, {
+    fetch(url + "/login", {
       method: 'POST',
       headers,
       body: JSON.stringify(body),
