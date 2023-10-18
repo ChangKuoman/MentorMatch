@@ -161,7 +161,7 @@ const Course = () => {
 
                         <div className="contenedor-grande">
                             <div className="div-izquierda">
-                                <img className={user.verificado ? "imagen-pfp dorado" : "imagen-pfp"} src="https://d3ipks40p8ekbx.cloudfront.net/dam/jcr:3a4e5787-d665-4331-bfa2-76dd0c006c1b/user_icon.png" />
+                                <img className={user.verified ? "imagen-pfp dorado" : "imagen-pfp"} src="https://d3ipks40p8ekbx.cloudfront.net/dam/jcr:3a4e5787-d665-4331-bfa2-76dd0c006c1b/user_icon.png" />
                                 <div className="contenedor-titulo">
                                     <h3>{user.name} {user.surname} - {calcularEdad(user.birthDate)}</h3>
                                 </div>
