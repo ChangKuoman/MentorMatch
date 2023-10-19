@@ -8,7 +8,7 @@ import Footer from './components/Footer';
 */
 import LoginContent from './components/LoginContent';
 import HomeComponent from './components/HomeComponent';
-import FormRegister from './components/FormRegister';
+import Register from './components/Register';
 import UserPage from './components/UserPage';
 import Course from './components/Course';
 import Event from './components/Event';
@@ -21,7 +21,7 @@ function App() {
     <div>
         <Routes >
           <Route path='/' element={<LoginContent />} onEnter/>
-          <Route path='/register' element = {<FormRegister />} />
+          <Route path='/register' element = {<Register />} />
           <Route path='/home' element = {<HomeComponent/>}/>
           <Route path='/user/' element = {<UserPage/>} />
           <Route path='/*' element={<PageNotFound/>} />
