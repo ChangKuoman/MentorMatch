@@ -54,6 +54,10 @@ const HomeComponent = () => {
     window.location.href = '/reservas';
   }
 
+  const accessFeedback = () => {
+    window.location.href = '/feedback';
+  }
+
   const handleLogout = () => {
     // Limpia los datos de la sesión del localstorage
     localStorage.removeItem('user');
@@ -69,7 +73,7 @@ const HomeComponent = () => {
         <div className="BloqueTop">
             <div className="HeaderHome">
               <div className="space">
-                
+
                 <h1>MentorMatch</h1>
                 <div className="botones-nav">
                   <img src = {LogoUser}
@@ -117,8 +121,8 @@ const HomeComponent = () => {
           </div>
           <div className="BloqueMidSub2">
             <div>
-              <img src = {LogoRating} alt = "Logo Rating" className="logoHome" />
-              <h2>CALIFICACION</h2>
+              <img src = {LogoRating} alt = "Logo Rating" className="logoHome" onClick={accessFeedback}/>
+              <h2>FEEDBACK</h2>
             </div>
           </div>
 
