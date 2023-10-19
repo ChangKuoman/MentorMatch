@@ -13,7 +13,7 @@ import BotonHome from '../icons/boton-home.png';
 import LogoLogOut from '../icons/icons8-logout-100.png';
 
 const getLogOutPosition = () => {
-  const logOutElement = document.querySelector(".LogoLogOut");
+  const logOutElement = document.querySelector(".LogoLogOut-2");
   if (!logOutElement) {
     return {
       x: 0,
