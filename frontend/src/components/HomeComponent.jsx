@@ -2,7 +2,8 @@ import React, { useState } from "react";
 import Logo from "./Logo";
 import "../css/HomeComponent.css"
 
-import LogoUser from '../icons/icons8-usuario-64.png';
+import LogoUser from '../icons/icons8-user-64.png';
+import LogoMessage from '../icons/icon-messages.png'
 import LogoReservas from '../icons/icons8-calendario-64 (1).png';
 import LogoCurses from '../icons/icons8-assignment-64.png';
 import LogoRating from '../icons/icons8-calificación-48.png';
@@ -45,6 +46,10 @@ const HomeComponent = () => {
     window.location.href = '/courses';
   }
 
+  const accessMessages = () => {
+    window.location.href = '/chats'
+  }
+
   const accessEvents = () => {
     window.location.href = '/reservas';
   }
@@ -60,16 +65,24 @@ const HomeComponent = () => {
 
   return (
     <div className="Home">
+      <Logo />
         <div className="BloqueTop">
             <div className="HeaderHome">
               <div className="space">
-                <Logo />
+                
                 <h1>MentorMatch</h1>
-                <img src = {LogoLogOut}
-                    alt = "logo Log Out"
+                <div className="botones-nav">
+                  <img src = {LogoUser}
+                    alt="logo user"
                     className="LogoLogOut"
-                    onClick={OpenModal}
-                />
+                    onClick={accessUser}
+                  />
+                  <img src = {LogoLogOut}
+                      alt = "logo Log Out"
+                      className="LogoLogOut"
+                      onClick={OpenModal}
+                  />
+                </div>
                 {
                   IsOpen &&
                   <div className="modal" style={{left: logOutPosition.x, top:logOutPosition.y}}>
@@ -86,8 +99,8 @@ const HomeComponent = () => {
         <div className="BloqueMid">
           <div className="BloqueMidSub1">
             <div>
-              <img src = {LogoUser} alt = "Logo Usuario" className="logoHome" onClick={accessUser}/>
-              <h2>USUARIO</h2>
+              <img src = {LogoMessage} alt = "Logo Message" className="logoHome" onClick={accessMessages}/>
+              <h2>Mis Mensajes</h2>
             </div>
           </div>
           <div className="BloqueMidSub2">

@@ -140,3 +140,63 @@
 .culminar:hover {
     background-color: #120f8c;
 }
+
+.content-reservas{
+    position: absolute;
+    width: 60%;
+    height: 70%;
+    margin: 0;
+    padding: 1%;
+    box-shadow:0px 18px 53px 0px rgba(0,0,0,0.3);
+    top: 20%;
+    left: 20%;
+    overflow-y: scroll;
+}
+.logo{
+    position: absolute;
+    top: 1%;
+    left: 1%;
+    width: 8%;
+    height: 8%;
+    z-index: 3;
+}
+
+.LogoLogOut-2{
+    width: 40px;
+    height: 40px;
+    cursor: pointer;
+    margin-left: 10px;
+    margin-right: 10px;
+    padding: 10px;
+    border-radius: 100%;
+    background: #64D3F87D;
+    object-fit:fill;
+
+    position: absolute;
+    top: 2%;
+    right: 2%;
+    z-index: 3;
+
+}
+
+.LogoLogOut-2:hover {
+    opacity: 0.7;
+    background-color: #384b52a1;
+}
+.modal{
+    margin: 0;
+    padding: 0;
+    width: 150px;
+    height: 100px;
+    position: absolute;
+}
+
+.modal-content{
+    background: #e2f5fc;
+    padding: 10px;
+    border: 3px solid;
+    border-radius: 8%;
+    border-color: #157499;
+
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
