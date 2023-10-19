@@ -13,6 +13,8 @@ import UserPage from './components/UserPage';
 import Course from './components/Course';
 import Event from './components/Event';
 import Chat from './components/Chat';
+import Feedback from './components/Feedback';
+import Subscription from './components/Subscription';
 
 function App() {
   return (
@@ -26,6 +28,9 @@ function App() {
           <Route path='/courses' element={<Course/>} />
           <Route path='/reservas' element={<Event />} />
           <Route path='/chats' element={<Chat />} />
+          <Route path='/feedback' element={<Feedback/>} />
+          <Route path='/subscripciones' element={<Subscription />}/>
+
         </Routes >
     </div>
   );
