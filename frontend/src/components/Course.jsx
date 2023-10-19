@@ -15,7 +15,7 @@ const headers = {
 };
 
 const getLogOutPosition = () => {
-    const logOutElement = document.querySelector(".LogoLogOut");
+    const logOutElement = document.querySelector(".LogoLogOut-2");
     if (!logOutElement) {
       return {
         x: 0,

@@ -351,6 +351,7 @@ select.classic:focus {
     width: 150px;
     height: 100px;
     position: absolute;
+    z-index: 5;
 }
 
 .modal-content{
