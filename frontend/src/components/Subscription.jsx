@@ -51,6 +51,9 @@ const Subscription = () => {
                             <img className="imagen" src="https://static.vecteezy.com/system/resources/previews/017/350/125/original/check-mark-icon-png.png" width={50} height={50}/>
                             <div>Mayor acceso a nuestros Star Mentors</div>
                         </div>
+                        <div className="contenedor-boton">
+                            <button className="boton-adquirir">¡PRONTO!</button>
+                        </div>
                     </div>
                 </div>
             </div>
