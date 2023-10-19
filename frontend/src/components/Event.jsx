@@ -308,7 +308,7 @@ const Event = () => {
         // Limpia los datos de la sesión del localstorage
         localStorage.removeItem('user');
         localStorage.removeItem('isLog');
-    
+
         // Redirige al usuario a /login
         window.location.href = '/';
       };
@@ -371,7 +371,7 @@ const Event = () => {
                               </div>
                           </div>
 
-                          <div className="contenedor-boton">
+                          <div className="contenedor-boton-2">
                               {event.state === 2 ? getButtonAndQualification(event): getButton(event.state)}
                           </div>
                       </div>
@@ -398,7 +398,7 @@ const Event = () => {
                               </div>
                           </div>
 
-                          <div className="contenedor-boton">
+                          <div className="contenedor-boton-2">
                               {event.state === 0 ? getButtonsWaiting(event.uuid) : event.state === 1 ? getButtonsCulminar(event.uuid) : getButton(event.state)}
                           </div>
                       </div>
