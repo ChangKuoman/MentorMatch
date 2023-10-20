@@ -56,12 +56,6 @@ const LoginContent = () => {
       return;
     }
 
-    // Valida que el correo contenga "@utec.edu.pe"
-    if (!email.includes('@utec.edu.pe')) {
-      setCorreoValido(false);
-      return;
-    }
-
     const body = {
       'email': email,
       'password': password,
@@ -92,7 +86,6 @@ const LoginContent = () => {
 
           window.location.href = '/home';
         } else {
-          console.log('El correo no existe');
           setCorreoValido(false);
           setContrasenaValida(false);
         }
