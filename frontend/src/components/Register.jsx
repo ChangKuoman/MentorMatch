@@ -108,7 +108,7 @@ const Register = () => {
 
         if (
             nameValid && surnameValid && emailValid && documentNroValid &&
-            passwordValid && confirmPassword && birthDate && terminosValid
+            passwordValid && confirmPasswordValid && birthDateValid && terminosValid
         ) {
             return true;
         }
