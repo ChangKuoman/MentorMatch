@@ -22,7 +22,7 @@ const getLogOutPosition = () => {
         y: 0,
       };
     }
-  
+
     const logOutRect = logOutElement.getBoundingClientRect();
     const logOutX = logOutRect.left;
     const logOutY = logOutRect.top;
@@ -104,7 +104,7 @@ const Course = () => {
         const diaActual = fechaActual.getDate();
 
         // Calcular la edad
-        const edad = añoActual - añoNacimiento;
+        let edad = añoActual - añoNacimiento;
         if (mesActual < mesNacimiento) {
           edad--;
         } else if (mesActual === mesNacimiento && diaActual < diaNacimiento) {
@@ -185,7 +185,7 @@ const Course = () => {
         // Limpia los datos de la sesión del localstorage
         localStorage.removeItem('user');
         localStorage.removeItem('isLog');
-    
+
         // Redirige al usuario a /login
         window.location.href = '/';
       };
@@ -208,7 +208,7 @@ const Course = () => {
               </div>
             </div>
             }
-            
+
             <div className="frame1">
                 <p>MENTOR MATCH</p>
             </div>
