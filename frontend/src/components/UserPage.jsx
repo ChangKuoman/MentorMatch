@@ -97,6 +97,7 @@ const UserPage = () => {
                 .then(data=> {
                   if (data.status === 200){
                     setUsuario(data.users)
+                    setDescripcion(data.users[0].description)
                 } else {
                   }
                 })
@@ -159,9 +160,11 @@ const UserPage = () => {
                 modalDescripcion && <div className="overlay">
                     <div className="content-modal">
                         <img className="cerrar-modal" onClick={cerrarModalD} src="https://cdn-icons-png.flaticon.com/512/7560/7560626.png" width={20} height={20} />
-                        <textarea className="textarea-modal-descripcion" onChange={manejarCambioDescripcion} value={descripcion}></textarea>
-                        <button className="boton-modal-descripcion" onClick={cambiarDescripcion}>Cambiar</button>
-                    </div>
+                        <div className="modal-derecha">
+                            <textarea className="textarea-modal-descripcion" onChange={manejarCambioDescripcion} value={descripcion}></textarea>
+                            <button className="boton-modal-descripcion" onClick={cambiarDescripcion}>Guardar</button>
+                        </div>
+                   </div>
                 </div>
 
             }
