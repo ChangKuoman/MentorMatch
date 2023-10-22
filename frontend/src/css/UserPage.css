@@ -124,3 +124,37 @@
     display: flex;
     padding: 3%;
 }
+
+.overlay{
+    position: absolute;
+    top: 0%;
+    height: 100%;
+    width: 100%;
+    background: rgba(0, 0, 0, 0.19);
+    z-index: 9;
+
+    display: flex;
+
+    justify-content: center;
+    align-items: center;
+}
+
+.content-modal{
+    width: 40%;
+    height: 30%;
+    background: #FFFFFF;
+}
+
+.info2{
+    height: auto !important;
+}
+
+.textarea-modal-descripcion {
+    resize: none;
+    width: auto;
+    height: auto;
+}
+
+.boton-modal-descripcion {
+
+}

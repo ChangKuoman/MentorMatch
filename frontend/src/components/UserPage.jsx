@@ -19,9 +19,50 @@ function setQualification(q) {
   }
 
 const UserPage = () => {
+    const [descripcion, setDescripcion] = useState("")
+    const [modalDescripcion, setModalDescripcion] = useState(false)
+    const [modalTags, setModalTags] = useState(false)
     // Define un estado para controlar la visibilidad del nav
     const [isVisible, setIsVisible] = useState(false);
 
+    const abrirModalD = () => {
+        setModalDescripcion(true)
+    }
+    const cerrarModalD = () => {
+        setModalDescripcion(false)
+    }
+    const abrirModalT = () => {
+        setModalTags(true)
+    }
+    const cerrarModalT = () => {
+        setModalTags(false)
+    }
+
+    const manejarCambioDescripcion = (e) => {
+        setDescripcion(e.target.value)
+    }
+    const cambiarDescripcion = () => {
+        const user = JSON.parse(localStorage.getItem('user'));
+        const email = user.email;
+
+        fetch(url + '/user-description', {
+            method: 'PUT',
+            headers,
+            body: JSON.stringify({
+              'email': email,
+              'description': descripcion
+            }),
+          }).then(response => response.json())
+            .then(data=> {
+                console.log(data)
+                if (data.status === 200) {
+                    setUsuario(data.users)
+                    cerrarModalD()
+                }
+            })
+            .catch(error => {
+            });
+    }
     // Manejador del evento `onMouseEnter` del elemento `.frame2`
     const handleMouseEnter = () => {
         setIsVisible(true);
@@ -91,19 +132,19 @@ const UserPage = () => {
                     <section className="info">{user.email}</section>
                 </div>
                 <div className="data">
-                    <p>Año de Nacimiento</p>
+                    <p>Fecha de Nacimiento</p>
                     <section className="info">{user.birthDate}</section>
                 </div>
                 <div className="data">
-                    <p>Descripción</p>
-                    <section className="info">{user.description}</section>
+                    <p>Descripción <img onClick={abrirModalD} className="imagen-lapiz" src="https://cdn-icons-png.flaticon.com/512/2919/2919564.png" width={20} height={20}/></p>
+                    <section className="info2">{user.description}</section>
                 </div>
                 <div className="data">
                     <p>Calificación</p>
                     <Rating defaultValue={setQualification(user.qualification)} precision={0.5} readOnly />
                 </div>
                 <div className="data">
-                    <p>Tags</p>
+                    <p>Tags <img onClick={abrirModalT} className="imagen-lapiz" src="https://cdn-icons-png.flaticon.com/512/2919/2919564.png" width={20} height={20}/></p>
                     <div className="contenedor-tags">
                         {user.tags.map((tag) => (
                             <div key= {tag} className="tag">
@@ -114,7 +155,24 @@ const UserPage = () => {
                 </div>
             </div>
             ))}
+            {
+                modalDescripcion && <div className="overlay">
+                    <div className="content-modal">
+                        <img className="cerrar-modal" onClick={cerrarModalD} src="https://cdn-icons-png.flaticon.com/512/7560/7560626.png" width={20} height={20} />
+                        <textarea className="textarea-modal-descripcion" onChange={manejarCambioDescripcion} value={descripcion}></textarea>
+                        <button className="boton-modal-descripcion" onClick={cambiarDescripcion}>Cambiar</button>
+                    </div>
+                </div>
 
+            }
+            {
+                modalTags && <div className="overlay">
+                    <div className="content-modal">
+                        <img onClick={cerrarModalT} src="https://cdn-icons-png.flaticon.com/512/7560/7560626.png" width={20} height={20} />
+
+                    </div>
+                </div>
+            }
         </div>
     )
 };
