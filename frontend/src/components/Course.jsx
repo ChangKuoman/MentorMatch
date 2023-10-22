@@ -11,6 +11,7 @@ import BotonHome from '../icons/boton-home.png';
 import LogoLogOut from '../icons/icons8-logout-100.png';
 
 import DefaultPFP from '../icons/user_icon.png'
+import listaCursos from './cursos'
 
 const headers = {
     'Content-Type': 'application/json',
@@ -38,6 +39,7 @@ const getLogOutPosition = () => {
 
 
 const Course = () => {
+
     const lastItemRef = useRef(null);
     const [users, setUsers] = useState([])
     const [validUsers, setValidUsers] = useState([])
@@ -225,17 +227,11 @@ const Course = () => {
                     <div className="texto-filtro">Filtro de cursos</div>
                     <select className="classic" onChange={manejarTag}>
                         <option value="none">Todos</option>
-                        <option value="Python">Python</option>
-                        <option value="C++">C++</option>
-                        <option value="Java">Java</option>
-                        <option value="Rust">Rust</option>
-                        <option value="JavaScript">JavaScript</option>
-                        <option value="Dart">Dart</option>
-                        <option value="HTML">HTML</option>
-                        <option value="CSS">CSS</option>
-                        <option value="Vuejs">Vuejs</option>
-                        <option value="React">React</option>
-                        <option value="Swift">Swift</option>
+                        {
+                            listaCursos.map((curso) => (
+                                <option key={curso} value={curso}>{curso}</option>
+                            ))
+                        }
                     </select>
                 </div>
 

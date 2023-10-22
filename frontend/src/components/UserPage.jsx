@@ -8,6 +8,8 @@ import Rating from '@mui/material/Rating';
 import PencilLogo from '../icons/pencil.png'
 import XLogo from '../icons/equis-2.png'
 
+import listaCursos from "./cursos.js";
+
 const headers = {
     'Content-Type': 'application/json',
 };
@@ -23,7 +25,7 @@ function setQualification(q) {
 
 const UserPage = () => {
     const [tagsHabilitadas, setTagsHabilitadas] = useState([])
-    const [tagsDeshabilitadas, setTagsDeshabilitadas] = useState(['Python', 'C++', 'Java', 'Rust', 'JavaScript', 'Dart', 'HTML', 'CSS', 'Vuejs', 'React', 'Swift'])
+    const [tagsDeshabilitadas, setTagsDeshabilitadas] = useState(listaCursos)
 
 
     const [descripcion, setDescripcion] = useState("")
@@ -232,7 +234,7 @@ const UserPage = () => {
                                 <div className="cuadro-tags">
                                     <div className="texto-tags">Habilitado</div>
                                     {
-                                        <div className="contenedor-tags">
+                                        <div className="contenedor-tags control-overflow">
                                             {tagsHabilitadas.map((tag) => (
                                                 <div key= {tag} className="tag" onClick={() => deshabilitarTag(tag)}>
                                                     {tag}
@@ -244,7 +246,7 @@ const UserPage = () => {
                                 <div className="cuadro-tags">
                                     <div className="texto-tags">Desabilitado</div>
                                     {
-                                        <div className="contenedor-tags">
+                                        <div className="contenedor-tags control-overflow">
                                             {tagsDeshabilitadas.map((tag) => (
                                                 <div key= {tag} className="tag" onClick={() => habilitarTag(tag)}>
                                                     {tag}
