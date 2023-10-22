@@ -36,6 +36,14 @@
 }
 
 .contenedor {
+    position: absolute;
+    z-index: 0;
+    left: 1%;
+    top: 20%;
+
+    width: 98%;
+    height: 60%;
+
     display: flex;
     flex-direction: row;
     justify-content: space-evenly;

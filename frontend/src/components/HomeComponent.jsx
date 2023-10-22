@@ -67,6 +67,10 @@ const HomeComponent = () => {
     window.location.href = '/';
   };
 
+  const accessSubs = () => {
+    window.location.href = '/subscripciones';
+  }
+
   return (
     <div className="Home">
       <Logo />
@@ -130,8 +134,12 @@ const HomeComponent = () => {
         <div className="BloqueBottom">
 
         </div>
+        <div className="premiun-bar" onClick={accessSubs}>
+          <p>Pásate a Premium</p>
+        </div>
     </div>
   );
 };
 
 export default HomeComponent;
+
