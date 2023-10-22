@@ -19,6 +19,10 @@ function setQualification(q) {
   }
 
 const UserPage = () => {
+    const [tagsHabilitadas, setTagsHabilitadas] = useState([])
+    const [tagsDeshabilitadas, setTagsDeshabilitadas] = useState(['Python', 'C++', 'Java', 'Rust', 'JavaScript', 'Dart', 'HTML', 'CSS', 'Vuejs', 'React', 'Swift'])
+
+
     const [descripcion, setDescripcion] = useState("")
     const [modalDescripcion, setModalDescripcion] = useState(false)
     const [modalTags, setModalTags] = useState(false)
@@ -98,6 +102,10 @@ const UserPage = () => {
                   if (data.status === 200){
                     setUsuario(data.users)
                     setDescripcion(data.users[0].description)
+
+                    setTagsHabilitadas(data.users[0].tags);
+                    const nuevosDeshabilitados = tagsDeshabilitadas.filter(tag => !data.users[0].tags.includes(tag));
+                    setTagsDeshabilitadas(nuevosDeshabilitados);
                 } else {
                   }
                 })
@@ -107,6 +115,50 @@ const UserPage = () => {
         fetchData();
     }, [])
 
+    function deshabilitarTag(tag) {
+        setTagsHabilitadas(tagsHabilitadas.filter((t) => t !== tag));
+        setTagsDeshabilitadas([...tagsDeshabilitadas, tag]);
+    }
+    function habilitarTag(tag) {
+        setTagsDeshabilitadas(tagsDeshabilitadas.filter((t) => t !== tag));
+        setTagsHabilitadas([...tagsHabilitadas, tag]);
+    }
+    const cambiarTags = () => {
+        const user = JSON.parse(localStorage.getItem('user'));
+        const email = user.email;
+
+        fetch(url + '/user-tags', {
+            method: 'POST',
+            headers,
+            body: JSON.stringify({
+              'email': email,
+              'tags': tagsHabilitadas
+            }),
+          }).then(response => response.json())
+            .then(data=> {
+                if (data.status === 200) {
+                    cerrarModalT()
+                }
+            })
+            .catch(error => {
+            });
+        fetch(url + '/user-tags', {
+            method: 'DELETE',
+            headers,
+            body: JSON.stringify({
+                'email': email,
+                'tags': tagsDeshabilitadas
+            }),
+            }).then(response => response.json())
+            .then(data=> {
+                if (data.status === 200) {
+                    cerrarModalT()
+                }
+            })
+            .catch(error => {
+            });
+        usuario[0].tags = tagsHabilitadas
+    }
     return (
         <div className="UserPage" onMouseLeave={handleMouseLeave}>
             <div className="frame1">
@@ -170,9 +222,37 @@ const UserPage = () => {
             }
             {
                 modalTags && <div className="overlay">
-                    <div className="content-modal">
+                    <div className="content-modal alto">
                         <img onClick={cerrarModalT} src="https://cdn-icons-png.flaticon.com/512/7560/7560626.png" width={20} height={20} />
-
+                        <div className="modal-derecha">
+                            <div className="contenedor-derecha-tags">
+                                <div className="cuadro-tags">
+                                    <div className="texto-tags">Habilitado</div>
+                                    {
+                                        <div className="contenedor-tags">
+                                            {tagsHabilitadas.map((tag) => (
+                                                <div key= {tag} className="tag" onClick={() => deshabilitarTag(tag)}>
+                                                    {tag}
+                                                </div>
+                                            ))}
+                                        </div>
+                                    }
+                                </div>
+                                <div className="cuadro-tags">
+                                    <div className="texto-tags">Desabilitado</div>
+                                    {
+                                        <div className="contenedor-tags">
+                                            {tagsDeshabilitadas.map((tag) => (
+                                                <div key= {tag} className="tag" onClick={() => habilitarTag(tag)}>
+                                                    {tag}
+                                                </div>
+                                            ))}
+                                        </div>
+                                    }
+                                </div>
+                            </div>
+                            <button className="boton-modal-descripcion" onClick={cambiarTags}>GUARDAR</button>
+                        </div>
                     </div>
                 </div>
             }

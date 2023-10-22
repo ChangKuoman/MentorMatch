@@ -192,3 +192,27 @@
   -webkit-filter: saturate(0.2) opacity(0.5);
   cursor: not-allowed;
 }
+
+.contenedor-derecha-tags {
+    display: flex;
+    flex-direction: row;
+}
+
+.cuadro-tags {
+    border: solid 1px black;
+    padding: 10px;
+    height: 150px;
+    margin-bottom: 0px;
+    width: 50%;
+}
+
+.alto {
+    height: 40%;
+}
+
+.texto-tags {
+    display: flex;
+    justify-content: center;
+    font-weight: bold;
+    font-size: 10px;
+}
