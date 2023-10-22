@@ -10,6 +10,9 @@ import BotonBack from '../icons/deshacer 1boton-back.png';
 import BotonHome from '../icons/boton-home.png';
 import LogoLogOut from '../icons/icons8-logout-100.png';
 
+import DefaultPFP from '../icons/user_icon.png'
+import listaCursos from './cursos'
+
 const headers = {
     'Content-Type': 'application/json',
 };
@@ -36,6 +39,7 @@ const getLogOutPosition = () => {
 
 
 const Course = () => {
+
     const lastItemRef = useRef(null);
     const [users, setUsers] = useState([])
     const [validUsers, setValidUsers] = useState([])
@@ -223,17 +227,11 @@ const Course = () => {
                     <div className="texto-filtro">Filtro de cursos</div>
                     <select className="classic" onChange={manejarTag}>
                         <option value="none">Todos</option>
-                        <option value="Python">Python</option>
-                        <option value="C++">C++</option>
-                        <option value="Java">Java</option>
-                        <option value="Rust">Rust</option>
-                        <option value="JavaScript">JavaScript</option>
-                        <option value="Dart">Dart</option>
-                        <option value="HTML">HTML</option>
-                        <option value="CSS">CSS</option>
-                        <option value="Vuejs">Vuejs</option>
-                        <option value="React">React</option>
-                        <option value="Swift">Swift</option>
+                        {
+                            listaCursos.map((curso) => (
+                                <option key={curso} value={curso}>{curso}</option>
+                            ))
+                        }
                     </select>
                 </div>
 
@@ -244,7 +242,7 @@ const Course = () => {
 
                             <div className="contenedor-grande">
                                 <div className="div-izquierda">
-                                    <img className={user.verified ? "imagen-pfp dorado" : "imagen-pfp"} src="https://d3ipks40p8ekbx.cloudfront.net/dam/jcr:3a4e5787-d665-4331-bfa2-76dd0c006c1b/user_icon.png" />
+                                    <img className={user.verified ? "imagen-pfp dorado" : "imagen-pfp"} src={DefaultPFP} />
                                     <div className="contenedor-titulo">
                                         <h3>{user.name} {user.surname} - {calcularEdad(user.birthDate)}</h3>
                                     </div>
