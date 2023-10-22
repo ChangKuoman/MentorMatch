@@ -186,3 +186,54 @@
 
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
 }
+
+.premiun-bar{
+    position: absolute;
+    width: 30%;
+    height: 5%;
+    bottom: 4%;
+    padding-left: 1%;
+    left: 0;
+    display: flex;
+    align-items: center ;
+
+    border-top-right-radius: 1dvh;
+    border-bottom-right-radius: 1dvb;
+
+    background: #0623B8;
+
+    color: #fff;
+    z-index: 9;
+
+    appearance: button;
+    box-sizing: border-box;
+    cursor: pointer;
+    font-family: Graphik,-apple-system,system-ui,"Segoe UI",Roboto,Oxygen,Ubuntu,Cantarell,"Fira Sans","Droid Sans","Helvetica Neue",sans-serif;
+    font-size: 20px;
+    touch-action: manipulation;
+    text-transform: none;
+    transition: all 80ms ease-in-out;
+    user-select: none;
+    -webkit-user-select: none;
+    touch-action: manipulation;
+    line-height: 1.15;
+    overflow: visible;
+}
+
+.premiun-bar:disabled {
+    opacity: .5;
+}
+  
+.premiun-bar:focus {
+    outline: 0;
+}
+
+.premiun-bar:hover {
+    background-color: #0A46E4;
+    border-color: #0A46E4;
+}
+
+.premiun-bar:active {
+    background-color: #0039D7;
+    border-color: #0039D7;
+}

@@ -23,6 +23,7 @@ const LoginContent = () => {
   const [password, setPassword] = useState('');
   const [correoValido, setCorreoValido] = useState(null);
   const [contrasenaValida, setContrasenaValida] = useState(null);
+  const [manyAttemps, setManyAttemps] = useState(false);
 
   // Almacena una referencia al formulario
   const formRef = useRef(null);
@@ -72,7 +73,9 @@ const LoginContent = () => {
       body: JSON.stringify(body),
     }).then(response => response.json())
       .then(data=> {
-        console.log(data);
+        console.log(data)
+        console.log(data.status);
+        console.log(data.error)
         if (data.status === 200){
           setCorreoValido(true);
           setContrasenaValida(true);
@@ -85,10 +88,17 @@ const LoginContent = () => {
           localStorage.setItem('isLog', true);
 
           window.location.href = '/home';
-        } else {
+        } 
+        if (data.status === 404){
           setCorreoValido(false);
+        }
+        if (data.status === 401){
           setContrasenaValida(false);
         }
+        if (data.status === 429){
+          setManyAttemps(true);
+        }
+        
       })
       .catch(error => {
         // Muestra un mensaje de error
@@ -138,6 +148,7 @@ const LoginContent = () => {
             <ErrorTextForm texto="Contraseña incorrecta" boolean={ contrasenaValida }/>
             <button className='btn' type="submit">INICIAR SESIÓN</button>
           </form>
+          <ErrorTextForm texto="Has realizado muchos intentos. Intentalo de nuevo en 1 hora" boolean={!manyAttemps}/>
           <div className="form-footer">
             <div className="login-form-diveder">
               <p className="text-diveder">o</p>

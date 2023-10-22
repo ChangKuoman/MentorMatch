@@ -299,19 +299,21 @@ select.classic:focus {
     left: 0%;
     top: 35%;
     background: #64D3F87D;
+    z-index: 5;
 }
 
 .nav img{
     width: 70%;
     height: 20%;
-
     background: #64d3f8;
     cursor: pointer;
     border-radius: 100%;
+    z-index: 5;
 }
 
 .nav img:hover{
     background-color: #081d2494;
+    z-index: 6;
 }
 
 .logo{
