@@ -5,6 +5,9 @@ import url from './url.js';
 import '../css/UserPage.css'
 import Rating from '@mui/material/Rating';
 
+import PencilLogo from '../icons/pencil.png'
+import XLogo from '../icons/equis-2.png'
+
 const headers = {
     'Content-Type': 'application/json',
 };
@@ -189,7 +192,7 @@ const UserPage = () => {
                     <section className="info">{user.birthDate}</section>
                 </div>
                 <div className="data">
-                    <p>Descripción <img onClick={abrirModalD} className="imagen-lapiz" src="https://cdn-icons-png.flaticon.com/512/2919/2919564.png" width={20} height={20}/></p>
+                    <p>Descripción <img onClick={abrirModalD} className="imagen-lapiz" src={PencilLogo} width={20} height={20}/></p>
                     <section className="info2">{user.description}</section>
                 </div>
                 <div className="data">
@@ -197,7 +200,7 @@ const UserPage = () => {
                     <Rating defaultValue={setQualification(user.qualification)} precision={0.5} readOnly />
                 </div>
                 <div className="data">
-                    <p>Tags <img onClick={abrirModalT} className="imagen-lapiz" src="https://cdn-icons-png.flaticon.com/512/2919/2919564.png" width={20} height={20}/></p>
+                    <p>Tags <img onClick={abrirModalT} className="imagen-lapiz" src={PencilLogo} width={20} height={20}/></p>
                     <div className="contenedor-tags">
                         {user.tags.map((tag) => (
                             <div key= {tag} className="tag">
@@ -211,7 +214,7 @@ const UserPage = () => {
             {
                 modalDescripcion && <div className="overlay">
                     <div className="content-modal">
-                        <img className="cerrar-modal" onClick={cerrarModalD} src="https://cdn-icons-png.flaticon.com/512/7560/7560626.png" width={20} height={20} />
+                        <img className="cerrar-modal" onClick={cerrarModalD} src={XLogo} width={20} height={20} />
                         <div className="modal-derecha">
                             <textarea className="textarea-modal-descripcion" onChange={manejarCambioDescripcion} value={descripcion}></textarea>
                             <button className="boton-modal-descripcion" onClick={cambiarDescripcion}>Guardar</button>
@@ -223,7 +226,7 @@ const UserPage = () => {
             {
                 modalTags && <div className="overlay">
                     <div className="content-modal alto">
-                        <img onClick={cerrarModalT} src="https://cdn-icons-png.flaticon.com/512/7560/7560626.png" width={20} height={20} />
+                        <img onClick={cerrarModalT} src={XLogo} width={20} height={20} />
                         <div className="modal-derecha">
                             <div className="contenedor-derecha-tags">
                                 <div className="cuadro-tags">
