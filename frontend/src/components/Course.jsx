@@ -11,6 +11,12 @@ import BotonHome from '../icons/boton-home.png';
 import LogoLogOut from '../icons/icons8-logout-100.png';
 
 import DefaultPFP from '../icons/user_icon.png'
+import PFP1 from '../icons/1-huevo.png'
+import PFP2 from '../icons/2-cascaron.png'
+import PFP3 from '../icons/3-pollo.png'
+import PFP4 from '../icons/4-pato.png'
+import PFP5 from '../icons/5-ganso.png'
+
 import listaCursos from './cursos'
 
 const headers = {
@@ -194,6 +200,22 @@ const Course = () => {
         window.location.href = '/';
       };
 
+    function hallarImagen(qualification) {
+        const q = setQualification(qualification);
+        const cant = qualification[0];
+        if (q >= 4 && cant >= 30) {
+            return PFP5;
+        } else if (q >= 3 && cant >= 20) {
+            return PFP4;
+        } else if (q >= 2 && cant >= 15) {
+            return PFP3;
+        } else if (q >= 1 && cant >= 10) {
+            return PFP2;
+        } else {
+            return PFP1;
+        }
+    }
+
     return (
         <div onMouseLeave={handleMouseLeave}>
             <Logo />
@@ -242,7 +264,10 @@ const Course = () => {
 
                             <div className="contenedor-grande">
                                 <div className="div-izquierda">
-                                    <img className={user.verified ? "imagen-pfp dorado" : "imagen-pfp"} src={DefaultPFP} />
+
+                                    {/*<img className={user.verified ? "imagen-pfp dorado" : "imagen-pfp"} src={DefaultPFP} />*/}
+
+                                    <img className={user.verified ? "imagen-pfp dorado" : "imagen-pfp"} src={hallarImagen(user.qualification)} />
                                     <div className="contenedor-titulo">
                                         <h3>{user.name} {user.surname} - {calcularEdad(user.birthDate)}</h3>
                                     </div>
