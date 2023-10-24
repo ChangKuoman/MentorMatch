@@ -200,9 +200,12 @@ const Course = () => {
         window.location.href = '/';
       };
 
-    function hallarImagen(qualification) {
-        const q = setQualification(qualification);
-        const cant = qualification[0];
+    function hallarImagen(user) {
+        if (user.photo) {
+            return `data:image/jpeg;base64,${user.photo}`
+        }
+        const q = setQualification(user.qualification);
+        const cant = user.qualification[0];
         if (q >= 4 && cant >= 30) {
             return PFP5;
         } else if (q >= 3 && cant >= 20) {
@@ -267,7 +270,7 @@ const Course = () => {
 
                                     {/*<img className={user.verified ? "imagen-pfp dorado" : "imagen-pfp"} src={DefaultPFP} />*/}
 
-                                    <img className={user.verified ? "imagen-pfp dorado" : "imagen-pfp"} src={hallarImagen(user.qualification)} />
+                                    <img className={user.verified ? "imagen-pfp dorado" : "imagen-pfp"} src={hallarImagen(user)} />
                                     <div className="contenedor-titulo">
                                         <h3>{user.name} {user.surname} - {calcularEdad(user.birthDate)}</h3>
                                     </div>
