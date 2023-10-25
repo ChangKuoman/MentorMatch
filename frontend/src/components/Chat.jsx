@@ -86,6 +86,52 @@ const Chat = () => {
       }
     }
 
+    const [inputMsg, setInputMsg] = useState("")
+
+    function enviarMsg() {
+      if (renderChat.length === 0) {
+        alert("Seleccione un chat para enviar un mensaje.")
+        return;
+      }
+      if (!inputMsg) {
+        alert("Ingrese texto para enviar un mensaje.")
+        return;
+      }
+
+      const user = JSON.parse(localStorage.getItem('user'));
+      const email = user.email;
+
+      fetch(url + '/put-chat', {
+          method: 'PUT',
+          headers,
+          body: JSON.stringify({
+            'chat': renderChat[0].uuid,
+            'message': inputMsg,
+            'user': email
+          }),
+        }).then(response => response.json())
+          .then(data=> {
+              console.log(data)
+              if (data.status === 200) {
+                setInputMsg("")
+                renderChat[0] = data.chats[0]
+
+                const index = chats.findIndex((chat) => chat.uuid === data.chats[0].uuid);
+                if (index !== -1) {
+                  chats[index].messages = data.chats[0].messages;
+                }
+                console.log(chats)
+              }
+          })
+          .catch(error => {
+          });
+
+    }
+
+    const handleMsg = (event) => {
+      setInputMsg(event.target.value);
+    }
+
     return (
         <div>
           <div className="contenedor-mas-grande-chat">
@@ -123,8 +169,8 @@ const Chat = () => {
                 ))}
                 </div>
                 <div className="contenedor-enviar">
-                  <input className="input-texto-chat" type="text" />
-                  <img src={LogoEnviar} height={25} width={25}/>
+                  <input value={inputMsg} onChange={handleMsg} className="input-texto-chat" type="text" />
+                  <img onClick={enviarMsg} src={LogoEnviar} height={25} width={25}/>
                 </div>
               </div>
             </div>
