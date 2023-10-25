@@ -58,6 +58,8 @@ const UserPage = () => {
         setModalPFP(true)
     }
     const cerrarModalP = () => {
+        setSelectedFile(null)
+        setImageData('')
         setModalPFP(false)
     }
 
@@ -247,6 +249,16 @@ const UserPage = () => {
 
     }
 
+    function isValidPhotoChange(user) {
+        if (!user.verified) {
+            return false;
+        }
+        if (setQualification(user.qualification) < 4) {
+            return false;
+        }
+        return true;
+    }
+
     return (
         <div className="UserPage" onMouseLeave={handleMouseLeave}>
             <div className="frame1">
@@ -260,8 +272,12 @@ const UserPage = () => {
             </div>
             {usuario.map((user)=>(
             <div className="user-content" key={user.email}>
-                <img className={user.verified ? "imagen-pfp dorado" : "imagen-pfp"} src={hallarImagen(user)} />
-                <img onClick={abrirModalP} className="imagen-lapiz" src={PencilLogo} width={20} height={20}/>
+                <div>
+                    <img className={user.verified ? "imagen-pfp dorado" : "imagen-pfp"} src={hallarImagen(user)} />
+                    {
+                        isValidPhotoChange(user) && <img onClick={abrirModalP} className="imagen-lapiz lapiz-foto" src={PencilLogo} width={20} height={20}/>
+                    }
+                </div>
 
                 <div className="data">
                     <p>Nombre</p>
@@ -353,11 +369,12 @@ const UserPage = () => {
                         <img className="cerrar-modal" onClick={cerrarModalP} src={XLogo} width={20} height={20} />
                         <div className="modal-derecha">
                             <input type="file" accept=".jpg, .jpeg, .png" onChange={handleFileChange} />
+                            <div className="contenedor-vacio">
+                            <div className="vacio"/>
                             {selectedFile && (
-                                <div>
-                                    <img src={URL.createObjectURL(selectedFile)} alt="Uploaded" style={{ width: '100px', height: '100px' }} />
-                                </div>
+                                <img src={URL.createObjectURL(selectedFile)} alt="Uploaded" style={{ width: '100px', height: '100px' }} />
                             )}
+                            </div>
                             <button className="boton-modal-descripcion" onClick={cambiarImagen}>Guardar</button>
                         </div>
                    </div>

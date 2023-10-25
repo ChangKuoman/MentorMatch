@@ -145,10 +145,27 @@
     background: #FFFFFF;
 }
 
+.vacio {
+    width: 0px;
+    height: 100px;
+    margin-bottom: 0px;
+}
+
+.contenedor-vacio {
+    margin-bottom: 0px;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+}
+
 .info2{
   /*  height: auto !important;*/
 
     overflow: auto;
+}
+
+.lapiz-foto {
+    transform: translate(-20px, 0);
 }
 
 .textarea-modal-descripcion {
