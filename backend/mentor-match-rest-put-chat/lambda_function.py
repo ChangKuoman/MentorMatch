@@ -1,5 +1,6 @@
 import boto3
 import datetime
+import uuid
 
 
 def timestamp_to_str(timestamp):
@@ -43,12 +44,13 @@ def lambda_handler(event, context):
         table_chat = dynamodb.Table('mentor-match-chat')
 
         response = table_chat.get_item(Key={'uuid': chat_uuid})
-
+        uuidmssg = str(uuid.uuid4())
         response["Item"]["messages"].append(
             {
                 "date": timestamp_to_str(datetime.datetime.now()),
                 "user": fr,
-                "content": message
+                "content": message,
+                "uuid": uuidmssg
             }
         )
         response2 = table_chat.put_item(Item=response["Item"])
