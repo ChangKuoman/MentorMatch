@@ -48,6 +48,7 @@
     padding: 10px;
     background-color: aliceblue;
     border-radius: 10px;
+    max-width: 350px;
 }
 
 .left {

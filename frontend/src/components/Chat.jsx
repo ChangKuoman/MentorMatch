@@ -1,5 +1,5 @@
 import React from "react";
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import "../css/Chat.css"
 import url from './url.js';
 
@@ -57,7 +57,14 @@ const Chat = () => {
 
     function handleBotonChat(chat) {
       setRenderChat([chat])
+      setInputMsg("")
     }
+
+    useEffect(() => {
+      scrollToBottom()
+      // https://stackoverflow.com/questions/37620694/how-to-scroll-to-bottom-in-react
+    }
+    , [renderChat]);
 
     function getEmail(chat) {
         const splitEmails = chat.emails.split('/');
@@ -114,13 +121,13 @@ const Chat = () => {
               console.log(data)
               if (data.status === 200) {
                 setInputMsg("")
-                renderChat[0] = data.chats[0]
+                setRenderChat(data.chats)
+                //renderChat[0] = data.chats[0]
 
                 const index = chats.findIndex((chat) => chat.uuid === data.chats[0].uuid);
                 if (index !== -1) {
                   chats[index].messages = data.chats[0].messages;
                 }
-                console.log(chats)
               }
           })
           .catch(error => {
@@ -130,6 +137,13 @@ const Chat = () => {
 
     const handleMsg = (event) => {
       setInputMsg(event.target.value);
+    }
+
+    const messagesEndRef = useRef(null)
+    const scrollToBottom = () => {
+      messagesEndRef.current?.scrollIntoView(
+        // { behavior: "smooth" }
+      )
     }
 
     return (
@@ -154,7 +168,7 @@ const Chat = () => {
                 {renderChat.map((chat) => (
                   <div key={chat.uuid} className="contenedor-email-mensajes">
                     <div className="email-seleccionado">{getEmail(chat)}</div>
-                    <div className="contenedor-mensajes">
+                    <div className="contenedor-mensajes" >
                       {chat.messages.map((message) => (
                         <div key={message.uuid}>
                           <div className={lugarMensaje(chat, message)}>
@@ -164,6 +178,7 @@ const Chat = () => {
                           </div>
                         </div>
                       ))}
+                      <div ref={messagesEndRef} />
                     </div>
                   </div>
                 ))}
