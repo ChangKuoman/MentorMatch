@@ -1,31 +1,35 @@
 
 .boton-chat {
-  background-color: rgba(51, 51, 51, 0.05);
+  background-color: white;
   border-radius: 8px;
   border-width: 0;
   color: #333333;
   cursor: pointer;
   display: inline-block;
   font-family: "Haas Grot Text R Web", "Helvetica Neue", Helvetica, Arial, sans-serif;
-  font-size: 20px;
+  font-size: 15px;
   font-weight: bold;
   line-height: 20px;
   list-style: none;
   margin: 0;
   padding: 10px 12px;
-  text-align: center;
+  text-align: left;
   transition: all 200ms;
   vertical-align: baseline;
   white-space: nowrap;
   user-select: none;
   -webkit-user-select: none;
   touch-action: manipulation;
+
+  width: 100%;
 }
 
 .contenedor-mensajes {
     display: flex;
     flex-direction: column;
     width: 100%;
+    height: 368.4px;
+    overflow: auto;
 }
 
 .usuario {
@@ -37,12 +41,14 @@
     font-size: 10px;
     color: gray;
     float: right;
+    margin-bottom: 0px;
 }
 
 .contenedor-mensaje {
     padding: 10px;
     background-color: aliceblue;
     border-radius: 10px;
+    max-width: 350px;
 }
 
 .left {
@@ -53,4 +59,82 @@
 .right {
     width: auto;
     float: right;
+}
+
+.contenedor-mas-grande-chat {
+    display: flex;
+    justify-content: center;
+}
+
+.contenedor-grande-chat {
+    display: flex;
+    flex-direction: row;
+    padding: 10px;
+    background-color: #c0f6fa;
+    border-radius: 10px;
+    width: 800px;
+    height: 500px;
+}
+
+.contenedor-izq-chat {
+    width: 250px;
+    padding: 10px;
+    background-color: #defdff;
+    border-radius: 10px;
+    margin-right: 10px;
+}
+
+.contenedor-der-chat {
+    width: 500px;
+    background-color: #defdff;
+    border-radius: 10px;
+    padding: 10px;
+}
+
+.texto-chats-chat {
+    font-weight: bold;
+    background-color: white;
+    border-radius: 10px;
+    font-size: 20px;
+    text-align: center;
+}
+
+.contenedor-emails-chat {
+    height: 90%;
+    margin-bottom: 0;
+    overflow: auto;
+}
+
+.email-seleccionado {
+    font-weight: bold;
+    background-color: white;
+    padding: 10px;
+    border-radius: 10px;
+}
+
+.contenedor-enviar {
+    margin-bottom: 0;
+    display: flex;
+}
+
+.input-texto-chat {
+    width: 470px;
+    height: 20px;
+    font-size: 15px;
+}
+
+.vacio-chat {
+    width: 0px;
+    height: 440px;
+    margin-bottom: 0px;
+}
+
+.contenedor-vacio-chat {
+    margin-bottom: 0px;
+    display: flex;
+    flex-direction: row;
+}
+
+.contenedor-email-mensajes {
+    width: 100%;
 }

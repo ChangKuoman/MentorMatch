@@ -13,6 +13,8 @@ import BotonHome from '../icons/boton-home.png';
 import LogoLogOut from '../icons/icons8-logout-100.png';
 import LogoUser from '../icons/icons8-user-64.png';
 
+import SearchIcon from '../icons/search.png'
+
 const getLogOutPosition = () => {
   const logOutElement = document.querySelector(".LogoLogOut");
   if (!logOutElement) {
@@ -211,7 +213,7 @@ const Event = () => {
         const diaActual = fechaActual.getDate();
 
         // Calcular la edad
-        const edad = añoActual - añoNacimiento;
+        let edad = añoActual - añoNacimiento;
         if (mesActual < mesNacimiento) {
           edad--;
         } else if (mesActual === mesNacimiento && diaActual < diaNacimiento) {
@@ -370,7 +372,7 @@ const Event = () => {
                               </div>
                                 <Popup trigger=
                                     {<img
-                                        src="https://cdn.icon-icons.com/icons2/3395/PNG/512/loading_search_icon_214009.png"
+                                        src={SearchIcon}
                                         width={20}
                                         height={20}
                                     />}
@@ -399,7 +401,7 @@ const Event = () => {
                               </div>
                               <Popup trigger=
                                     {<img
-                                        src="https://cdn.icon-icons.com/icons2/3395/PNG/512/loading_search_icon_214009.png"
+                                        src={SearchIcon}
                                         width={20}
                                         height={20}
                                     />}

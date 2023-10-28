@@ -73,6 +73,7 @@ def lambda_handler(event, context):
             if len(response2["Items"]) == 0:
                 # CREATE A NEW CHAT
                 uuidv4 = str(uuid.uuid4())
+                uuidmssg = str(uuid.uuid4())
                 item = {
                     "uuid": uuidv4,
                     "emails": emails_s,
@@ -80,7 +81,8 @@ def lambda_handler(event, context):
                         {
                             "content": "¡Increíble, acaban de hacer match por primera vez!",
                             "date": timestamp_to_str(datetime.datetime.now()),
-                            "user": "system"
+                            "user": "system",
+                            "uuid": uuidmssg
                         }
                     ]
                 }
@@ -106,10 +108,12 @@ def lambda_handler(event, context):
                 }
 
             elif len(response2["Items"]) == 1:
+                uuidmssg = str(uuid.uuid4())
                 response2["Items"][0]["messages"].append({
                     "content": "¡Increíble, hicieron match otra vez!",
                     "date": timestamp_to_str(datetime.datetime.now()),
-                    "user": "system"
+                    "user": "system",
+                    "uuid": uuidmssg
                 })
                 response3 = table_chat.put_item(Item=response2["Items"][0])
                 return {

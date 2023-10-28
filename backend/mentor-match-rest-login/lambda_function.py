@@ -76,6 +76,10 @@ def lambda_handler(event, context):
                 table_user.put_item(Item=item)
 
             if (verify_password(password, response["Item"]["password"])):
+                item["unlockDate"] = ""
+                item["blockDate"] = ""
+                item["attemps"] = 0
+                table_user.put_item(Item=item)
                 table_user_data = dynamodb.Table('mentor-match-user-data')
                 response = table_user_data.get_item(Key={'email': email})
                 return {

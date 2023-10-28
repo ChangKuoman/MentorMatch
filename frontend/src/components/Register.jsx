@@ -77,41 +77,64 @@ const Register = () => {
 
       function inputsCorrect() {
         const emailPattern = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/
+        const utec = "@utec.edu.pe"
         const documentNroPattern = /^\d+$/
         const passwordValid = /^(?=.*[A-Z])(?=.*\d)[a-zA-Z0-9]{8,}$/
-        if (!emailPattern.test(email)) {
+        let conforme = true;
+
+        if (!email.endsWith(utec)) {
+            conforme = false;
             setEmailValid(false)
         }
         if (name == '') {
+            conforme = false;
             setNameValid(false)
         }
         if (surname == '') {
+            conforme = false;
             setSurnameValid(false)
         }
         if (!documentNroPattern.test(documentNro) || (documentType === "DNI" && documentNro.length !== 8) || (documentType === "CE" && documentNro.length !== 9)) {
+            conforme = false;
             setDocumentNroValid(false)
         }
         if (terminos == false) {
+            conforme = false;
             setTerminosValid(false)
         }
         if (!passwordValid.test(password)) {
+            conforme = false;
             setPasswordValid(false)
         } else if (password !== confirmPassword) {
+            conforme = false;
             setConfirmPasswordValid(false)
         }
 
         const today = new Date();
         const bDate = new Date(birthDate);
-        const age = today.getFullYear() - bDate.getFullYear();
 
-        if (!(age >= 18 && age < 100)) {
+        const añoNacimiento = bDate.getFullYear();
+        const mesNacimiento = bDate.getMonth() + 1;
+        const diaNacimiento = bDate.getDate() + 1;
+
+        const añoActual = today.getFullYear();
+        const mesActual = today.getMonth() + 1;
+        const diaActual = today.getDate();
+
+        // Calcular la edad
+        let age = añoActual - añoNacimiento;
+        if (mesActual < mesNacimiento) {
+            age--;
+        } else if (mesActual === mesNacimiento && diaActual < diaNacimiento) {
+            age--;
+        }
+
+        if (!(age >= 16 && age < 100)) {
+            conforme = false;
             setBirthDateValid(false)
         }
 
-        if (
-            nameValid && surnameValid && emailValid && documentNroValid &&
-            passwordValid && confirmPasswordValid && birthDateValid && terminosValid
-        ) {
+        if (conforme) {
             return true;
         }
         return false;
@@ -165,32 +188,50 @@ const Register = () => {
             </div>
             <div className="Frame2"></div>
             <div className="contenedor-formulario">
-                <form className="formulario" onSubmit={handleSubmit}>
-                <label className="labels">Correo electrónico</label>
-                <input
-                    className="input-texto-register"
-                    type="text"
-                    name="email"
-                    value={email}
-                    placeholder="ejemplo@gmail.com"
-                    onChange={handleChange}
-                />
-                {
-                    !emailValid && <p className="error-form-text">Ingrese un correo válido</p>
-                }
-                <label className="labels">Nombre</label>
-                <input
-                    className="input-texto-register"
-                    type="text"
-                    name="name"
-                    value={name}
-                    placeholder="John"
-                    onChange={handleChange}
-                />
-                {
-                    !nameValid && <p className="error-form-text">El atributo nombre es requerido</p>
-                }
-                <label className="labels">Apellido</label>
+
+            <form className="formulario" onSubmit={handleSubmit}>
+            <label className="labels">Correo electrónico</label>
+            <input
+                className="input-texto-register"
+                type="text"
+                name="email"
+                value={email}
+                placeholder="ejemplo@utec.edu.pe"
+                onChange={handleChange}
+            />
+            {
+                !emailValid && <p className="error-form-text">Ingrese un correo válido utec</p>
+            }
+            <label className="labels">Nombre</label>
+            <input
+                className="input-texto-register"
+                type="text"
+                name="name"
+                value={name}
+                placeholder="John"
+                onChange={handleChange}
+            />
+            {
+                !nameValid && <p className="error-form-text">El atributo nombre es requerido</p>
+            }
+            <label className="labels">Apellido</label>
+            <input
+                className="input-texto-register"
+                type="text"
+                name="surname"
+                value={surname}
+                placeholder="Doe"
+                onChange={handleChange}
+            />
+            {
+                !surnameValid && <p className="error-form-text">El atributo apellido es requerido</p>
+            }
+            <label className="labels">Documento de identidad</label>
+            <div className="contenedor-documentos">
+                <select className="documento-izquierda" name="documentType" onChange={handleChange}>
+                    <option value="DNI">DNI</option>
+                    <option value="CE">CE</option>
+                </select>
                 <input
                     className="input-texto-register"
                     type="text"
@@ -253,11 +294,11 @@ const Register = () => {
                     onChange={handleChange}
                 />
                 {
-                    !birthDateValid && <p className="error-form-text">Debe ser mayor de edad para usar nuestros servicios</p>
+                    !birthDateValid && <p className="error-form-text">Debe ser mayor de 16 para usar nuestros servicios</p>
                 }
                 <div className="contenedor-terminos">
                     <input type="checkbox" name="terminos" onChange={handleChange} />
-                    <label className="terminos-texto">Acepto los <a className="tyc" href="https://www.google.com.pe/" target="_blank">términos y condiciones</a></label>
+                    <label className="terminos-texto">Acepto los <a className="tyc" href="https://docs.google.com/document/d/1_3CCmWctM6PG-UHilKJ_Anc-VPHTWviBG9Y0YDzeTic/edit" target="_blank">términos y condiciones</a></label>
                 </div>
                 {
                     !terminosValid && <p className="error-form-text">Aceptar términos y condiciones</p>

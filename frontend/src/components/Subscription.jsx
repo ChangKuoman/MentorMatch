@@ -11,6 +11,8 @@ import BotonHome from '../icons/boton-home.png';
 import LogoLogOut from '../icons/icons8-logout-100.png';
 import LogoUser from '../icons/icons8-user-64.png';
 
+import CheckLogo from '../icons/check.png'
+import EquisLogo from '../icons/equis.png'
 
 const headers = {
   'Content-Type': 'application/json',
@@ -116,16 +118,17 @@ const Subscription = () => {
                     </div>
                     <hr className="linea" />
                     <div>
+
                         <div className="mini-contenedor-subscription">
-                            <img className="imagen" src="https://static.vecteezy.com/system/resources/previews/017/350/125/original/check-mark-icon-png.png" width={50} height={50}/>
+                            <img className="imagen" src={CheckLogo} width={50} height={50}/>
                             <div>Límite de 5 invitaciones por día</div>
                         </div>
                         <div className="mini-contenedor-subscription">
-                            <img className="imagen" src="https://cdn-icons-png.flaticon.com/512/6372/6372150.png" width={50} height={50}/>
+                            <img className="imagen" src={EquisLogo} width={50} height={50}/>
                             <div>Uso de herramientas IA para el apoyo de tu aprendizaje</div>
                         </div>
                         <div className="mini-contenedor-subscription">
-                            <img className="imagen" src="https://cdn-icons-png.flaticon.com/512/6372/6372150.png" width={50} height={50}/>
+                            <img className="imagen" src={EquisLogo} width={50} height={50}/>
                             <div>Mayor acceso a nuestros Star Mentors</div>
                         </div>
                     </div>
@@ -137,16 +140,17 @@ const Subscription = () => {
                     </div>
                     <hr className="linea" />
                     <div>
+
                         <div className="mini-contenedor-subscription">
-                            <img className="imagen" src="https://static.vecteezy.com/system/resources/previews/017/350/125/original/check-mark-icon-png.png" width={50} height={50}/>
+                            <img className="imagen" src={CheckLogo} width={50} height={50}/>
                             <div>Invitaciones ilimitadas por día</div>
                         </div>
                         <div className="mini-contenedor-subscription">
-                            <img className="imagen" src="https://static.vecteezy.com/system/resources/previews/017/350/125/original/check-mark-icon-png.png" width={50} height={50}/>
+                            <img className="imagen" src={CheckLogo} width={50} height={50}/>
                             <div>Uso de herramientas IA para el apoyo de tu aprendizaje</div>
                         </div>
                         <div className="mini-contenedor-subscription">
-                            <img className="imagen" src="https://static.vecteezy.com/system/resources/previews/017/350/125/original/check-mark-icon-png.png" width={50} height={50}/>
+                            <img className="imagen" src={CheckLogo} width={50} height={50}/>
                             <div>Mayor acceso a nuestros Star Mentors</div>
                         </div>
                         <div className="contenedor-boton-subscription">
