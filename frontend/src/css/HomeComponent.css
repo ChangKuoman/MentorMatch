@@ -8,18 +8,11 @@
     height: 100vh;
 }
 
-.BloqueTop{
-    width: 100%;
-    height: 20%;
-    position: relative;
-    margin: 0;
-    padding: 0;
-}
-
 .BloqueMid{
     width: 90%;
     height: 50%;
-    position: relative;
+    position: absolute;
+    top: 15%;
     margin: 0;
     padding: 0;
     padding-top: 5%;
@@ -28,80 +21,92 @@
     padding-right: 5%;
 }
 
-.BloqueBottom{
+.Frame1-Home{
+    position: fixed;
     width: 100%;
-    height: 20%;
-    position: relative;
+    height: 12%;
     margin: 0;
-    padding: 0
+    top: -1%;
+    left: 0;
+    rotate: 0.5deg;
+    background: #64D3F8;
+    z-index: 3;
+}
+
+.Frame2-Home{
+    position: fixed;
+    width: 100%;
+    margin: 0;
+    height: 13%;
+    top: 0%;
+    left: 0;
+    rotate: 0.5deg;
+    background: #64D3F87D;
+    z-index: 2;
+}
+.Frame3-Home{
+    position: fixed;
+    width: 100%;
+    height: 12%;
+    margin: 0;
+    bottom: -1%;
+    left: 0;
+    rotate: 0.5deg;
+    background: #64D3F8;
+    z-index: 3;
+}
+
+.Frame4-Home{
+    position: fixed;
+    width: 100%;
+    margin: 0;
+    height: 13%;
+    bottom: 0%;
+    left: 0;
+    rotate: 0.5deg;
+    background: #64D3F87D;
+    z-index: 2;
 }
 
 .HeaderHome{
-    width: 100% - 40px;
-    height: 100%;
-    padding: 0;
-    padding-left: 20px;
-    padding-right: 20px;
-    margin: 0;
-    background: linear-gradient( #018ABE, 20%, #97CADB);
-
-}
-
-.HeaderHome:before{
-    content: '';
     position: absolute;
-    top: 70%;
+    width: 100%;
+    height: 10%;
+    top: 0;
     left: 0;
-    width: 100%;
-    height: 90px;
-    background: #e2f5fc;
-    transform: skewY(2deg);
-}
-
-
-.space{
-    display: flex;
-    position: relative;
-    width: 100%;
-    height: 60%;
     margin: 0;
-    padding: 0;
-    flex-direction: row;
+
+    z-index: 5;
+    background: none;
+
     display: flex;
     flex-direction: row;
-    justify-content: space-between;
+    justify-content: space-around;
     align-items: center;
 }
 
-.space h1{
+.botones-nav{
     margin: 0;
-    margin-left: 15%;
-    margin-right: 15%;
-    color: #D6E8EE;
-    font-weight: 1000;
-    font-family: 'Courier New', Courier, monospace;
-    font-size:40px;
+    width: 8%;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    align-items: center;
 }
 
-
-.BloqueBottom{
-    
-    background-color: #97CADB;
-}
-
-.BloqueBottom::before{
-    content: '';
-    position: absolute;
-    bottom: 70%;
-    left: 0;
-    width: 100%;
-    height: 90px;
-    background: #e2f5fc;
-    transform: skewY(2deg);
+.HeaderHome h1{
+    font-family: Bree Serif;
+    font-size: 55px;
+    font-weight: 400;
+    line-height: 54px;
+    letter-spacing: 0.4em;
+    text-align: left;
+    color: #FFFFFF;
+    margin: 0;
 }
 
 .BloqueMid{
-    background-color: #e2f5fc;
+    background-color: #FFFFFF;
     display: flex;
     flex-direction: row;
 }
@@ -153,14 +158,14 @@
 }
 
 .LogoLogOut{
-    width: 40px;
-    height: 40px;
+    width: 35px;
+    height: 35px;
     cursor: pointer;
     margin-left: 10px;
     margin-right: 10px;
     padding: 10px;
     border-radius: 100%;
-    background: #64D3F87D;
+    background: #82dbf8;
     object-fit:fill;
 }
 
@@ -191,7 +196,7 @@
     position: absolute;
     width: 30%;
     height: 5%;
-    bottom: 4%;
+    bottom: 3%;
     padding-left: 1%;
     left: 0;
     display: flex;
@@ -236,4 +241,45 @@
 .premiun-bar:active {
     background-color: #0039D7;
     border-color: #0039D7;
+}
+
+@media screen and (max-width: 500px) {
+    .HeaderHome h1{
+        font-size: 40px;
+        letter-spacing: 0.1em;
+    }
+    .botones-nav{
+        position: absolute;
+        width: 100%;
+        left: 0%;
+        top: 140%;
+        justify-content: space-between;
+    }
+    
+    .LogoLogOut:hover {
+        opacity: 0.9;
+        background-color: #577580d7;
+    }
+    .BloqueMid{
+        top: 20%;
+        flex-direction: column;
+        height: 60%;
+        overflow: scroll;
+        align-items: center;
+    }
+    .premiun-bar{
+        position: fixed;
+    }
+}
+
+@media screen and (min-width: 501px) and (max-width: 700px){
+    .HeaderHome h1{
+        letter-spacing: 0.2em;
+    }
+    .botones-nav{
+        width: auto;
+    }
+    .BloqueMid{
+        height: 60%;
+    }
 }

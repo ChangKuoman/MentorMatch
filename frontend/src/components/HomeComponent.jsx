@@ -24,7 +24,7 @@ const getLogOutPosition = () => {
   const logOutHeight = logOutRect.height;
   const logOutWidth = logOutRect.width;
   return {
-    x: logOutX - 150 + logOutWidth/2,
+    x: logOutX - 50 + logOutWidth/2,
     y: logOutY + logOutHeight,
   };
 };
@@ -73,70 +73,65 @@ const HomeComponent = () => {
 
   return (
     <div className="Home">
-      <Logo />
-        <div className="BloqueTop">
-            <div className="HeaderHome">
-              <div className="space">
-
-                <h1>MentorMatch</h1>
-                <div className="botones-nav">
-                  <img src = {LogoUser}
-                    alt="logo user"
-                    className="LogoLogOut"
-                    onClick={accessUser}
-                  />
-                  <img src = {LogoLogOut}
-                      alt = "logo Log Out"
-                      className="LogoLogOut"
-                      onClick={OpenModal}
-                  />
-                </div>
-                {
-                  IsOpen &&
-                  <div className="modal" style={{left: logOutPosition.x, top:logOutPosition.y}}>
-                  <div className="overlay" onClick={OpenModal}></div>
-                  <div className="modal-content">
-                    <button className="close-modal" onClick={OpenModal}>Cancelar</button>
-                    <button onClick={handleLogout}>Cerrar Sesion</button>
-                  </div>
-                </div>
-                }
-              </div>
-            </div>
-        </div>
-        <div className="BloqueMid">
-          <div className="BloqueMidSub1">
-            <div>
-              <img src = {LogoMessage} alt = "Logo Message" className="logoHome" onClick={accessMessages}/>
-              <h2>Mis Mensajes</h2>
+      <div className="Frame1-Home"></div>
+      <div className="Frame2-Home"></div>
+      <div className="HeaderHome">
+        <Logo className = 'Logo'/>
+        <h1>MentorMatch</h1>
+        <div className="botones-nav">
+          <img src = {LogoUser}
+            alt="logo user"
+            className="LogoLogOut"
+            onClick={accessUser}
+          />
+          <img src = {LogoLogOut}
+              alt = "logo Log Out"
+              className="LogoLogOut"
+              onClick={OpenModal}
+          />
+          {
+            IsOpen &&
+            <div className="modal" style={{left: logOutPosition.x, top:logOutPosition.y}}>
+            <div className="overlay" onClick={OpenModal}></div>
+            <div className="modal-content">
+              <button className="close-modal" onClick={OpenModal}>Cancelar</button>
+              <button onClick={handleLogout}>Cerrar Sesion</button>
             </div>
           </div>
-          <div className="BloqueMidSub2">
-            <div>
-              <img src = {LogoReservas} alt = "Logo Reservas" className="logoHome" onClick={accessEvents}/>
-              <h2>RESERVAS</h2>
-            </div>
-          </div>
-          <div className="BloqueMidSub1">
-            <div>
-              <img src = {LogoCurses} alt = "Logo Curso" className="logoHome" onClick={accessCourses}/>
-              <h2>CURSOS<br/>DISPONIBLES</h2>
-            </div>
-          </div>
-          <div className="BloqueMidSub2">
-            <div>
-              <img src = {LogoRating} alt = "Logo Rating" className="logoHome" onClick={accessFeedback}/>
-              <h2>FEEDBACK</h2>
-            </div>
-          </div>
-
+          }
         </div>
-        <div className="BloqueBottom">
-
+      </div>
+      <div className="BloqueMid">
+        <div className="BloqueMidSub1">
+          <div>
+            <img src = {LogoMessage} alt = "Logo Message" className="logoHome" onClick={accessMessages}/>
+            <h2>Mis Mensajes</h2>
+          </div>
         </div>
-        <div className="premiun-bar" onClick={accessSubs}>
-          <p>Pásate a Premium</p>
+        <div className="BloqueMidSub2">
+          <div>
+            <img src = {LogoReservas} alt = "Logo Reservas" className="logoHome" onClick={accessEvents}/>
+            <h2>RESERVAS</h2>
+          </div>
         </div>
+        <div className="BloqueMidSub1">
+          <div>
+            <img src = {LogoCurses} alt = "Logo Curso" className="logoHome" onClick={accessCourses}/>
+            <h2>CURSOS<br/>DISPONIBLES</h2>
+          </div>
+        </div>
+        <div className="BloqueMidSub2">
+          <div>
+            <img src = {LogoRating} alt = "Logo Rating" className="logoHome" onClick={accessFeedback}/>
+            <h2>FEEDBACK</h2>
+          </div>
+        </div>
+      </div>
+      <div className="Frame3-Home"></div>
+      <div className="Frame4-Home"></div>
+      <div className="premiun-bar" onClick={accessSubs}>
+        <p>Pásate a Premium</p>
+      </div>
     </div>
   );
 };

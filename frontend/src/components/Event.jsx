@@ -11,11 +11,12 @@ import url from './url.js';
 import BotonBack from '../icons/deshacer 1boton-back.png';
 import BotonHome from '../icons/boton-home.png';
 import LogoLogOut from '../icons/icons8-logout-100.png';
+import LogoUser from '../icons/icons8-user-64.png';
 
 import SearchIcon from '../icons/search.png'
 
 const getLogOutPosition = () => {
-  const logOutElement = document.querySelector(".LogoLogOut-2");
+  const logOutElement = document.querySelector(".LogoLogOut");
   if (!logOutElement) {
     return {
       x: 0,
@@ -29,7 +30,7 @@ const getLogOutPosition = () => {
   const logOutHeight = logOutRect.height;
   const logOutWidth = logOutRect.width;
   return {
-    x: logOutX - 150 + logOutWidth/2,
+    x: logOutX - 50 + logOutWidth/2,
     y: logOutY + logOutHeight,
   };
 };
@@ -307,34 +308,47 @@ const Event = () => {
     }
 
     const handleLogout = () => {
-        // Limpia los datos de la sesión del localstorage
-        localStorage.removeItem('user');
-        localStorage.removeItem('isLog');
+      // Limpia los datos de la sesión del localstorage
+      localStorage.removeItem('user');
+      localStorage.removeItem('isLog');
 
-        // Redirige al usuario a /login
-        window.location.href = '/';
-      };
+      // Redirige al usuario a /login
+      window.location.href = '/';
+    };
 
+    const accessUser = () => {
+      window.location.href = '/user/';
+    }
+   
     return (
         <div onMouseLeave={handleMouseLeave}>
-            <Logo />
-            <img src = {LogoLogOut}
-                alt = "logo Log Out"
-                className="LogoLogOut-2"
-                onClick={OpenModal}
-            />
-            {
-              IsOpen &&
-              <div className="modal" style={{left: logOutPosition.x, top:logOutPosition.y}}>
-              <div className="overlay" onClick={OpenModal}></div>
-              <div className="modal-content">
-                <button className="close-modal" onClick={OpenModal}>Cancelar</button>
-                <button onClick={handleLogout}>Cerrar Sesion</button>
+            <div className="HeaderHome">
+              <Logo className = 'Logo'/>
+              <h1>MentorMatch</h1>
+              <div className="botones-nav">
+                <img src = {LogoUser}
+                  alt="logo user"
+                  className="LogoLogOut"
+                  onClick={accessUser}
+                />
+                <img src = {LogoLogOut}
+                    alt = "logo Log Out"
+                    className="LogoLogOut"
+                    onClick={OpenModal}
+                />
+                {
+                  IsOpen &&
+                  <div className="modal" style={{left: logOutPosition.x, top:logOutPosition.y}}>
+                  <div className="overlay" onClick={OpenModal}></div>
+                  <div className="modal-content">
+                    <button className="close-modal" onClick={OpenModal}>Cancelar</button>
+                    <button onClick={handleLogout}>Cerrar Sesion</button>
+                  </div>
+                </div>
+                }
               </div>
             </div>
-            }
              <div className="frame1">
-                <p>MENTOR MATCH</p>
             </div>
             <div className="frame2"></div>
             <div onMouseEnter={handleMouseEnter} className="Open-nave"></div>

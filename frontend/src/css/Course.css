@@ -316,15 +316,6 @@ select.classic:focus {
     z-index: 6;
 }
 
-.logo{
-    position: absolute;
-    top: 1%;
-    left: 1%;
-    width: 8%;
-    height: 8%;
-    z-index: 3;
-}
-
 .LogoLogOut-2{
     width: 40px;
     height: 40px;
