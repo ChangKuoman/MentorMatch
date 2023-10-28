@@ -239,7 +239,7 @@
 .control-overflow {
     max-height: 130px;
     overflow: auto;
-
+}
 
 @media screen and (max-width: 500px) {
     .Open-nave{

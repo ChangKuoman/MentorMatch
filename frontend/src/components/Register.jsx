@@ -226,23 +226,7 @@ const Register = () => {
             {
                 !surnameValid && <p className="error-form-text">El atributo apellido es requerido</p>
             }
-            <label className="labels">Documento de identidad</label>
-            <div className="contenedor-documentos">
-                <select className="documento-izquierda" name="documentType" onChange={handleChange}>
-                    <option value="DNI">DNI</option>
-                    <option value="CE">CE</option>
-                </select>
-                <input
-                    className="input-texto-register"
-                    type="text"
-                    name="surname"
-                    value={surname}
-                    placeholder="Doe"
-                    onChange={handleChange}
-                />
-                {
-                    !surnameValid && <p className="error-form-text">El atributo apellido es requerido</p>
-                }
+
                 <label className="labels">Documento de identidad</label>
                 <div className="contenedor-documentos">
                     <select className="documento-izquierda" name="documentType" onChange={handleChange}>
