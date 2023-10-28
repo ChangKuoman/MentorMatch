@@ -269,7 +269,7 @@ const Register = () => {
                 <p className="mentor-match-title">MENTOR MATCH</p>
                 <img src={Img_mentor_match} alt = "Imagen de Login" className="img-login"/>
             </div>
-            <div className="inf-mentor-match">
+            <div className="inf-mentor-match-r">
             <section className="inf-bloque">
                 <section className="inf-header">
                 <p>¿Qué es Mentor Match?</p>

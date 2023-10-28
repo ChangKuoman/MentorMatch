@@ -148,18 +148,18 @@ const Feedback = () => {
                 <img src = {BotonBack} alt = "Boton de regreso" className="boton-regreso" onClick={handleBackClick}/>
                 <img src = {BotonHome} alt = "Boton de home" className="boton-home" onClick={handleHomeClick}/>
             </div>
-            <div className="contenedor">
-                <div className="contenedor-chico">
+            <div className="contenedor-feeback">
+                <div className="contenedor-feeback-chico">
                 <div className="titulo-feedback">Feedback</div>
                 <div>Déjanos tu opinión para seguir mejorando</div>
                 <form>
-                    <div className="mini-text">Comentario</div>
+                    <div className="mini-text-feeback">Comentario</div>
 
                     <div>
                         <textarea onChange={handleComment} className="input-texto" />
                     </div>
 
-                    <div className="mini-text">Valoración de la página</div>
+                    <div className="mini-text-feeback">Valoración de la página</div>
                     <Rating
                         value={value}
                         size="large"

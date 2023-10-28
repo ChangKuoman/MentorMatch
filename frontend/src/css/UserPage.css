@@ -134,7 +134,7 @@
         height: 0px;
     }
     .boton-regreso{
-        position: fixed;
+        position: absolute;
         top: 14%;
         left: 20%;
         width: 13.3%;
