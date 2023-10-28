@@ -3,6 +3,8 @@ import { useState, useEffect } from 'react';
 import "../css/Register.css"
 import url from './url.js';
 
+import Img_mentor_match from "../icons/mentor-match.png"
+
 const headers = {
   'Content-Type': 'application/json',
 };
@@ -158,106 +160,150 @@ const Register = () => {
 
     return (
         <div>
+            <div className="Frame1">
+                <h1 className="title1">BIENVENIDOS A</h1>
+            </div>
+            <div className="Frame2"></div>
             <div className="contenedor-formulario">
-            <form className="formulario" onSubmit={handleSubmit}>
-            <label className="labels">Correo electrónico</label>
-            <input
-                className="input-texto-register"
-                type="text"
-                name="email"
-                value={email}
-                placeholder="ejemplo@gmail.com"
-                onChange={handleChange}
-            />
-            {
-                !emailValid && <p className="error-form-text">Ingrese un correo válido</p>
-            }
-            <label className="labels">Nombre</label>
-            <input
-                className="input-texto-register"
-                type="text"
-                name="name"
-                value={name}
-                placeholder="John"
-                onChange={handleChange}
-            />
-            {
-                !nameValid && <p className="error-form-text">El atributo nombre es requerido</p>
-            }
-            <label className="labels">Apellido</label>
-            <input
-                className="input-texto-register"
-                type="text"
-                name="surname"
-                value={surname}
-                placeholder="Doe"
-                onChange={handleChange}
-            />
-            {
-                !surnameValid && <p className="error-form-text">El atributo apellido es requerido</p>
-            }
-            <label className="labels">Documento de identidad</label>
-            <div className="contenedor-documentos">
-                <select className="documento-izquierda" name="documentType" onChange={handleChange}>
-                    <option value="DNI">DNI</option>
-                    <option value="CE">CE</option>
-                </select>
+                <form className="formulario" onSubmit={handleSubmit}>
+                <label className="labels">Correo electrónico</label>
                 <input
-                    className="input-texto-register documento-derecha"
+                    className="input-texto-register"
                     type="text"
-                    name="documentNro"
-                    value={documentNro}
-                    placeholder="01234567"
+                    name="email"
+                    value={email}
+                    placeholder="ejemplo@gmail.com"
                     onChange={handleChange}
                 />
+                {
+                    !emailValid && <p className="error-form-text">Ingrese un correo válido</p>
+                }
+                <label className="labels">Nombre</label>
+                <input
+                    className="input-texto-register"
+                    type="text"
+                    name="name"
+                    value={name}
+                    placeholder="John"
+                    onChange={handleChange}
+                />
+                {
+                    !nameValid && <p className="error-form-text">El atributo nombre es requerido</p>
+                }
+                <label className="labels">Apellido</label>
+                <input
+                    className="input-texto-register"
+                    type="text"
+                    name="surname"
+                    value={surname}
+                    placeholder="Doe"
+                    onChange={handleChange}
+                />
+                {
+                    !surnameValid && <p className="error-form-text">El atributo apellido es requerido</p>
+                }
+                <label className="labels">Documento de identidad</label>
+                <div className="contenedor-documentos">
+                    <select className="documento-izquierda" name="documentType" onChange={handleChange}>
+                        <option value="DNI">DNI</option>
+                        <option value="CE">CE</option>
+                    </select>
+                    <input
+                        className="input-texto-register documento-derecha"
+                        type="text"
+                        name="documentNro"
+                        value={documentNro}
+                        placeholder="01234567"
+                        onChange={handleChange}
+                    />
+                </div>
+                {
+                    !documentNroValid && <p className="error-form-text">El número de documento debe ser válido</p>
+                }
+                <label className="labels">Contraseña</label>
+                <input
+                    className="input-texto-register"
+                    type="password"
+                    name="password"
+                    value={password}
+                    placeholder="***"
+                    onChange={handleChange}
+                />
+                {
+                    !passwordValid && <p className="error-form-text">La contraseña debe como mínimo 8 caracteres, una mayúscula y un dígito</p>
+                }
+                <label className="labels">Confirmar contraseña</label>
+                <input
+                    className="input-texto-register"
+                    type="password"
+                    name="confirmPassword"
+                    value={confirmPassword}
+                    placeholder="***"
+                    onChange={handleChange}
+                />
+                {
+                    !confirmPasswordValid && <p className="error-form-text">Las contraseñas deben coincidir</p>
+                }
+                <label className="labels">Fecha de nacimiento</label>
+                <input
+                    className="input-texto-register"
+                    type="date"
+                    name="birthDate"
+                    value={birthDate}
+                    onChange={handleChange}
+                />
+                {
+                    !birthDateValid && <p className="error-form-text">Debe ser mayor de edad para usar nuestros servicios</p>
+                }
+                <div className="contenedor-terminos">
+                    <input type="checkbox" name="terminos" onChange={handleChange} />
+                    <label className="terminos-texto">Acepto los <a className="tyc" href="https://www.google.com.pe/" target="_blank">términos y condiciones</a></label>
+                </div>
+                {
+                    !terminosValid && <p className="error-form-text">Aceptar términos y condiciones</p>
+                }
+                <button className="boton-register" type="submit">Enviar</button>
+                </form>
             </div>
-            {
-                !documentNroValid && <p className="error-form-text">El número de documento debe ser válido</p>
-            }
-            <label className="labels">Contraseña</label>
-            <input
-                className="input-texto-register"
-                type="password"
-                name="password"
-                value={password}
-                placeholder="***"
-                onChange={handleChange}
-            />
-            {
-                !passwordValid && <p className="error-form-text">La contraseña debe como mínimo 8 caracteres, una mayúscula y un dígito</p>
-            }
-            <label className="labels">Confirmar contraseña</label>
-            <input
-                className="input-texto-register"
-                type="password"
-                name="confirmPassword"
-                value={confirmPassword}
-                placeholder="***"
-                onChange={handleChange}
-            />
-            {
-                !confirmPasswordValid && <p className="error-form-text">Las contraseñas deben coincidir</p>
-            }
-            <label className="labels">Fecha de nacimiento</label>
-            <input
-                className="input-texto-register"
-                type="date"
-                name="birthDate"
-                value={birthDate}
-                onChange={handleChange}
-            />
-            {
-                !birthDateValid && <p className="error-form-text">Debe ser mayor de edad para usar nuestros servicios</p>
-            }
-            <div className="contenedor-terminos">
-                <input type="checkbox" name="terminos" onChange={handleChange} />
-                <label className="terminos-texto">Acepto los <a className="tyc" href="https://www.google.com.pe/" target="_blank">términos y condiciones</a></label>
+            <div className="panel-login">
+                <p className="mentor-match-title">MENTOR MATCH</p>
+                <img src={Img_mentor_match} alt = "Imagen de Login" className="img-login"/>
             </div>
-            {
-                !terminosValid && <p className="error-form-text">Aceptar términos y condiciones</p>
-            }
-            <button className="boton-register" type="submit">Enviar</button>
-            </form>
+            <div className="inf-mentor-match">
+            <section className="inf-bloque">
+                <section className="inf-header">
+                <p>¿Qué es Mentor Match?</p>
+                </section>
+                <section className="inf-content">
+                <p>
+                MentorMatch es una plataforma web diseñada para fomentar la colaboración entre estudiantes en el intercambio de conocimientos, en base a sus fortalezas académicas.
+                </p>
+                </section>
+            </section>
+            <section className="inf-bloque">
+                <section className="inf-header">
+                <p>¿Quiénes somos?</p>
+                </section>
+                <section className="inf-content">
+                <p>
+                Somos un equipo interdiciplinario que buscamos eliminar las barreras de aprendizaje de nuestros compañeros por intermedio de un aplicativo.
+                </p>
+                </section>
+            </section>
+            <section className="inf-bloque">
+                <section className="inf-header">
+                <p>Beneficios de Mentor Match</p>
+                </section>
+                <section className="inf-content">
+                <p>
+                Algunos de los beneficios que se obtiene por el uso de la aplicación son:</p>
+                <ul>
+                    <li>Aprendizaje colaborativo gratuito.</li>
+                    <li>Fácil acceso de asesorías.</li>
+                    <li>Se adapta al cronograma personal.</li>
+                </ul>
+                </section>
+            </section>
             </div>
         </div>
     )

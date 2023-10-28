@@ -1,14 +1,14 @@
+html{
+  overflow: hidden;
+  overflow-y:scroll;
+}
+
 .Login{
   width: 100%;
   height: 100vh;
   margin: 0;
   padding: 0;
   display: flex;
-}
-
-html{
-  overflow: hidden;
-  overflow-y:scroll;
 }
 
 ::-webkit-scrollbar {
@@ -39,7 +39,7 @@ html {
   height: 20%;
   margin: 0;
   padding: 0;
-  top: -2.1%;
+  top: -2.5%;
   left: -0.5%;
   rotate: 178deg;
   background: #64D3F8;
@@ -79,6 +79,7 @@ html {
   left: -0.5%;
   rotate: 178deg;
   background: #64D3F87D;
+  box-shadow:0px 18px 53px 0px rgba(0,0,0,0.3);
 }
 
 .Frame3{
@@ -89,6 +90,7 @@ html {
   right: -18%;
   rotate: -86deg;
   background: #64D3F8;
+  box-shadow:0px 18px 53px 0px rgba(0,0,0,0.3);
 }
 
 .Frame4{
@@ -117,7 +119,7 @@ html {
   top: 40%;
   left: 10%;
   border-radius: 50px;
-
+  box-shadow:0px 18px 53px 0px rgba(0,0,0,0.3);
   background: #DEF7FF;
 }
 
@@ -156,16 +158,22 @@ html {
   height: 70%;
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
+  justify-content: space-evenly;
+
+}
+
+.login-form div{
+  margin: 0;
 
 }
 
 .login-input{
   border: none;
   border-radius: 10px;
-  width: 100%;
+  width: 95%;
   background: #93E4FF;
   padding: 5px;
+  margin-top: 10px;
 }
 
 .btn {
@@ -203,6 +211,7 @@ html {
 }
 
 .login-form-diveder{
+  height: 40%;
   display: flex;
   margin: 0;
   padding: 0;
@@ -323,4 +332,96 @@ html {
   letter-spacing: 0em;
   text-align: justify;
   color: #000000;
+}
+
+@media screen and (max-width: 500px){
+  .Frame1{
+    width: 103%;
+  }
+  .Frame2{
+    height: 24%;
+  }
+  .title1{
+    font-size: 40px;
+    width: 100%;
+    margin: 0;
+  }
+  
+  .title2{
+    font-size: 20px;
+  }
+
+  .panel-login{
+    width: 100%;
+    left: 0;
+    top: 24%;
+  }
+
+  .login-form-group{
+    width: 85%;
+    left: 5.25%;
+    padding: 2%;
+    top: 73%;
+  }
+  
+  .inf-mentor-match{
+    flex-direction: column;
+    width: 80%;
+    height: auto;
+    top: 110%;
+    justify-content: center;
+  }
+  .mentor-match-title{
+    font-size: 40px;
+  }
+
+  .inf-bloque{
+    width: 90%;
+  }
+  .text-form-footer{
+    font-size: 15px;
+  }
+}
+
+@media screen and (min-width:501px) and (max-width:700px) {
+  .Frame1{
+    width: 103%;
+  }
+  .title1{
+    font-size: 60px;
+    width: 100%;
+    margin: 0;
+  }
+  
+  .title2{
+    font-size: 20px;
+  }
+
+  .panel-login{
+    width: 100%;
+    left: 0;
+    top: 24%;
+  }
+
+  .login-form-group{
+    width: 85%;
+    left: 5.25%;
+    padding: 2%;
+    top: 73%;
+  }
+  
+  .inf-mentor-match{
+    flex-direction: column;
+    width: 80%;
+    height: auto;
+    top: 110%;
+    justify-content: center;
+  }
+  .mentor-match-title{
+    font-size: 40px;
+  }
+
+  .inf-bloque{
+    width: 90%;
+  }
 }
