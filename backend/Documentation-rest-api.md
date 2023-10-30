@@ -28,6 +28,7 @@
 
 - [Endpoints Chat](#endpoints-user)
     - [/get-chats](#get-chats)
+    - [/put-chat](#put-chat)
 
 ## Introduction
 

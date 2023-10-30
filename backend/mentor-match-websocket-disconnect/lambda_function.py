@@ -6,7 +6,7 @@ def lambda_handler(event, context):
     connectionId = event['requestContext']['connectionId']
 
     dynamodb.delete_item(
-        TableName='websocket-connections',
+        TableName='mentor-match-websocket-connection',
         Key={'connectionId': {'S': connectionId}}
     )
 
