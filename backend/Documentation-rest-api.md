@@ -34,7 +34,7 @@
 
 Headers: **Content-Type: application/json**
 
-API link: https://oo3m2to3bi.execute-api.us-east-1.amazonaws.com/test
+API link: https://fnac3oh84b.execute-api.us-east-1.amazonaws.com/prod
 
 ## Endpoints User
 
