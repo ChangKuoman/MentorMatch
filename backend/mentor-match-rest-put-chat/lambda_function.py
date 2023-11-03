@@ -24,7 +24,7 @@ def check_attributes(event, list_attributes):
 def lambda_handler(event, context):
     try:
         # CHECK ATTRIBUTES IN EVENT
-        map = check_attributes(event, ["chat", "message", "user"])
+        map = check_attributes(event, ["chat", "message", "fr", "to"])
         if map["ok"] == False:
             error = ",".join(map["needed"])
             error += " attributes are needed in payload"
@@ -37,7 +37,8 @@ def lambda_handler(event, context):
         # OBTAIN ATTRIBUTES OF EVENT
         chat_uuid = event["chat"]
         message = event["message"]
-        fr = event["user"]
+        fr = event["fr"]
+        to = event["to"]
 
         # DYNAMODB CONNECTION
         dynamodb = boto3.resource('dynamodb')
@@ -54,6 +55,19 @@ def lambda_handler(event, context):
             }
         )
         response2 = table_chat.put_item(Item=response["Item"])
+
+        # POST TO SNS
+        sns = boto3.client('sns')
+        link = 'http://mentor-match.s3-website-us-east-1.amazonaws.com/'
+
+        response_sns = sns.publish(
+        	TopicArn = 'arn:aws:sns:us-east-1:002237945535:mentor-match-sns',
+        	Subject = 'Mentor Match - Nuevo Mensaje',
+            Message = f'Recibiste un mensaje nuevo de {fr}: {message}. Entra a {link} para contestar el mensaje.',
+            MessageAttributes = {
+                'email': {'DataType': 'String', 'StringValue': to }
+            }
+        )
 
         return {
             "status": 200,

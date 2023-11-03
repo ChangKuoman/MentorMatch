@@ -639,7 +639,8 @@ Payload:
 | :-- | :-- | --: |
 | chat | string | |
 | message | string | |
-| user | string | |
+| to | string | |
+| fr | string | |
 
 Response Examples:
 

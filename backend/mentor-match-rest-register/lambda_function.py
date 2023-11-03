@@ -1,5 +1,6 @@
 import boto3
 import hashlib
+import json
 
 
 def hash_password(password):
@@ -33,7 +34,7 @@ def lambda_handler(event, context):
                 "text": "Bad Request",
                 "error": error
             }
-        
+
         # OBTAIN ATTRIBUTES OF EVENT
         email = event["email"]
         name = event["name"]
@@ -47,20 +48,20 @@ def lambda_handler(event, context):
         dynamodb = boto3.resource('dynamodb')
         table_user = dynamodb.Table('mentor-match-user')
         table_user_data = dynamodb.Table('mentor-match-user-data')
-        
+
         # VERIFY EMAIL EXISTS
         email_exists = False
         response = table_user.get_item(Key={'email': email})
         if 'Item' in response:
             email_exists = True
-        
+
         # VERIFY DOCUMENT EXISTS
         document_exists = False
         response = table_user.scan()
         for item in response['Items']:
             if item["document"] == [documentType, documentNro]:
                 document_exists = True
-    
+
         error = " already exists"
         if email_exists and document_exists:
             error = "Email and Document" + error
@@ -68,7 +69,7 @@ def lambda_handler(event, context):
             error = "Email" + error
         elif document_exists:
             error = "Document" + error
-            
+
         if email_exists or document_exists:
             return {
                 "status": 400,
@@ -86,7 +87,7 @@ def lambda_handler(event, context):
             "attemps": 0,
             "connectionId": ""
         }
-        
+
         item_user_data = {
             "email": email,
             "name": name,
@@ -106,13 +107,31 @@ def lambda_handler(event, context):
         table_user.put_item(Item=item_user)
         table_user_data.put_item(Item=item_user_data)
 
+        # SUBSCRIPTION TO SNS
+        sns = boto3.client('sns')
+
+        topic_arn = 'arn:aws:sns:us-east-1:002237945535:mentor-match-sns'
+
+        response = sns.subscribe(
+            TopicArn=topic_arn,
+            Protocol='email',
+            Endpoint=email,
+            Attributes={
+               'FilterPolicy': json.dumps({
+                   'email': [
+                       email
+                   ]
+               })
+            }
+        )
+
         return {
             "status": 200,
             "text": "Ok",
             "users": [item_user_data],
             "total": 1
         }
-    
+
     except Exception as e:
         return {
             "status": 500,
