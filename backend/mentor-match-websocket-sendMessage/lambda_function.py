@@ -1,6 +1,7 @@
 import boto3
 import json
 import datetime
+import uuid
 
 
 def timestamp_to_str(timestamp):
@@ -46,11 +47,11 @@ def lambda_handler(event, context):
         # TO THE USER
         table_user = dynamodb.Table('mentor-match-user')
         response_user = table_user.get_item(Key={"email": to})
+
         connectionId = response_user["Item"]["connectionId"]
         if connectionId != "":
-            table_connection = dynamodb.Table('websocket-connections')
+            table_connection = dynamodb.Table('mentor-match-websocket-connection')
             response_connection = table_connection.get_item(Key={"connectionId": connectionId})
-
             if "Item" in response_connection:
                 apigatewaymanagementapi.post_to_connection(
                     Data=message,
@@ -62,7 +63,7 @@ def lambda_handler(event, context):
             endpoint_url = "https://" + event["requestContext"]["domainName"] + "/" + event["requestContext"]["stage"]
         )
         apigatewaymanagementapi.post_to_connection(
-            Data=f"{e}",
+            Data=f"Error: {e}",
             ConnectionId=event["requestContext"]["connectionId"]
         )
     return {}

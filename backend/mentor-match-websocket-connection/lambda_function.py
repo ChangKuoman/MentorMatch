@@ -6,7 +6,7 @@ def lambda_handler(event, context):
     connectionId = event['requestContext']['connectionId']
 
     dynamodb.put_item(
-        TableName='websocket-connections',
+        TableName='mentor-match-websocket-connection',
         Item={'connectionId': {'S': connectionId}}
     )
 

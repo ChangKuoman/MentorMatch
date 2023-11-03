@@ -21,7 +21,7 @@ URL de @connections: https://5rae21tjti.execute-api.us-east-1.amazonaws.com/test
 Lambda Function Associated: mentor-match-websocket-connection <br>
 Description:
 - Connects to websocket
-- Save connection id in dynamodb table (websocket-connections)
+- Save connection id in dynamodb table (mentor-match-websocket-connection)
 
 Body: Not Required
 
@@ -30,7 +30,7 @@ Body: Not Required
 Lambda Function Associated: mentor-match-websocket-disconnect <br>
 Description:
 - Disconnects from websocket
-- Deletes connection id in dynamodb table (websocket-connections)
+- Deletes connection id in dynamodb table (mentor-match-websocket-connection)
 
 Body: Not Required
 
@@ -57,7 +57,7 @@ Body Example:
 {
     "action":"sendMessage",
     "message":"This is an example message!",
-    "to":"example@utec.edu.pe",
-    "fr":"example@gmail.com",
+    "to":"example1@utec.edu.pe",
+    "fr":"example2@utec.edu.pe",
     "uuid": "c5536400-cc80-43b0-b2ab-7590c354ab09"
 }

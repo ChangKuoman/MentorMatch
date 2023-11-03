@@ -114,7 +114,8 @@ const Chat = () => {
           body: JSON.stringify({
             'chat': renderChat[0].uuid,
             'message': inputMsg,
-            'user': email
+            'fr': email,
+            'to': getEmail(renderChat[0])
           }),
         }).then(response => response.json())
           .then(data=> {
