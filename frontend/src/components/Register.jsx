@@ -4,6 +4,8 @@ import "../css/Register.css"
 import url from './url.js';
 
 import Img_mentor_match from "../icons/mentor-match.png"
+import ojo_cerrado from "../icons/icons8-closed-eye-100.png"
+import ojo_abierto from "../icons/icons8-eye-100.png"
 
 const headers = {
   'Content-Type': 'application/json',
@@ -29,7 +31,7 @@ const Register = () => {
     const [documentNroValid, setDocumentNroValid] = useState(true)
     const [passwordValid, setPasswordValid] = useState(true)
     const [confirmPasswordValid, setConfirmPasswordValid] = useState(true)
-    const [birthDateValid, setBirthDateValid] = useState(true)
+    const [birthDateValid, setBirthDateValid] = useState(true)    
 
     const handleChange = (event) => {
         setEmailValid(true)
@@ -179,7 +181,24 @@ const Register = () => {
                 .catch(error => {
                 });
         }
-      };
+    };
+
+    // logica para el ojito
+    const [showPassword, setShowPassword] = useState(false);
+    const handleShowPassword = () => {
+        setShowPassword(!showPassword);
+    
+        // Cambia la imagen de ojo cerrado a ojo abierto como una animación
+        if (showPassword) {
+        const img = document.querySelector(".eye-ac");
+        img.style.transform = "scale(1)";
+        img.style.transition = "transform 0.5s ease";
+        } else {
+        const img = document.querySelector(".eye-ac");
+        img.style.transform = "scale(1.2)";
+        img.style.transition = "transform 0.5s ease";
+        }
+    };
 
     return (
         <div>
@@ -246,17 +265,23 @@ const Register = () => {
                     !documentNroValid && <p className="error-form-text">El número de documento debe ser válido</p>
                 }
                 <label className="labels">Contraseña</label>
-                <input
-                    className="input-texto-register"
-                    type="password"
-                    name="password"
-                    value={password}
-                    placeholder="***"
-                    onChange={handleChange}
-                />
-                {
-                    !passwordValid && <p className="error-form-text">La contraseña debe como mínimo 8 caracteres, una mayúscula y un dígito</p>
-                }
+                <div className="input-password-ac">
+                    <input
+                        className="input-texto-register"
+                        type={showPassword ? 'text' : 'password'}
+                        name="password"
+                        value={password}
+                        placeholder="***"
+                        onChange={handleChange}
+                    />
+                    {showPassword ? 
+                    <img onClick={handleShowPassword} className='eye-ac' src={ojo_abierto} alt = "ojo_abierto" /> :
+                    <img onClick={handleShowPassword} className='eye-ac' src={ojo_cerrado} alt = "ojo cerrado" />
+                    }
+                    {
+                        !passwordValid && <p className="error-form-text">La contraseña debe como mínimo 8 caracteres, una mayúscula y un dígito</p>
+                    }
+                </div>
                 <label className="labels">Confirmar contraseña</label>
                 <input
                     className="input-texto-register"

@@ -269,6 +269,12 @@
     }
     .premiun-bar{
         position: fixed;
+        width: auto;
+        padding-right: 10px;
+    }
+    .modal{
+        top: 107% !important;
+        left: 60% !important ;
     }
 }
 
@@ -281,5 +287,13 @@
     }
     .BloqueMid{
         height: 60%;
+    }
+}
+
+@media screen and (max-width: 375px){
+    .premiun-bar{
+        font-size: 15px !important;
+        width: auto;
+        padding-right: 10px;
     }
 }
