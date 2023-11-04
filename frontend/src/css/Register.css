@@ -80,8 +80,8 @@ div {
 }
 
 .boton-register {
-    margin-top: 10px;
-border-radius: 5px;
+  margin-top: 10px;
+  border-radius: 5px;
 
   align-items: center;
   background-color: #fff;
@@ -132,7 +132,7 @@ border-radius: 5px;
   width: 90%;
   height: 30%;
   position: absolute;
-  top: 100%;
+  top: 108%;
   margin: 0;
   margin-right: 10%;
   padding: 0;
@@ -232,11 +232,11 @@ border-radius: 5px;
     top: 73%;
   }
   
-  .inf-mentor-match{
+  .inf-mentor-match-r{
     flex-direction: column;
     width: 90%;
     height: auto;
-    top: 150%;
+    top: 150% !important;
     justify-content: center;
   }
   .mentor-match-title{
@@ -248,5 +248,15 @@ border-radius: 5px;
   }
   .text-form-footer{
     font-size: 15px;
+  }
+}
+
+
+@media screen and (max-width: 340px) {
+  .inf-mentor-match-r{
+    top: 180% !important;
+  }
+  .contenedor-formulario{
+    height: auto;
   }
 }

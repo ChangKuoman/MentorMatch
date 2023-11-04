@@ -130,7 +130,7 @@ const Feedback = () => {
                     {
                     IsOpen &&
                     <div className="modal" style={{left: logOutPosition.x, top:logOutPosition.y}}>
-                    <div className="overlay" onClick={OpenModal}></div>
+                   
                     <div className="modal-content">
                         <button className="close-modal" onClick={OpenModal}>Cancelar</button>
                         <button onClick={handleLogout}>Cerrar Sesion</button>

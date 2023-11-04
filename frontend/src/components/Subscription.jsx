@@ -13,6 +13,7 @@ import LogoUser from '../icons/icons8-user-64.png';
 
 import CheckLogo from '../icons/check.png'
 import EquisLogo from '../icons/equis.png'
+import { green } from "@mui/material/colors";
 
 const headers = {
   'Content-Type': 'application/json',
@@ -74,6 +75,30 @@ const Subscription = () => {
         window.location.href = '/user/';
     };
 
+    // logica para el switch mensual-anual
+
+    const [switchAnual, setSwitchAnual] = useState(true);
+
+    const handleSwitch = () =>{
+        setSwitchAnual(!switchAnual);
+    }
+
+    const SwitchMensualAnual = ({ switchAnual, precioMensual }) => {
+        const precioAnual = precioMensual * 12;
+        const descuentoAnual = precioAnual * 0.1;
+      
+        if (switchAnual) {
+          return (
+            <>
+                <p className="descuento-text-ac"> 10% Descuento </p>
+                <p className="precio">S/. {precioAnual - descuentoAnual}</p>
+            </>
+          );
+        } else {
+          return <p className="precio">S/. {precioMensual}</p>;
+        }
+      };
+
     return (
         <div onMouseLeave={handleMouseLeave}>
             <div className="HeaderHome">
@@ -93,7 +118,7 @@ const Subscription = () => {
                     {
                     IsOpen &&
                     <div className="modal" style={{left: logOutPosition.x, top:logOutPosition.y}}>
-                        <div className="overlay" onClick={OpenModal}></div>
+                        
                         <div className="modal-content">
                             <button className="close-modal" onClick={OpenModal}>Cancelar</button>
                             <button onClick={handleLogout}>Cerrar Sesion</button>
@@ -111,50 +136,86 @@ const Subscription = () => {
                 <img src = {BotonHome} alt = "Boton de home" className="boton-home" onClick={handleHomeClick}/>
             </div>
             <div className="contenedor-subscription" onMouseLeave={handleMouseLeave}>
-                <div className="contenedor-subscription-intermedio">
-                    <div className="contenedor-subscription-titulo">
-                        <div className="titulo">FREE PLAN</div>
-                        <div className="precio">S/. 0</div>
-                    </div>
-                    <hr className="linea" />
-                    <div>
-
-                        <div className="mini-contenedor-subscription">
-                            <img className="imagen" src={CheckLogo} width={50} height={50}/>
-                            <div>Límite de 5 invitaciones por día</div>
-                        </div>
-                        <div className="mini-contenedor-subscription">
-                            <img className="imagen" src={EquisLogo} width={50} height={50}/>
-                            <div>Uso de herramientas IA para el apoyo de tu aprendizaje</div>
-                        </div>
-                        <div className="mini-contenedor-subscription">
-                            <img className="imagen" src={EquisLogo} width={50} height={50}/>
-                            <div>Mayor acceso a nuestros Star Mentors</div>
-                        </div>
-                    </div>
+                <div className="switch-mensual-anual-ac">
+                    <p className="text-switch-ac">mensual</p>
+                    <input
+                        className="input-switch-ac"
+                        type = "range"
+                        id="switch"
+                        min={0}
+                        max={1}
+                        onChange={handleSwitch}
+                    />
+                    <p className="text-switch-ac">anual</p>
                 </div>
-                <div className="contenedor-subscription-intermedio">
-                    <div className="contenedor-titulo">
-                        <div className="titulo">PREMIUM PLAN</div>
-                        <div className="precio">S/. 10</div>
-                    </div>
-                    <hr className="linea" />
-                    <div>
+                <div className="planes-ac">
+                    <div className="contenedor-subscription-intermedio">
+                        <div className="contenedor-subscription-titulo">
+                            <div className="titulo">FREE PLAN</div>
+                            <SwitchMensualAnual switchAnual={false} precioMensual={0}/>
+                        </div>
+                        <hr className="linea" />
+                        <div>
 
-                        <div className="mini-contenedor-subscription">
-                            <img className="imagen" src={CheckLogo} width={50} height={50}/>
-                            <div>Invitaciones ilimitadas por día</div>
+                            <div className="mini-contenedor-subscription">
+                                <img className="imagen" src={CheckLogo} width={50} height={50}/>
+                                <div>Límite de 5 invitaciones por día</div>
+                            </div>
+                            <div className="mini-contenedor-subscription">
+                                <img className="imagen" src={EquisLogo} width={50} height={50}/>
+                                <div>Uso de herramientas IA para el apoyo de tu aprendizaje</div>
+                            </div>
+                            <div className="mini-contenedor-subscription">
+                                <img className="imagen" src={EquisLogo} width={50} height={50}/>
+                                <div>Mayor acceso a nuestros Star Mentors</div>
+                            </div>
                         </div>
-                        <div className="mini-contenedor-subscription">
-                            <img className="imagen" src={CheckLogo} width={50} height={50}/>
-                            <div>Uso de herramientas IA para el apoyo de tu aprendizaje</div>
+                    </div>
+                    <div className="contenedor-subscription-intermedio">
+                        <div className="contenedor-subscription-titulo">
+                            <div className="titulo">PREMIUM PLAN</div>
+                            <SwitchMensualAnual switchAnual={switchAnual} precioMensual={5}/>
                         </div>
-                        <div className="mini-contenedor-subscription">
-                            <img className="imagen" src={CheckLogo} width={50} height={50}/>
-                            <div>Mayor acceso a nuestros Star Mentors</div>
+                        <hr className="linea" />
+                        <div>
+
+                            <div className="mini-contenedor-subscription">
+                                <img className="imagen" src={CheckLogo} width={50} height={50}/>
+                                <div>Invitaciones ilimitadas por día</div>
+                            </div>
+                            <div className="mini-contenedor-subscription">
+                                <img className="imagen" src={EquisLogo} width={50} height={50}/>
+                                <div>Uso de herramientas IA para el apoyo de tu aprendizaje</div>
+                            </div>
+                            <div className="mini-contenedor-subscription">
+                                <img className="imagen" src={EquisLogo} width={50} height={50}/>
+                                <div>Mayor acceso a nuestros Star Mentors</div>
+                            </div>
                         </div>
-                        <div className="contenedor-boton-subscription">
-                            <button className="boton-adquirir">¡PRONTO!</button>
+                    </div>
+                    <div className="contenedor-subscription-intermedio">
+                        <div className="contenedor-subscription-titulo">
+                            <div className="titulo">VIP PLAN</div>
+                            <SwitchMensualAnual switchAnual={switchAnual} precioMensual={10}/>
+                        </div>
+                        <hr className="linea" />
+                        <div>
+
+                            <div className="mini-contenedor-subscription">
+                                <img className="imagen" src={CheckLogo} width={50} height={50}/>
+                                <div>Invitaciones ilimitadas por día</div>
+                            </div>
+                            <div className="mini-contenedor-subscription">
+                                <img className="imagen" src={CheckLogo} width={50} height={50}/>
+                                <div>Uso de herramientas IA para el apoyo de tu aprendizaje</div>
+                            </div>
+                            <div className="mini-contenedor-subscription">
+                                <img className="imagen" src={CheckLogo} width={50} height={50}/>
+                                <div>Mayor acceso a nuestros Star Mentors</div>
+                            </div>
+                            <div className="contenedor-boton-subscription">
+                                <button className="boton-adquirir">¡PRONTO!</button>
+                            </div>
                         </div>
                     </div>
                 </div>

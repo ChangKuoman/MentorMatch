@@ -16,21 +16,24 @@ import Chat from './components/Chat';
 import Feedback from './components/Feedback';
 import Subscription from './components/Subscription';
 
+
 function App() {
+  
+  const isLog = localStorage.getItem('isLog')
+
   return (
     <div>
         <Routes >
-          <Route path='/' element={<LoginContent />} onEnter/>
-          <Route path='/register' element = {<Register />} />
-          <Route path='/home' element = {<HomeComponent/>}/>
-          <Route path='/user/' element = {<UserPage/>} />
+          <Route path='/' element={isLog ? <Navigate to="/home" /> : <LoginContent />} />
+          <Route path='/register' element = {isLog ? <Navigate to="/home" /> : <Register />} />
+          <Route path='/home' element = {isLog ? <HomeComponent/> : <Navigate to="/" />} />
+          <Route path='/user/' element = {isLog ? <UserPage/> : <Navigate to="/" />} />
+          <Route path='/courses' element={isLog ? <Course/> : <Navigate to="/" />} />
+          <Route path='/reservas' element={isLog ? <Event/> : <Navigate to="/" />} />
+          <Route path='/chats' element={isLog ? <Chat/> : <Navigate to="/" />} />
+          <Route path='/feedback' element={isLog ? <Feedback/> : <Navigate to="/" />} />
+          <Route path='/subscripciones' element={isLog ? <Subscription/> : <Navigate to="/" />} />
           <Route path='/*' element={<PageNotFound/>} />
-          <Route path='/courses' element={<Course/>} />
-          <Route path='/reservas' element={<Event />} />
-          <Route path='/chats' element={<Chat />} />
-          <Route path='/feedback' element={<Feedback/>} />
-          <Route path='/subscripciones' element={<Subscription />}/>
-
         </Routes >
     </div>
   );

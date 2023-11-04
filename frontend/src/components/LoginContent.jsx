@@ -4,6 +4,8 @@ import '../css/LoginContent.css';
 import url from './url.js';
 
 import Img_mentor_match from "../icons/mentor-match.png"
+import ojo_cerrado from "../icons/icons8-closed-eye-100.png"
+import ojo_abierto from "../icons/icons8-eye-100.png"
 
 function limpiarDatos(datos) {
   // Elimina caracteres especiales que puedan ser utilizados para inyectar código SQL
@@ -106,6 +108,23 @@ const LoginContent = () => {
       });
   };
 
+  // logica para el ojito
+  const [showPassword, setShowPassword] = useState(false);
+  const handleShowPassword = () => {
+    setShowPassword(!showPassword);
+  
+    // Cambia la imagen de ojo cerrado a ojo abierto como una animación
+    if (showPassword) {
+      const img = document.querySelector(".eye-ac");
+      img.style.transform = "scale(1)";
+      img.style.transition = "transform 0.5s ease";
+    } else {
+      const img = document.querySelector(".eye-ac");
+      img.style.transform = "scale(1.2)";
+      img.style.transition = "transform 0.5s ease";
+    }
+  };
+
   return (
     <div className="Login">
       <div className="Frame1">
@@ -134,16 +153,22 @@ const LoginContent = () => {
             <ErrorTextForm texto="Este correo no existe" boolean={ correoValido }/>
             <div>
               <label htmlFor="password">Contraseña</label>
-              <input
-                className="login-input"
-                type="password"
-                id="password"
-                name="password"
-                value={password}
-                onChange={handlePasswordChange}
-                placeholder = "******************"
-                required
-              />
+              <div className="input-password-ac">
+                <input
+                  className="login-input"
+                  type={showPassword ? 'text' : 'password'}
+                  id="password"
+                  name="password"
+                  value={password}
+                  onChange={handlePasswordChange}
+                  placeholder = "******************"
+                  required
+                />
+                {showPassword ? 
+                  <img onClick={handleShowPassword} className='eye-ac' src={ojo_abierto} alt = "ojo_abierto" /> :
+                  <img onClick={handleShowPassword} className='eye-ac' src={ojo_cerrado} alt = "ojo cerrado" />
+                }
+              </div>
             </div>
             <ErrorTextForm texto="Contraseña incorrecta" boolean={ contrasenaValida }/>
             <button className='btn' type="submit">INICIAR SESIÓN</button>
