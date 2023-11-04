@@ -72,9 +72,9 @@
 
 .user-content{
     width: 40%;
-    height: 73%;
+    height: auto;
     position: absolute;
-    top: 20%;
+    top: 16%;
     left: 30%;
     background: #DEF7FF;
     box-shadow:0px 18px 53px 0px rgba(0,0,0,0.3);

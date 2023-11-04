@@ -3,10 +3,36 @@ import { useState, useEffect, useRef } from 'react';
 import "../css/Chat.css"
 import url from './url.js';
 
+import Logo from "./Logo";
+import LogoUser from '../icons/icons8-user-64.png';
+import LogoLogOut from '../icons/icons8-logout-100.png';
+import BotonBack from '../icons/deshacer 1boton-back.png';
+import BotonHome from '../icons/boton-home.png';
+
 import LogoEnviar from '../icons/enviar.png'
 
 const headers = {
   'Content-Type': 'application/json',
+};
+
+const getLogOutPosition = () => {
+  const logOutElement = document.querySelector(".LogoLogOut");
+  if (!logOutElement) {
+    return {
+      x: 0,
+      y: 0,
+    };
+  }
+
+  const logOutRect = logOutElement.getBoundingClientRect();
+  const logOutX = logOutRect.left;
+  const logOutY = logOutRect.top;
+  const logOutHeight = logOutRect.height;
+  const logOutWidth = logOutRect.width;
+  return {
+    x: logOutX - 50 + logOutWidth/2,
+    y: logOutY + logOutHeight,
+  };
 };
 
 const Chat = () => {
@@ -146,8 +172,78 @@ const Chat = () => {
       )
     }
 
+    const [isVisible, setIsVisible] = useState(false);
+    const handleMouseEnter = () => {
+        setIsVisible(true);
+    };
+    const handleMouseLeave = () => {
+        setIsVisible(false);
+    };
+    const handleHomeClick = () => {
+        window.location.href = '/home';
+    }
+
+    const handleBackClick  = () => {
+        window.location.href = '/home';
+    }
+
+    const [IsOpen, setIsOpen] = useState(false);
+    const [logOutPosition, setLogOutPosition] = useState(getLogOutPosition());
+    const OpenModal = () => {
+        setIsOpen(!IsOpen);
+        setLogOutPosition(getLogOutPosition());
+    }
+
+    const handleLogout = () => {
+        // Limpia los datos de la sesión del localstorage
+        localStorage.removeItem('user');
+        localStorage.removeItem('isLog');
+
+        // Redirige al usuario a /login
+        window.location.href = '/';
+    };
+
+    const accessUser = () => {
+        window.location.href = '/user/';
+    };
+
+
     return (
         <div>
+          <div className="HeaderHome">
+            <Logo className = 'Logo'/>
+              <h1>MentorMatch</h1>
+              <div className="botones-nav">
+                  <img src = {LogoUser}
+                      alt="logo user"
+                      className="LogoLogOut"
+                      onClick={accessUser}
+                  />
+                  <img src = {LogoLogOut}
+                      alt = "logo Log Out"
+                      className="LogoLogOut"
+                      onClick={OpenModal}
+                  />
+                  {
+                  IsOpen &&
+                  <div className="modal" style={{left: logOutPosition.x, top:logOutPosition.y}}>
+                      
+                      <div className="modal-content">
+                          <button className="close-modal" onClick={OpenModal}>Cancelar</button>
+                          <button onClick={handleLogout}>Cerrar Sesion</button>
+                      </div>
+                  </div>
+                  }
+              </div>
+          </div>
+          <div className="frame1">
+          </div>
+          <div className="frame2"></div>
+          <div onMouseEnter={handleMouseEnter} className="Open-nave"></div>
+          <div className={`nav${isVisible ? '' : 'hidden'}`}>
+              <img src = {BotonBack} alt = "Boton de regreso" className="boton-regreso" onClick={handleBackClick}/>
+              <img src = {BotonHome} alt = "Boton de home" className="boton-home" onClick={handleHomeClick}/>
+          </div>
           <div className="contenedor-mas-grande-chat">
             <div className="contenedor-grande-chat">
 
