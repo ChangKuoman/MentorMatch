@@ -42,6 +42,30 @@ def lambda_handler(event, context):
 
         # DYNAMODB CONNECTION
         dynamodb = boto3.resource('dynamodb')
+
+        ### RESTRICT NUMBER OF MESSAGES
+        table_user_data = dynamodb.Table('mentor-match-user-data')
+        response_user_data = table_user_data.get_item(Key={'email': fr})
+        if "Item" not in response_user_data:
+            return {
+                "status": 404,
+                "text": "Resource Not Found",
+                "error": "email is not found"
+            }
+        if response_user_data["Item"]["plan"] == 'free':
+            table_user = dynamodb.Table('mentor-match-user')
+            response_user = table_user.get_item(Key={'email': fr})
+            if response_user["Item"]["interactions"] < 5:
+                response_user["Item"]["interactions"] += 1
+                table_user.put_item(Item=response_user["Item"])
+            else:
+                return {
+                    "status": 429,
+                    "text": "Too Many Requests",
+                    "error": "maximum number of messages reached"
+                }
+        ###
+
         table_chat = dynamodb.Table('mentor-match-chat')
 
         response = table_chat.get_item(Key={'uuid': chat_uuid})
