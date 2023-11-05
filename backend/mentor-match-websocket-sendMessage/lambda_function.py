@@ -41,7 +41,7 @@ def lambda_handler(event, context):
 
         # TO SAME USER
         apigatewaymanagementapi.post_to_connection(
-            Data=message,
+            Data=json.dumps(response["Item"]),
             ConnectionId=event["requestContext"]["connectionId"]
         )
         # TO THE USER
@@ -54,9 +54,23 @@ def lambda_handler(event, context):
             response_connection = table_connection.get_item(Key={"connectionId": connectionId})
             if "Item" in response_connection:
                 apigatewaymanagementapi.post_to_connection(
-                    Data=message,
+                    Data=json.dumps(response["Item"]),
                     ConnectionId=connectionId
                 )
+
+        # POST TO SNS
+        sns = boto3.client('sns')
+        link = 'http://mentor-match.s3-website-us-east-1.amazonaws.com/'
+
+        response_sns = sns.publish(
+        	TopicArn = 'arn:aws:sns:us-east-1:002237945535:mentor-match-sns',
+        	Subject = 'Mentor Match - Nuevo Mensaje',
+            Message = f'Recibiste un mensaje nuevo de {fr}: {message}. Entra a {link} para contestar el mensaje.',
+            MessageAttributes = {
+                'email': {'DataType': 'String', 'StringValue': to }
+            }
+        )
+
     except Exception as e:
         apigatewaymanagementapi = boto3.client(
             'apigatewaymanagementapi',
