@@ -1,7 +1,9 @@
 import boto3
 import json
 
+
 dynamodb = boto3.resource('dynamodb')
+
 
 def lambda_handler(event, context):
     try:
@@ -20,7 +22,12 @@ def lambda_handler(event, context):
         )
 
         apigatewaymanagementapi.post_to_connection(
-            Data=f"setEmail {email} success",
+            Data=json.dumps({
+                    "status": 200,
+                    "text": "Ok",
+                    "email": email,
+                    "action": "setEmail"
+                }),
             ConnectionId=connectionId
         )
     except Exception as e:
@@ -30,7 +37,12 @@ def lambda_handler(event, context):
         )
 
         apigatewaymanagementapi.post_to_connection(
-            Data=f"Error: {e}",
+            Data=json.dumps({
+                    "status": 500,
+                    "text": "Internal Server Error",
+                    "error": e,
+                    "action": "setEmail"
+                }),
             ConnectionId=connectionId
         )
     return {}

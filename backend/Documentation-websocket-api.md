@@ -11,8 +11,8 @@
     - [sendMessage](#send-message)
 
 ## Introduction
-WebSocket URL: wss://5rae21tjti.execute-api.us-east-1.amazonaws.com/test/
-URL de @connections: https://5rae21tjti.execute-api.us-east-1.amazonaws.com/test/@connections
+WebSocket URL: wss://ohkhi5gvc3.execute-api.us-east-1.amazonaws.com/test/
+URL de @connections: https://ohkhi5gvc3.execute-api.us-east-1.amazonaws.com/test/@connections
 
 ## Routes
 

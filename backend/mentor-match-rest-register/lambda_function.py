@@ -1,6 +1,13 @@
 import boto3
 import hashlib
 import json
+import datetime
+
+
+def timestamp_to_str(timestamp):
+    """Convierte un timestamp en formato datetime a una cadena."""
+    timestamp_str = timestamp.strftime('%Y-%m-%d %H:%M:%S')
+    return timestamp_str
 
 
 def hash_password(password):
@@ -85,7 +92,9 @@ def lambda_handler(event, context):
             "blockDate": "",
             "unlockDate": "",
             "attemps": 0,
-            "connectionId": ""
+            "connectionId": "",
+            "creationDate": timestamp_to_str(datetime.datetime.now()),
+            "interactions": 0
         }
 
         item_user_data = {
@@ -100,7 +109,10 @@ def lambda_handler(event, context):
             "tags": [],
             "photo": "",
             "events-r": [],
-            "events-g": []
+            "events-g": [],
+            "superuser": False,
+            "plan": "free",
+            "planDateV": ""
         }
 
         # PUT ITEMS
