@@ -35,7 +35,8 @@ def lambda_handler(event, context):
                 Data=json.dumps({
                     "status": 404,
                     "text": "Resource Not Found",
-                    "error": "email is not found"
+                    "error": "email is not found",
+                    "action": "sendMessage"
                 }),
                 ConnectionId=event["requestContext"]["connectionId"]
             )
@@ -51,7 +52,8 @@ def lambda_handler(event, context):
                     Data=json.dumps({
                         "status": 429,
                         "text": "Too Many Requests",
-                        "error": "maximum number of messages reached"
+                        "error": "maximum number of messages reached",
+                    "action": "sendMessage"
                     }),
                     ConnectionId=event["requestContext"]["connectionId"]
                 )
@@ -73,9 +75,16 @@ def lambda_handler(event, context):
         )
         response2 = table.put_item(Item=response["Item"])
 
+        mssg = {}
+        mssg["status"] = 200
+        mssg["text"] = "Ok"
+        mssg["action"] = "sendMessage"
+        mssg["total"] = 1
+        mssg["chats"] = [response["Item"]]
+
         # MESSAGE TO SAME USER
         apigatewaymanagementapi.post_to_connection(
-            Data=json.dumps(response["Item"]),
+            Data=json.dumps(mssg),
             ConnectionId=event["requestContext"]["connectionId"]
         )
         # MESSAGE TO THE USER
@@ -88,7 +97,7 @@ def lambda_handler(event, context):
             response_connection = table_connection.get_item(Key={"connectionId": connectionId})
             if "Item" in response_connection:
                 apigatewaymanagementapi.post_to_connection(
-                    Data=json.dumps(response["Item"]),
+                    Data=json.dumps(mssg),
                     ConnectionId=connectionId
                 )
 
@@ -111,7 +120,12 @@ def lambda_handler(event, context):
             endpoint_url = "https://" + event["requestContext"]["domainName"] + "/" + event["requestContext"]["stage"]
         )
         apigatewaymanagementapi.post_to_connection(
-            Data=f"Error: {e}",
+            Data=json.dumps({
+                    "status": 500,
+                    "text": "Internal Server Error",
+                    "error": e,
+                    "action": "setEmail"
+                }),
             ConnectionId=event["requestContext"]["connectionId"]
         )
     return {}
