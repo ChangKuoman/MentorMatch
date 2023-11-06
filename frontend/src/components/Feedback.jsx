@@ -1,7 +1,6 @@
 import React from "react";
 import { useState, useEffect } from 'react';
 import "../css/Feedback.css"
-import url from './url.js';
 import Rating from '@mui/material/Rating';
 
 import Logo from "./Logo";
@@ -11,10 +10,7 @@ import BotonHome from '../icons/boton-home.png';
 import LogoLogOut from '../icons/icons8-logout-100.png';
 import LogoUser from '../icons/icons8-user-64.png';
 
-
-const headers = {
-  'Content-Type': 'application/json',
-};
+import { url, headers } from './utils.js'
 
 const getLogOutPosition = () => {
     const logOutElement = document.querySelector(".LogoLogOut");
@@ -130,7 +126,7 @@ const Feedback = () => {
                     {
                     IsOpen &&
                     <div className="modal" style={{left: logOutPosition.x, top:logOutPosition.y}}>
-                   
+
                     <div className="modal-content">
                         <button className="close-modal" onClick={OpenModal}>Cancelar</button>
                         <button onClick={handleLogout}>Cerrar Sesion</button>

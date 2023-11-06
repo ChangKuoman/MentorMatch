@@ -1,11 +1,12 @@
 import React, { useState, useRef } from 'react';
 import ErrorTextForm from './ErrorTextForm';
 import '../css/LoginContent.css';
-import url from './url.js';
 
 import Img_mentor_match from "../icons/mentor-match.png"
 import ojo_cerrado from "../icons/icons8-closed-eye-100.png"
 import ojo_abierto from "../icons/icons8-eye-100.png"
+
+import { url, headers } from './utils.js'
 
 function limpiarDatos(datos) {
   // Elimina caracteres especiales que puedan ser utilizados para inyectar código SQL
@@ -65,9 +66,6 @@ const LoginContent = () => {
     };
 
     console.log(body);
-    const headers = {
-      'Content-Type': 'application/json',
-    };
 
     fetch(url + "/login", {
       method: 'POST',
@@ -90,7 +88,7 @@ const LoginContent = () => {
           localStorage.setItem('isLog', true);
 
           window.location.href = '/home';
-        } 
+        }
         if (data.status === 404){
           setCorreoValido(false);
         }
@@ -100,7 +98,7 @@ const LoginContent = () => {
         if (data.status === 429){
           setManyAttemps(true);
         }
-        
+
       })
       .catch(error => {
         // Muestra un mensaje de error
@@ -112,7 +110,7 @@ const LoginContent = () => {
   const [showPassword, setShowPassword] = useState(false);
   const handleShowPassword = () => {
     setShowPassword(!showPassword);
-  
+
     // Cambia la imagen de ojo cerrado a ojo abierto como una animación
     if (showPassword) {
       const img = document.querySelector(".eye-ac");
@@ -164,7 +162,7 @@ const LoginContent = () => {
                   placeholder = "******************"
                   required
                 />
-                {showPassword ? 
+                {showPassword ?
                   <img onClick={handleShowPassword} className='eye-ac' src={ojo_abierto} alt = "ojo_abierto" /> :
                   <img onClick={handleShowPassword} className='eye-ac' src={ojo_cerrado} alt = "ojo cerrado" />
                 }

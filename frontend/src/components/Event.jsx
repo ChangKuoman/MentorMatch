@@ -5,7 +5,6 @@ import "../css/Event.css"
 import Popup from 'reactjs-popup';
 import 'reactjs-popup/dist/index.css';
 import Rating from '@mui/material/Rating';
-import url from './url.js';
 // https://www.geeksforgeeks.org/how-to-create-popup-box-in-reactjs/
 
 import BotonBack from '../icons/deshacer 1boton-back.png';
@@ -14,6 +13,8 @@ import LogoLogOut from '../icons/icons8-logout-100.png';
 import LogoUser from '../icons/icons8-user-64.png';
 
 import SearchIcon from '../icons/search.png'
+
+import { url, headers } from './utils.js'
 
 const getLogOutPosition = () => {
   const logOutElement = document.querySelector(".LogoLogOut");
@@ -35,10 +36,6 @@ const getLogOutPosition = () => {
   };
 };
 
-
-const headers = {
-  'Content-Type': 'application/json',
-};
 
 const Event = () => {
 
@@ -319,7 +316,7 @@ const Event = () => {
     const accessUser = () => {
       window.location.href = '/user/';
     }
-   
+
     return (
         <div onMouseLeave={handleMouseLeave}>
             <div className="HeaderHome">
@@ -339,7 +336,7 @@ const Event = () => {
                 {
                   IsOpen &&
                   <div className="modal" style={{left: logOutPosition.x, top:logOutPosition.y}}>
-                  
+
                   <div className="modal-content">
                     <button className="close-modal" onClick={OpenModal}>Cancelar</button>
                     <button onClick={handleLogout}>Cerrar Sesion</button>

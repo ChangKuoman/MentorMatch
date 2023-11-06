@@ -2,7 +2,6 @@ import React from "react";
 import { useState, useEffect, useRef } from 'react';
 import Rating from '@mui/material/Rating';
 import "../css/Course.css"
-import url from './url.js';
 
 import Logo from "./Logo";
 
@@ -11,18 +10,7 @@ import BotonHome from '../icons/boton-home.png';
 import LogoLogOut from '../icons/icons8-logout-100.png';
 import LogoUser from '../icons/icons8-user-64.png';
 
-import DefaultPFP from '../icons/user_icon.png'
-import PFP1 from '../icons/1-huevo.png'
-import PFP2 from '../icons/2-cascaron.png'
-import PFP3 from '../icons/3-pollo.png'
-import PFP4 from '../icons/4-pato.png'
-import PFP5 from '../icons/5-ganso.png'
-
-import listaCursos from './cursos'
-
-const headers = {
-    'Content-Type': 'application/json',
-};
+import { url, headers, listaCursos, setQualification, calcularEdad, hallarImagen } from './utils.js';
 
 const getLogOutPosition = () => {
     const logOutElement = document.querySelector(".LogoLogOut");
@@ -92,42 +80,8 @@ const Course = () => {
         fetchData();
         }, []);
 
-    function setQualification(q) {
-        const cant = q[0];
-        const sum = q[1];
-        if (cant == 0){ return 0; }
-        else {
-            return sum / cant;
-        }
-      }
-      function calcularEdad(fechaNacimiento) {
-        // Obtener la fecha actual
-        const fechaActual = new Date();
-
-        // Obtener el año, mes y día de la fecha de nacimiento
-        const añoNacimiento = fechaNacimiento.split("/")[0];
-        const mesNacimiento = fechaNacimiento.split("/")[1];
-        const diaNacimiento = fechaNacimiento.split("/")[2];
-
-        // Obtener el año, mes y día de la fecha actual
-        const añoActual = fechaActual.getFullYear();
-        const mesActual = fechaActual.getMonth() + 1;
-        const diaActual = fechaActual.getDate();
-
-        // Calcular la edad
-        let edad = añoActual - añoNacimiento;
-        if (mesActual < mesNacimiento) {
-          edad--;
-        } else if (mesActual === mesNacimiento && diaActual < diaNacimiento) {
-          edad--;
-        }
-
-        return edad;
-      }
-
       const soundLike = new Audio('like.mp3');
       const soundHate = new Audio('hate.mp3');
-
 
     const Like = () => {
         soundLike.play();
@@ -200,29 +154,11 @@ const Course = () => {
         // Redirige al usuario a /login
         window.location.href = '/';
     };
-  
+
     const accessUser = () => {
         window.location.href = '/user/';
     }
-    
-    function hallarImagen(user) {
-        if (user.photo) {
-            return `data:image/jpeg;base64,${user.photo}`
-        }
-        const q = setQualification(user.qualification);
-        const cant = user.qualification[0];
-        if (q >= 4 && cant >= 30) {
-            return PFP5;
-        } else if (q >= 3 && cant >= 20) {
-            return PFP4;
-        } else if (q >= 2 && cant >= 15) {
-            return PFP3;
-        } else if (q >= 1 && cant >= 10) {
-            return PFP2;
-        } else {
-            return PFP1;
-        }
-    }
+
     return (
         <div onMouseLeave={handleMouseLeave}>
             <div className="HeaderHome">
@@ -242,7 +178,7 @@ const Course = () => {
                     {
                     IsOpen &&
                     <div className="modal" style={{left: logOutPosition.x, top:logOutPosition.y}}>
-                    
+
                     <div className="modal-content">
                         <button className="close-modal" onClick={OpenModal}>Cancelar</button>
                         <button onClick={handleLogout}>Cerrar Sesion</button>

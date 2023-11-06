@@ -1,7 +1,6 @@
 import React, {useState, useEffect} from "react";
 import BotonBack from '../icons/deshacer 1boton-back.png';
 import BotonHome from '../icons/boton-home.png';
-import url from './url.js';
 import '../css/UserPage.css'
 import Rating from '@mui/material/Rating';
 
@@ -12,26 +11,7 @@ import LogoLogOut from '../icons/icons8-logout-100.png';
 import PencilLogo from '../icons/pencil.png'
 import XLogo from '../icons/equis-2.png'
 
-import listaCursos from "./cursos.js";
-
-import PFP1 from '../icons/1-huevo.png'
-import PFP2 from '../icons/2-cascaron.png'
-import PFP3 from '../icons/3-pollo.png'
-import PFP4 from '../icons/4-pato.png'
-import PFP5 from '../icons/5-ganso.png'
-
-const headers = {
-    'Content-Type': 'application/json',
-};
-
-function setQualification(q) {
-    const cant = q[0];
-    const sum = q[1];
-    if (cant == 0){ return 0; }
-    else {
-        return sum / cant;
-    }
-}
+import { url, headers, listaCursos, setQualification, hallarImagen } from './utils.js';
 
 const getLogOutPosition = () => {
     const logOutElement = document.querySelector(".botones-nav");
@@ -41,7 +21,7 @@ const getLogOutPosition = () => {
         y: 0,
       };
     }
-  
+
     const logOutRect = logOutElement.getBoundingClientRect();
     const logOutX = logOutRect.left;
     const logOutY = logOutRect.top;
@@ -204,25 +184,6 @@ const UserPage = () => {
         usuario[0].tags = tagsHabilitadas
     }
 
-    function hallarImagen(user) {
-        if (user.photo) {
-            return `data:image/jpeg;base64,${user.photo}`
-        }
-        const q = setQualification(user.qualification);
-        const cant = user.qualification[0];
-        if (q >= 4 && cant >= 30) {
-            return PFP5;
-        } else if (q >= 3 && cant >= 20) {
-            return PFP4;
-        } else if (q >= 2 && cant >= 15) {
-            return PFP3;
-        } else if (q >= 1 && cant >= 10) {
-            return PFP2;
-        } else {
-            return PFP1;
-        }
-    }
-
     const [selectedFile, setSelectedFile] = useState(null);
     const [imageData, setImageData] = useState('');
 
@@ -287,21 +248,21 @@ const UserPage = () => {
     const accessUser = () => {
         window.location.href = '/user/';
     }
-    
+
     const OpenModal = () => {
         setIsOpen(!IsOpen);
         setLogOutPosition(getLogOutPosition());
     }
-    
+
     const handleLogout = () => {
         // Limpia los datos de la sesión del localstorage
         localStorage.removeItem('user');
         localStorage.removeItem('isLog');
-    
+
         // Redirige al usuario a /login
         window.location.href = '/';
     };
-  
+
     return (
         <div className="UserPage" onMouseLeave={handleMouseLeave}>
             <div className="frame1"></div>

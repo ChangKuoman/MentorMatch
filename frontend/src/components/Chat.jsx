@@ -1,7 +1,6 @@
 import React from "react";
 import { useState, useEffect, useRef, useCallback } from 'react';
 import "../css/Chat.css"
-import url from './url.js';
 
 import Logo from "./Logo";
 import LogoUser from '../icons/icons8-user-64.png';
@@ -11,9 +10,7 @@ import BotonHome from '../icons/boton-home.png';
 
 import LogoEnviar from '../icons/enviar.png'
 
-const headers = {
-  'Content-Type': 'application/json',
-};
+import { url, headers } from './utils.js'
 
 const getLogOutPosition = () => {
   const logOutElement = document.querySelector(".LogoLogOut");
