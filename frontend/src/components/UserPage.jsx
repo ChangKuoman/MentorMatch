@@ -14,7 +14,7 @@ import XLogo from '../icons/equis-2.png'
 import { url, headers, listaCursos, setQualification, hallarImagen } from './utils.js';
 
 const getLogOutPosition = () => {
-    const logOutElement = document.querySelector(".botones-nav");
+    const logOutElement = document.querySelector(".LogoLogOut");
     if (!logOutElement) {
       return {
         x: 0,
@@ -28,7 +28,7 @@ const getLogOutPosition = () => {
     const logOutHeight = logOutRect.height;
     const logOutWidth = logOutRect.width;
     return {
-      x: logOutX - 140 + logOutWidth/2,
+      x: logOutX - 50 + logOutWidth/2,
       y: logOutY + logOutHeight,
     };
 };
@@ -273,8 +273,7 @@ const UserPage = () => {
                 <div className="botones-nav">
                 <img src = {LogoUser}
                     alt="logo user"
-                    hidden
-                    className="LogoLogOut"
+                    className="LogoLogOut hidden"
                     onClick={accessUser}
                 />
                 <img src = {LogoLogOut}
@@ -285,12 +284,12 @@ const UserPage = () => {
                 {
                     IsOpen &&
                     <div className="modal" style={{left: logOutPosition.x, top:logOutPosition.y}}>
-                    <div className="overlay" onClick={OpenModal}></div>
-                    <div className="modal-content">
-                    <button className="close-modal" onClick={OpenModal}>Cancelar</button>
-                    <button onClick={handleLogout}>Cerrar Sesion</button>
+
+                        <div className="modal-content">
+                            <button className="close-modal" onClick={OpenModal}>Cancelar</button>
+                            <button onClick={handleLogout}>Cerrar Sesion</button>
+                        </div>
                     </div>
-                </div>
                 }
                 </div>
             </div>
