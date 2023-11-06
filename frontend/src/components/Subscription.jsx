@@ -12,27 +12,7 @@ import LogoUser from '../icons/icons8-user-64.png';
 
 import CheckLogo from '../icons/check.png'
 import EquisLogo from '../icons/equis.png'
-import { green } from "@mui/material/colors";
-
-const getLogOutPosition = () => {
-    const logOutElement = document.querySelector(".LogoLogOut");
-    if (!logOutElement) {
-      return {
-        x: 0,
-        y: 0,
-      };
-    }
-
-    const logOutRect = logOutElement.getBoundingClientRect();
-    const logOutX = logOutRect.left;
-    const logOutY = logOutRect.top;
-    const logOutHeight = logOutRect.height;
-    const logOutWidth = logOutRect.width;
-    return {
-      x: logOutX - 50 + logOutWidth/2,
-      y: logOutY + logOutHeight,
-    };
-};
+import { getLogOutPosition } from "./utils.js";
 
 const Subscription = () => {
     const [isVisible, setIsVisible] = useState(false);

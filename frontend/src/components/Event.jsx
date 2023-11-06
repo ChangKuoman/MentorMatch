@@ -14,28 +14,7 @@ import LogoUser from '../icons/icons8-user-64.png';
 
 import SearchIcon from '../icons/search.png'
 
-import { url, headers } from './utils.js'
-
-const getLogOutPosition = () => {
-  const logOutElement = document.querySelector(".LogoLogOut");
-  if (!logOutElement) {
-    return {
-      x: 0,
-      y: 0,
-    };
-  }
-
-  const logOutRect = logOutElement.getBoundingClientRect();
-  const logOutX = logOutRect.left;
-  const logOutY = logOutRect.top;
-  const logOutHeight = logOutRect.height;
-  const logOutWidth = logOutRect.width;
-  return {
-    x: logOutX - 50 + logOutWidth/2,
-    y: logOutY + logOutHeight,
-  };
-};
-
+import { url, headers, getLogOutPosition } from './utils.js'
 
 const Event = () => {
 

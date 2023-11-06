@@ -11,27 +11,7 @@ import LogoLogOut from '../icons/icons8-logout-100.png';
 import PencilLogo from '../icons/pencil.png'
 import XLogo from '../icons/equis-2.png'
 
-import { url, headers, listaCursos, setQualification, hallarImagen } from './utils.js';
-
-const getLogOutPosition = () => {
-    const logOutElement = document.querySelector(".LogoLogOut");
-    if (!logOutElement) {
-      return {
-        x: 0,
-        y: 0,
-      };
-    }
-
-    const logOutRect = logOutElement.getBoundingClientRect();
-    const logOutX = logOutRect.left;
-    const logOutY = logOutRect.top;
-    const logOutHeight = logOutRect.height;
-    const logOutWidth = logOutRect.width;
-    return {
-      x: logOutX - 50 + logOutWidth/2,
-      y: logOutY + logOutHeight,
-    };
-};
+import { url, headers, listaCursos, setQualification, hallarImagen, getLogOutPosition } from './utils.js';
 
 
 const UserPage = () => {
