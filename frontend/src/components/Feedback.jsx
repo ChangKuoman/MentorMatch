@@ -14,6 +14,7 @@ import { url, headers, getLogOutPosition } from './utils.js'
 
 
 const Feedback = () => {
+    const [isDisabled, setIsDisabled] = useState(false);
 
     const [comment, setComment] = useState("")
     const [value, setValue] = useState(0)
@@ -24,6 +25,7 @@ const Feedback = () => {
 
     function enviarForm(e) {
         e.preventDefault()
+        setIsDisabled(true);
 
         const user = JSON.parse(localStorage.getItem('user'));
         const email = user.email;
@@ -50,6 +52,9 @@ const Feedback = () => {
                 .catch(error => {
                 });
         }
+        setTimeout(() => {
+            setIsDisabled(false);
+        }, 4000); // 4 seconds
     }
 
     const [isVisible, setIsVisible] = useState(false);
@@ -143,7 +148,7 @@ const Feedback = () => {
                             setValue(newValue);
                         }}
                     />
-                    <button className="boton-feedback" onClick={(e) => enviarForm(e)}>ENVIAR</button>
+                    <button className="boton-feedback" onClick={(e) => enviarForm(e)} disabled={isDisabled}>ENVIAR</button>
                 </form>
                 </div>
 

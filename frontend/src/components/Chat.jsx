@@ -14,6 +14,7 @@ import { url, headers, getLogOutPosition } from './utils.js'
 
 
 const Chat = () => {
+    const [isDisabledButton, setIsDisabledButton] = useState(false);
 
     const [chats, setChats] = useState([])
     const [connection, setConnection] = useState(null);
@@ -160,6 +161,7 @@ const Chat = () => {
     const [inputMsg, setInputMsg] = useState("")
 
     function enviarMsg() {
+      setIsDisabledButton(true);
       if (renderChat.length === 0) {
         alert("Seleccione un chat para enviar un mensaje.")
         return;
@@ -181,7 +183,9 @@ const Chat = () => {
           "uuid": renderChat[0].uuid
         }));
       }
-
+      setTimeout(() => {
+        setIsDisabledButton(false);
+      }, 4000); // 4 seconds
     }
 
     const handleMsg = (event) => {
@@ -304,7 +308,9 @@ const Chat = () => {
                 </div>
                 <div className="contenedor-enviar">
                   <input value={inputMsg} onChange={handleMsg} className="input-texto-chat" type="text" />
-                  <img onClick={enviarMsg} src={LogoEnviar} height={25} width={25}/>
+                  <button onClick={enviarMsg} className="boton-enviar-mensaje" disabled={isDisabledButton}>
+                    <img src={LogoEnviar} height={25} width={25}/>
+                  </button>
                 </div>
               </div>
             </div>

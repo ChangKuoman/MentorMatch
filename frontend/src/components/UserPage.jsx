@@ -15,6 +15,9 @@ import { url, headers, listaCursos, setQualification, hallarImagen, getLogOutPos
 
 
 const UserPage = () => {
+    const [isDisabledD, setIsDisabledD] = useState(false);
+    const [isDisabledT, setIsDisabledT] = useState(false);
+
     const [tagsHabilitadas, setTagsHabilitadas] = useState([])
     const [tagsDeshabilitadas, setTagsDeshabilitadas] = useState(listaCursos)
 
@@ -51,6 +54,7 @@ const UserPage = () => {
         setDescripcion(e.target.value)
     }
     const cambiarDescripcion = () => {
+        setIsDisabledD(true);
         const user = JSON.parse(localStorage.getItem('user'));
         const email = user.email;
 
@@ -71,6 +75,9 @@ const UserPage = () => {
             })
             .catch(error => {
             });
+        setTimeout(() => {
+            setIsDisabledD(false);
+        }, 4000); // 4 seconds
     }
     // Manejador del evento `onMouseEnter` del elemento `.frame2`
     const handleMouseEnter = () => {
@@ -128,6 +135,7 @@ const UserPage = () => {
         setTagsHabilitadas([...tagsHabilitadas, tag]);
     }
     const cambiarTags = () => {
+        setIsDisabledT(true);
         const user = JSON.parse(localStorage.getItem('user'));
         const email = user.email;
 
@@ -162,6 +170,9 @@ const UserPage = () => {
             .catch(error => {
             });
         usuario[0].tags = tagsHabilitadas
+        setTimeout(() => {
+            setIsDisabledT(false);
+        }, 4000); // 4 seconds
     }
 
     const [selectedFile, setSelectedFile] = useState(null);
@@ -329,7 +340,7 @@ const UserPage = () => {
                         <img className="cerrar-modal" onClick={cerrarModalD} src={XLogo} width={20} height={20} />
                         <div className="modal-derecha">
                             <textarea className="textarea-modal-descripcion" onChange={manejarCambioDescripcion} value={descripcion}></textarea>
-                            <button className="boton-modal-descripcion" onClick={cambiarDescripcion}>Guardar</button>
+                            <button className="boton-modal-descripcion" onClick={cambiarDescripcion} disabled={isDisabledD}>Guardar</button>
                         </div>
                    </div>
                 </div>
@@ -366,7 +377,7 @@ const UserPage = () => {
                                     }
                                 </div>
                             </div>
-                            <button className="boton-modal-descripcion" onClick={cambiarTags}>GUARDAR</button>
+                            <button className="boton-modal-descripcion" onClick={cambiarTags} disabled={isDisabledT}>GUARDAR</button>
                         </div>
                     </div>
                 </div>

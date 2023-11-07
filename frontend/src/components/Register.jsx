@@ -9,6 +9,7 @@ import ojo_abierto from "../icons/icons8-eye-100.png"
 import { url, headers } from './utils.js'
 
 const Register = () => {
+    const [isDisabled, setIsDisabled] = useState(false);
 
     const [email, setEmail] = useState("")
     const [name, setName] = useState("")
@@ -141,6 +142,7 @@ const Register = () => {
 
       const handleSubmit = (event) => {
         event.preventDefault();
+        setIsDisabled(true);
         // INCORRECT INPUTS
         if (inputsCorrect())  {
             // FORMAT TO FETCH
@@ -178,6 +180,9 @@ const Register = () => {
                 .catch(error => {
                 });
         }
+        setTimeout(() => {
+            setIsDisabled(false);
+        }, 4000); // 4 seconds
     };
 
     // logica para el ojito
@@ -309,7 +314,7 @@ const Register = () => {
                 {
                     !terminosValid && <p className="error-form-text">Aceptar términos y condiciones</p>
                 }
-                <button className="boton-register" type="submit">Enviar</button>
+                <button className="boton-register" type="submit" disabled={isDisabled}>Enviar</button>
                 </form>
             </div>
             <div className="panel-login">

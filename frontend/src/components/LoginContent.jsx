@@ -21,6 +21,7 @@ function limpiarDatos(datos) {
 }
 
 const LoginContent = () => {
+  const [isDisabled, setIsDisabled] = useState(false);
   // Define estados para el correo y la contraseña
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
@@ -49,6 +50,7 @@ const LoginContent = () => {
   // Función para manejar el envío del formulario
   const handleSubmit = (e) => {
     e.preventDefault();
+    setIsDisabled(true);
     // validacion si está ingresando un correo
     if (!email.trim()) {
       alert('Debe ingresar un correo electrónico.');
@@ -98,12 +100,14 @@ const LoginContent = () => {
         if (data.status === 429){
           setManyAttemps(true);
         }
-
       })
       .catch(error => {
         // Muestra un mensaje de error
         alert(error);
       });
+      setTimeout(() => {
+        setIsDisabled(false);
+      }, 4000); // 4 seconds
   };
 
   // logica para el ojito
@@ -169,14 +173,14 @@ const LoginContent = () => {
               </div>
             </div>
             <ErrorTextForm texto="Contraseña incorrecta" boolean={ contrasenaValida }/>
-            <button className='btn' type="submit">INICIAR SESIÓN</button>
+            <button className='btn' type="submit" disabled={isDisabled}>INICIAR SESIÓN</button>
           </form>
           <ErrorTextForm texto="Has realizado muchos intentos. Intentalo de nuevo en 1 hora" boolean={!manyAttemps}/>
           <div className="form-footer">
             <div className="login-form-diveder">
               <p className="text-diveder">o</p>
             </div>
-            <p className="text-form-footer">Aun no te has registrado? <a href='/register' onClick={handleRegistrarse}>Registrate aquí</a></p>
+            <p className="text-form-footer">Aun no te has registrado? <a className="texto-registrate-aqui" href='/register' onClick={handleRegistrarse}>Registrate aquí</a></p>
           </div>
         </div>
         <div className="panel-login">
