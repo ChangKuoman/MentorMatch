@@ -1,5 +1,5 @@
 import React from 'react';
-import LOGO from '../icons/LogoBlanco-removebg-preview.png';
+import LOGO from '../icons/LogoBlanco-removebg-preview2.png';
 import '../css/header.css';
 
 const Logo = () => {

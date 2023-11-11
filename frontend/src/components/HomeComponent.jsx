@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import Logo from "./Logo";
+import SoporteBtn from "./SoporteBtn";
 import "../css/HomeComponent.css"
 
 import LogoUser from '../icons/icons8-user-64.png';
@@ -51,6 +52,17 @@ const HomeComponent = () => {
 
   const accessSubs = () => {
     window.location.href = '/subscripciones';
+  }
+
+  const [openSoporte, setOpenSoporte] = useState(false);
+
+  const modalSoporte = () => {
+    setOpenSoporte(!openSoporte);
+  };
+
+  const goMentoMatchWhatsApp = async () => {
+    const url = 'https://wa.me/message/UXZOS5GAVXXNA1';
+    window.open(url, "_blank");
   }
 
   return (
@@ -114,6 +126,7 @@ const HomeComponent = () => {
       <div className="premiun-bar" onClick={accessSubs}>
         <p>Pásate a Premium</p>
       </div>
+      <SoporteBtn />
     </div>
   );
 };
