@@ -3,6 +3,8 @@ import Logo from "./Logo";
 import SoporteBtn from "./SoporteBtn";
 import "../css/HomeComponent.css"
 
+import Advertisement from "./Advertisement";
+
 import LogoUser from '../icons/icons8-user-64.png';
 import LogoMessage from '../icons/icon-messages.png'
 import LogoReservas from '../icons/icons8-calendario-64 (1).png';
@@ -127,6 +129,7 @@ const HomeComponent = () => {
         <p>Pásate a Premium</p>
       </div>
       <SoporteBtn />
+      <Advertisement />
     </div>
   );
 };

@@ -272,7 +272,7 @@ select.classic:focus {
     margin: 0;
     padding: 0;
     width: auto;
-    left: 30%;
+    left: 35%;
     height: 80%;
 }
 .Open-nave{
@@ -359,4 +359,50 @@ select.classic:focus {
 
 .no-click {
     pointer-events: none;
+}
+
+@media screen and (max-width: 1150px) {
+    .carrusel-perfiles{
+        left: 28% !important;
+    }
+    .card{
+        overflow: scroll;
+    }
+}
+
+@media screen and (max-width: 700px) {
+    .carrusel-perfiles{
+        top: 23%;
+        width: 100%;
+        height: auto;
+        display: flex;
+        left: 0 !important;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
+    }
+    .contenedor-filtro{
+        width: auto;
+    }
+    
+}
+
+@media screen and (max-width:450px) {
+    .classic{
+        width: 200px;
+    }
+    .texto-filtro{
+        width: 60px;
+        font-size: 15px;
+        height: auto;
+    }
+    .card{
+        overflow: scroll;
+    }
+}
+
+@media screen and (max-width:330px) {
+    .carrusel-perfiles{
+        top: 27%;
+    }
 }
