@@ -48,7 +48,7 @@
     top: 22%;
 
     width: 98%;
-    height: 60%;
+    height: 70%;
     margin: 0;
 
     display: flex;
@@ -136,6 +136,56 @@
     margin: 0;
 }
 
+.modal-pago-overlay-ac{
+    position: absolute;
+    height: 100%;
+    width: 100%;
+    left: 0;
+    top: 0;
+    margin: 0;
+    padding: 0;
+    background: rgb(0, 0, 0, 0.8);
+
+    z-index: 12 !important;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.cerrar-modal-pago-ac{
+    width: 20px;
+}
+
+.qr-plin-ac{
+    margin: 2px;
+    width: 50%;
+}
+
+.modal-pago-container-ac{
+    background: whitesmoke;
+    width: 40%;
+    height: 80%;
+    margin: 0;
+    padding: 20px;
+    border-radius: 10px;
+
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: center;
+}
+
+.modal-pago-detalles-ac{
+    margin: 0;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    overflow: scroll;
+}
+
 @media screen and (max-width: 500px) {
     .contenedor-subscription{
         top: 25%;
@@ -153,6 +203,15 @@
     }
     .precio{
         font-size: 40px;
+    }
+    .modal-pago-container-ac{
+        width: 80%;
+    }
+    .modal-pago-detalles-ac{
+        justify-content:flex-start;
+    }
+    .qr-plin-ac{
+        width: 100%;
     }
 }
 

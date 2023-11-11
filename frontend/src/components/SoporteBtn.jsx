@@ -6,7 +6,6 @@ import BtnCorreo from '../icons/LogoBlanco-removebg-preview.png'
 import '../css/SoporteBtn.css'
 
 const SoporteBtn = () => {
-    const [openSoporte, setOpenSoporte] = useState(false);
     
     const goMentoMatchWhatsApp = async () => {
         const url = 'https://wa.me/message/UXZOS5GAVXXNA1';

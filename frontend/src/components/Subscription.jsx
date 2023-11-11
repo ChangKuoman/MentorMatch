@@ -9,6 +9,9 @@ import BotonBack from '../icons/deshacer 1boton-back.png';
 import BotonHome from '../icons/boton-home.png';
 import LogoLogOut from '../icons/icons8-logout-100.png';
 import LogoUser from '../icons/icons8-user-64.png';
+import CloseModal from '../icons/icons8-close-100.png';
+import QRPlin from '../icons/qrplin-anderson.png'
+import BtnWhatsApp from '../icons/icons8-whatsapp-64.png';
 
 import CheckLogo from '../icons/check.png'
 import EquisLogo from '../icons/equis.png'
@@ -73,6 +76,17 @@ const Subscription = () => {
           return <p className="precio">S/. {precioMensual}</p>;
         }
       };
+
+    const [modalPago, setModalPago] = useState(false);
+
+    const pagar = () => {
+        setModalPago(!modalPago);
+    }
+
+    const goMentoMatchWhatsApp = async () => {
+        const url = 'https://wa.me/message/UXZOS5GAVXXNA1';
+        window.open(url, "_blank");
+    }
 
     return (
         <div onMouseLeave={handleMouseLeave}>
@@ -166,6 +180,22 @@ const Subscription = () => {
                                 <img className="imagen" src={EquisLogo} width={50} height={50}/>
                                 <div>Mayor acceso a nuestros Star Mentors</div>
                             </div>
+                            <div className="contenedor-boton-subscription">
+                                <button onClick={pagar} className="boton-adquirir">COMPRAR</button>
+                            </div>
+                            {modalPago && 
+                            <div className="modal-pago-overlay-ac">
+                                <div className="modal-pago-container-ac">
+                                    <img className='cerrar-modal-pago-ac' onClick={pagar} src={CloseModal} alt="close modal pago" />
+                                    <div className="modal-pago-detalles-ac">
+                                        <p>Por el momento los pagos se harán a través de plin. Gracias</p>
+                                        <img className="qr-plin-ac" src={QRPlin} alt="qr-plin-ac" />
+                                        <p>Contacto con nosotros para verificar tu pago</p>
+                                        <img onClick={goMentoMatchWhatsApp} src={BtnWhatsApp} alt="btn-whatsapp-soporte" />
+                                    </div>
+                                </div>
+                            </div>
+                            }
                         </div>
                     </div>
                     <div className="contenedor-subscription-intermedio">
