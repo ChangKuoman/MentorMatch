@@ -52,7 +52,7 @@ div {
 .contenedor-formulario {
   position: absolute;
   width: 35%;
-  height: 70%;
+  height: auto;
   top: 28%;
   left: 2%;
   display: flex;
