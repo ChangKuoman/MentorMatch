@@ -1,7 +1,6 @@
 import React from "react";
 import { useState, useEffect, useRef, useCallback } from 'react';
 import "../css/Chat.css"
-import url from './url.js';
 
 import Logo from "./Logo";
 import LogoUser from '../icons/icons8-user-64.png';
@@ -11,31 +10,11 @@ import BotonHome from '../icons/boton-home.png';
 
 import LogoEnviar from '../icons/enviar.png'
 
-const headers = {
-  'Content-Type': 'application/json',
-};
+import { url, headers, getLogOutPosition } from './utils.js'
 
-const getLogOutPosition = () => {
-  const logOutElement = document.querySelector(".LogoLogOut");
-  if (!logOutElement) {
-    return {
-      x: 0,
-      y: 0,
-    };
-  }
-
-  const logOutRect = logOutElement.getBoundingClientRect();
-  const logOutX = logOutRect.left;
-  const logOutY = logOutRect.top;
-  const logOutHeight = logOutRect.height;
-  const logOutWidth = logOutRect.width;
-  return {
-    x: logOutX - 50 + logOutWidth/2,
-    y: logOutY + logOutHeight,
-  };
-};
 
 const Chat = () => {
+    const [isDisabledButton, setIsDisabledButton] = useState(false);
 
     const [chats, setChats] = useState([])
     const [connection, setConnection] = useState(null);
@@ -182,6 +161,7 @@ const Chat = () => {
     const [inputMsg, setInputMsg] = useState("")
 
     function enviarMsg() {
+      setIsDisabledButton(true);
       if (renderChat.length === 0) {
         alert("Seleccione un chat para enviar un mensaje.")
         return;
@@ -203,7 +183,9 @@ const Chat = () => {
           "uuid": renderChat[0].uuid
         }));
       }
-
+      setTimeout(() => {
+        setIsDisabledButton(false);
+      }, 4000); // 4 seconds
     }
 
     const handleMsg = (event) => {
@@ -326,7 +308,9 @@ const Chat = () => {
                 </div>
                 <div className="contenedor-enviar">
                   <input value={inputMsg} onChange={handleMsg} className="input-texto-chat" type="text" />
-                  <img onClick={enviarMsg} src={LogoEnviar} height={25} width={25}/>
+                  <button onClick={enviarMsg} className="boton-enviar-mensaje" disabled={isDisabledButton}>
+                    <img src={LogoEnviar} height={25} width={25}/>
+                  </button>
                 </div>
               </div>
             </div>

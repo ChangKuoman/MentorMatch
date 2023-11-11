@@ -8,26 +8,8 @@ import LogoReservas from '../icons/icons8-calendario-64 (1).png';
 import LogoCurses from '../icons/icons8-assignment-64.png';
 import LogoRating from '../icons/icons8-calificación-48.png';
 import LogoLogOut from '../icons/icons8-logout-100.png';
+import { getLogOutPosition } from "./utils.js";
 
-const getLogOutPosition = () => {
-  const logOutElement = document.querySelector(".LogoLogOut");
-  if (!logOutElement) {
-    return {
-      x: 0,
-      y: 0,
-    };
-  }
-
-  const logOutRect = logOutElement.getBoundingClientRect();
-  const logOutX = logOutRect.left;
-  const logOutY = logOutRect.top;
-  const logOutHeight = logOutRect.height;
-  const logOutWidth = logOutRect.width;
-  return {
-    x: logOutX - 50 + logOutWidth/2,
-    y: logOutY + logOutHeight,
-  };
-};
 
 const HomeComponent = () => {
   const [IsOpen, setIsOpen] = useState(false);
@@ -92,7 +74,7 @@ const HomeComponent = () => {
           {
             IsOpen &&
             <div className="modal" style={{left: logOutPosition.x, top:logOutPosition.y}}>
-            
+
             <div className="modal-content">
               <button className="close-modal" onClick={OpenModal}>Cancelar</button>
               <button onClick={handleLogout}>Cerrar Sesion</button>

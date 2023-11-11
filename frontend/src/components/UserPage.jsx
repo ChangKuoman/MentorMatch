@@ -1,7 +1,6 @@
 import React, {useState, useEffect} from "react";
 import BotonBack from '../icons/deshacer 1boton-back.png';
 import BotonHome from '../icons/boton-home.png';
-import url from './url.js';
 import '../css/UserPage.css'
 import Rating from '@mui/material/Rating';
 
@@ -12,49 +11,13 @@ import LogoLogOut from '../icons/icons8-logout-100.png';
 import PencilLogo from '../icons/pencil.png'
 import XLogo from '../icons/equis-2.png'
 
-import listaCursos from "./cursos.js";
-
-import PFP1 from '../icons/1-huevo.png'
-import PFP2 from '../icons/2-cascaron.png'
-import PFP3 from '../icons/3-pollo.png'
-import PFP4 from '../icons/4-pato.png'
-import PFP5 from '../icons/5-ganso.png'
-
-const headers = {
-    'Content-Type': 'application/json',
-};
-
-function setQualification(q) {
-    const cant = q[0];
-    const sum = q[1];
-    if (cant == 0){ return 0; }
-    else {
-        return sum / cant;
-    }
-}
-
-const getLogOutPosition = () => {
-    const logOutElement = document.querySelector(".botones-nav");
-    if (!logOutElement) {
-      return {
-        x: 0,
-        y: 0,
-      };
-    }
-  
-    const logOutRect = logOutElement.getBoundingClientRect();
-    const logOutX = logOutRect.left;
-    const logOutY = logOutRect.top;
-    const logOutHeight = logOutRect.height;
-    const logOutWidth = logOutRect.width;
-    return {
-      x: logOutX - 140 + logOutWidth/2,
-      y: logOutY + logOutHeight,
-    };
-};
+import { url, headers, listaCursos, setQualification, hallarImagen, getLogOutPosition } from './utils.js';
 
 
 const UserPage = () => {
+    const [isDisabledD, setIsDisabledD] = useState(false);
+    const [isDisabledT, setIsDisabledT] = useState(false);
+
     const [tagsHabilitadas, setTagsHabilitadas] = useState([])
     const [tagsDeshabilitadas, setTagsDeshabilitadas] = useState(listaCursos)
 
@@ -91,6 +54,7 @@ const UserPage = () => {
         setDescripcion(e.target.value)
     }
     const cambiarDescripcion = () => {
+        setIsDisabledD(true);
         const user = JSON.parse(localStorage.getItem('user'));
         const email = user.email;
 
@@ -111,6 +75,9 @@ const UserPage = () => {
             })
             .catch(error => {
             });
+        setTimeout(() => {
+            setIsDisabledD(false);
+        }, 4000); // 4 seconds
     }
     // Manejador del evento `onMouseEnter` del elemento `.frame2`
     const handleMouseEnter = () => {
@@ -168,6 +135,7 @@ const UserPage = () => {
         setTagsHabilitadas([...tagsHabilitadas, tag]);
     }
     const cambiarTags = () => {
+        setIsDisabledT(true);
         const user = JSON.parse(localStorage.getItem('user'));
         const email = user.email;
 
@@ -202,25 +170,9 @@ const UserPage = () => {
             .catch(error => {
             });
         usuario[0].tags = tagsHabilitadas
-    }
-
-    function hallarImagen(user) {
-        if (user.photo) {
-            return `data:image/jpeg;base64,${user.photo}`
-        }
-        const q = setQualification(user.qualification);
-        const cant = user.qualification[0];
-        if (q >= 4 && cant >= 30) {
-            return PFP5;
-        } else if (q >= 3 && cant >= 20) {
-            return PFP4;
-        } else if (q >= 2 && cant >= 15) {
-            return PFP3;
-        } else if (q >= 1 && cant >= 10) {
-            return PFP2;
-        } else {
-            return PFP1;
-        }
+        setTimeout(() => {
+            setIsDisabledT(false);
+        }, 4000); // 4 seconds
     }
 
     const [selectedFile, setSelectedFile] = useState(null);
@@ -287,21 +239,21 @@ const UserPage = () => {
     const accessUser = () => {
         window.location.href = '/user/';
     }
-    
+
     const OpenModal = () => {
         setIsOpen(!IsOpen);
         setLogOutPosition(getLogOutPosition());
     }
-    
+
     const handleLogout = () => {
         // Limpia los datos de la sesión del localstorage
         localStorage.removeItem('user');
         localStorage.removeItem('isLog');
-    
+
         // Redirige al usuario a /login
         window.location.href = '/';
     };
-  
+
     return (
         <div className="UserPage" onMouseLeave={handleMouseLeave}>
             <div className="frame1"></div>
@@ -312,8 +264,7 @@ const UserPage = () => {
                 <div className="botones-nav">
                 <img src = {LogoUser}
                     alt="logo user"
-                    hidden
-                    className="LogoLogOut"
+                    className="LogoLogOut hidden"
                     onClick={accessUser}
                 />
                 <img src = {LogoLogOut}
@@ -324,12 +275,12 @@ const UserPage = () => {
                 {
                     IsOpen &&
                     <div className="modal" style={{left: logOutPosition.x, top:logOutPosition.y}}>
-                    <div className="overlay" onClick={OpenModal}></div>
-                    <div className="modal-content">
-                    <button className="close-modal" onClick={OpenModal}>Cancelar</button>
-                    <button onClick={handleLogout}>Cerrar Sesion</button>
+
+                        <div className="modal-content">
+                            <button className="close-modal" onClick={OpenModal}>Cancelar</button>
+                            <button onClick={handleLogout}>Cerrar Sesion</button>
+                        </div>
                     </div>
-                </div>
                 }
                 </div>
             </div>
@@ -389,7 +340,7 @@ const UserPage = () => {
                         <img className="cerrar-modal" onClick={cerrarModalD} src={XLogo} width={20} height={20} />
                         <div className="modal-derecha">
                             <textarea className="textarea-modal-descripcion" onChange={manejarCambioDescripcion} value={descripcion}></textarea>
-                            <button className="boton-modal-descripcion" onClick={cambiarDescripcion}>Guardar</button>
+                            <button className="boton-modal-descripcion" onClick={cambiarDescripcion} disabled={isDisabledD}>Guardar</button>
                         </div>
                    </div>
                 </div>
@@ -426,7 +377,7 @@ const UserPage = () => {
                                     }
                                 </div>
                             </div>
-                            <button className="boton-modal-descripcion" onClick={cambiarTags}>GUARDAR</button>
+                            <button className="boton-modal-descripcion" onClick={cambiarTags} disabled={isDisabledT}>GUARDAR</button>
                         </div>
                     </div>
                 </div>
