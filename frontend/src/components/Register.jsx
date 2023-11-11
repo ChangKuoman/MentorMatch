@@ -1,17 +1,15 @@
 import React from "react";
 import { useState, useEffect } from 'react';
 import "../css/Register.css"
-import url from './url.js';
 
 import Img_mentor_match from "../icons/mentor-match.png"
 import ojo_cerrado from "../icons/icons8-closed-eye-100.png"
 import ojo_abierto from "../icons/icons8-eye-100.png"
 
-const headers = {
-  'Content-Type': 'application/json',
-};
+import { url, headers } from './utils.js'
 
 const Register = () => {
+    const [isDisabled, setIsDisabled] = useState(false);
 
     const [email, setEmail] = useState("")
     const [name, setName] = useState("")
@@ -31,7 +29,7 @@ const Register = () => {
     const [documentNroValid, setDocumentNroValid] = useState(true)
     const [passwordValid, setPasswordValid] = useState(true)
     const [confirmPasswordValid, setConfirmPasswordValid] = useState(true)
-    const [birthDateValid, setBirthDateValid] = useState(true)    
+    const [birthDateValid, setBirthDateValid] = useState(true)
 
     const handleChange = (event) => {
         setEmailValid(true)
@@ -144,6 +142,7 @@ const Register = () => {
 
       const handleSubmit = (event) => {
         event.preventDefault();
+        setIsDisabled(true);
         // INCORRECT INPUTS
         if (inputsCorrect())  {
             // FORMAT TO FETCH
@@ -181,13 +180,16 @@ const Register = () => {
                 .catch(error => {
                 });
         }
+        setTimeout(() => {
+            setIsDisabled(false);
+        }, 4000); // 4 seconds
     };
 
     // logica para el ojito
     const [showPassword, setShowPassword] = useState(false);
     const handleShowPassword = () => {
         setShowPassword(!showPassword);
-    
+
         // Cambia la imagen de ojo cerrado a ojo abierto como una animación
         if (showPassword) {
         const img = document.querySelector(".eye-ac");
@@ -274,7 +276,7 @@ const Register = () => {
                         placeholder="***"
                         onChange={handleChange}
                     />
-                    {showPassword ? 
+                    {showPassword ?
                     <img onClick={handleShowPassword} className='eye-ac' src={ojo_abierto} alt = "ojo_abierto" /> :
                     <img onClick={handleShowPassword} className='eye-ac' src={ojo_cerrado} alt = "ojo cerrado" />
                     }
@@ -312,7 +314,7 @@ const Register = () => {
                 {
                     !terminosValid && <p className="error-form-text">Aceptar términos y condiciones</p>
                 }
-                <button className="boton-register" type="submit">Enviar</button>
+                <button className="boton-register" type="submit" disabled={isDisabled}>Enviar</button>
                 </form>
             </div>
             <div className="panel-login">

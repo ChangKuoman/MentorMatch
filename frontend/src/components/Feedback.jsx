@@ -1,7 +1,6 @@
 import React from "react";
 import { useState, useEffect } from 'react';
 import "../css/Feedback.css"
-import url from './url.js';
 import Rating from '@mui/material/Rating';
 
 import Logo from "./Logo";
@@ -11,33 +10,11 @@ import BotonHome from '../icons/boton-home.png';
 import LogoLogOut from '../icons/icons8-logout-100.png';
 import LogoUser from '../icons/icons8-user-64.png';
 
-
-const headers = {
-  'Content-Type': 'application/json',
-};
-
-const getLogOutPosition = () => {
-    const logOutElement = document.querySelector(".LogoLogOut");
-    if (!logOutElement) {
-      return {
-        x: 0,
-        y: 0,
-      };
-    }
-
-    const logOutRect = logOutElement.getBoundingClientRect();
-    const logOutX = logOutRect.left;
-    const logOutY = logOutRect.top;
-    const logOutHeight = logOutRect.height;
-    const logOutWidth = logOutRect.width;
-    return {
-      x: logOutX - 50 + logOutWidth/2,
-      y: logOutY + logOutHeight,
-    };
-};
+import { url, headers, getLogOutPosition } from './utils.js'
 
 
 const Feedback = () => {
+    const [isDisabled, setIsDisabled] = useState(false);
 
     const [comment, setComment] = useState("")
     const [value, setValue] = useState(0)
@@ -48,6 +25,7 @@ const Feedback = () => {
 
     function enviarForm(e) {
         e.preventDefault()
+        setIsDisabled(true);
 
         const user = JSON.parse(localStorage.getItem('user'));
         const email = user.email;
@@ -74,6 +52,9 @@ const Feedback = () => {
                 .catch(error => {
                 });
         }
+        setTimeout(() => {
+            setIsDisabled(false);
+        }, 4000); // 4 seconds
     }
 
     const [isVisible, setIsVisible] = useState(false);
@@ -130,7 +111,7 @@ const Feedback = () => {
                     {
                     IsOpen &&
                     <div className="modal" style={{left: logOutPosition.x, top:logOutPosition.y}}>
-                   
+
                     <div className="modal-content">
                         <button className="close-modal" onClick={OpenModal}>Cancelar</button>
                         <button onClick={handleLogout}>Cerrar Sesion</button>
@@ -167,7 +148,7 @@ const Feedback = () => {
                             setValue(newValue);
                         }}
                     />
-                    <button className="boton-feedback" onClick={(e) => enviarForm(e)}>ENVIAR</button>
+                    <button className="boton-feedback" onClick={(e) => enviarForm(e)} disabled={isDisabled}>ENVIAR</button>
                 </form>
                 </div>
 

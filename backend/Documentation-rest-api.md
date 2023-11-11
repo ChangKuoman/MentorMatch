@@ -28,12 +28,13 @@
 
 - [Endpoints Chat](#endpoints-user)
     - [/get-chats](#get-chats)
+    - [/put-chat](#put-chat)
 
 ## Introduction
 
 Headers: **Content-Type: application/json**
 
-API link: https://oo3m2to3bi.execute-api.us-east-1.amazonaws.com/test
+API link: https://fnac3oh84b.execute-api.us-east-1.amazonaws.com/prod
 
 ## Endpoints User
 
@@ -638,7 +639,8 @@ Payload:
 | :-- | :-- | --: |
 | chat | string | |
 | message | string | |
-| user | string | |
+| to | string | |
+| fr | string | |
 
 Response Examples:
 

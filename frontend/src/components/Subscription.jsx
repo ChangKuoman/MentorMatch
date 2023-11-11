@@ -1,8 +1,7 @@
 import React from "react";
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import "../css/Subscription.css"
 import "../css/Course.css"
-import url from './url.js';
 
 import Logo from "./Logo";
 
@@ -13,31 +12,7 @@ import LogoUser from '../icons/icons8-user-64.png';
 
 import CheckLogo from '../icons/check.png'
 import EquisLogo from '../icons/equis.png'
-import { green } from "@mui/material/colors";
-
-const headers = {
-  'Content-Type': 'application/json',
-};
-
-const getLogOutPosition = () => {
-    const logOutElement = document.querySelector(".LogoLogOut");
-    if (!logOutElement) {
-      return {
-        x: 0,
-        y: 0,
-      };
-    }
-
-    const logOutRect = logOutElement.getBoundingClientRect();
-    const logOutX = logOutRect.left;
-    const logOutY = logOutRect.top;
-    const logOutHeight = logOutRect.height;
-    const logOutWidth = logOutRect.width;
-    return {
-      x: logOutX - 50 + logOutWidth/2,
-      y: logOutY + logOutHeight,
-    };
-};
+import { getLogOutPosition } from "./utils.js";
 
 const Subscription = () => {
     const [isVisible, setIsVisible] = useState(false);
@@ -86,7 +61,7 @@ const Subscription = () => {
     const SwitchMensualAnual = ({ switchAnual, precioMensual }) => {
         const precioAnual = precioMensual * 12;
         const descuentoAnual = precioAnual * 0.1;
-      
+
         if (switchAnual) {
           return (
             <>
@@ -118,7 +93,7 @@ const Subscription = () => {
                     {
                     IsOpen &&
                     <div className="modal" style={{left: logOutPosition.x, top:logOutPosition.y}}>
-                        
+
                         <div className="modal-content">
                             <button className="close-modal" onClick={OpenModal}>Cancelar</button>
                             <button onClick={handleLogout}>Cerrar Sesion</button>

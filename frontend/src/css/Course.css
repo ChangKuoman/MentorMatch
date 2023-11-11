@@ -39,7 +39,7 @@ h1{
     max-width: 85vw;
     padding:20px;
     height:250px;
-    box-shadow:0px 18px 53px 0px rgba(0,0,0,0.3);
+    border: solid 2px grey;
     border-radius:20px;
     background-size: cover;
     background-position:center;
@@ -355,4 +355,8 @@ select.classic:focus {
     border-color: #157499;
 
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+
+.no-click {
+    pointer-events: none;
 }

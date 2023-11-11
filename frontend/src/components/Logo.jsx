@@ -1,10 +1,10 @@
 import React from 'react';
-import logo from '../css/LogoBlanco-removebg-preview.png';
+import LOGO from '../icons/LogoBlanco-removebg-preview2.png';
 import '../css/header.css';
 
 const Logo = () => {
     return (
-      <img src={logo} alt="Logo MentorMatch" className='logo'/>
+      <img src={LOGO} alt="Logo Mentor Match" className='logo'/>
     );
 };
 

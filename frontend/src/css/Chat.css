@@ -138,3 +138,10 @@
 .contenedor-email-mensajes {
     width: 100%;
 }
+
+.boton-enviar-mensaje {
+    padding: 0;
+    border: none;
+    margin: 0;
+    background-color: transparent;
+}

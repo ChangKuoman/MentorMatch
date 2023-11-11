@@ -128,7 +128,7 @@ html {
   height: 10%;
   padding: 0;
   margin: 0;
-  
+
   display: flex;
   justify-content: center;
   align-items: center;
@@ -191,7 +191,7 @@ html {
   border-radius: 5px;
 
   font-family: Bree Serif;
-  
+
   display: flex;
   justify-content: center;
   align-items: center;
@@ -275,7 +275,7 @@ html {
   padding: 0;
   margin: 0;
   width: 100%;
-  height: 90%;  
+  height: 90%;
 }
 .mentor-match-title{
   font-family: Bree Serif;
@@ -379,7 +379,7 @@ html {
     width: 100%;
     margin: 0;
   }
-  
+
   .title2{
     font-size: 20px;
   }
@@ -396,7 +396,7 @@ html {
     padding: 2%;
     top: 73%;
   }
-  
+
   .inf-mentor-match{
     flex-direction: column;
     width: 80%;
@@ -440,7 +440,7 @@ html {
     width: 100%;
     margin: 0;
   }
-  
+
   .title2{
     font-size: 20px;
   }
@@ -457,7 +457,7 @@ html {
     padding: 2%;
     top: 73%;
   }
-  
+
   .inf-mentor-match{
     flex-direction: column;
     width: 80%;
@@ -472,4 +472,8 @@ html {
   .inf-bloque{
     width: 90%;
   }
+}
+
+.texto-registrate-aqui {
+  color: black;
 }

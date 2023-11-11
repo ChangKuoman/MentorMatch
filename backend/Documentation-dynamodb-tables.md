@@ -23,6 +23,8 @@ Table Name: **mentor-match-user**
 | document | list | [documentType: string, documentNro: string] |
 | password | string | hashed password |
 | connectionId | string | |
+| interactions | int | 0 <= n <= 5|
+| creationDate | string | date |
 
 ## Table User Data
 
@@ -42,6 +44,9 @@ Table Name: **mentor-match-user-data**
 | photo | string | |
 | events-r | list | contais strings |
 | events-g | list | contais strings |
+| plan | string | free, premium, vip |
+| planDateV | string | date |
+| superuser | bool | |
 
 ## Table Qualification
 

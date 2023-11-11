@@ -1,7 +1,6 @@
 import React from "react";
-import { useState, useEffect, useRef } from 'react';
+import { useState, useEffect, useRef, useCallback } from 'react';
 import "../css/Chat.css"
-import url from './url.js';
 
 import Logo from "./Logo";
 import LogoUser from '../icons/icons8-user-64.png';
@@ -11,33 +10,26 @@ import BotonHome from '../icons/boton-home.png';
 
 import LogoEnviar from '../icons/enviar.png'
 
-const headers = {
-  'Content-Type': 'application/json',
-};
+import { url, headers, getLogOutPosition } from './utils.js'
 
-const getLogOutPosition = () => {
-  const logOutElement = document.querySelector(".LogoLogOut");
-  if (!logOutElement) {
-    return {
-      x: 0,
-      y: 0,
-    };
-  }
-
-  const logOutRect = logOutElement.getBoundingClientRect();
-  const logOutX = logOutRect.left;
-  const logOutY = logOutRect.top;
-  const logOutHeight = logOutRect.height;
-  const logOutWidth = logOutRect.width;
-  return {
-    x: logOutX - 50 + logOutWidth/2,
-    y: logOutY + logOutHeight,
-  };
-};
 
 const Chat = () => {
+    const [isDisabledButton, setIsDisabledButton] = useState(false);
 
     const [chats, setChats] = useState([])
+    const [connection, setConnection] = useState(null);
+
+    const updateChats = useCallback((dataChats) => {
+      setChats(prevChats => {
+        return prevChats.map(chat => {
+          if (chat.uuid === dataChats[0].uuid) {
+            return { ...chat, messages: dataChats[0].messages };
+          }
+          return chat;
+        });
+      });
+    }, []);
+
 
     useEffect(() => {
         async function fetchData() {
@@ -77,7 +69,54 @@ const Chat = () => {
         }
 
         fetchData();
-        }, []);
+
+        const socket = new WebSocket('wss://ohkhi5gvc3.execute-api.us-east-1.amazonaws.com/test/');
+
+        socket.onopen = () => {
+          console.log('Conexión establecida.');
+          setConnection(socket)
+          const user = JSON.parse(localStorage.getItem('user'));
+          const email = user.email;
+          socket.send(JSON.stringify({
+            "action": "setEmail",
+            "email": email,
+          }))
+        };
+
+        socket.onmessage = (event) => {
+          const data = JSON.parse(event.data);
+
+          if (data.status === 200 && data.action === "sendMessage") {
+            setInputMsg("")
+
+            // this renders the chat either way you send o receive a message
+            setRenderChat(data.chats)
+
+            // this updates the chat in the chats array
+            updateChats(data.chats);
+
+            // check if last message is from user's email
+            const user = JSON.parse(localStorage.getItem('user'));
+            const email = user.email;
+            const lastMessage = data.chats[0].messages[data.chats[0].messages.length - 1];
+            if (lastMessage.user !== email) {
+              alert("Un nuevo mensaje acaba de llegar.");
+            }
+          }
+          else if (data.status === 429 && data.action === "sendMessage") {
+            alert("Ha alcanzado el límite de mensajes por día. Intente mañana.")
+          }
+        };
+
+        socket.onclose = () => {
+          console.log('Conexión cerrada.');
+        };
+
+        return () => {
+          socket.close();
+          setConnection(null);
+        };
+      }, []);
 
     const [renderChat, setRenderChat] = useState([])
 
@@ -122,6 +161,7 @@ const Chat = () => {
     const [inputMsg, setInputMsg] = useState("")
 
     function enviarMsg() {
+      setIsDisabledButton(true);
       if (renderChat.length === 0) {
         alert("Seleccione un chat para enviar un mensaje.")
         return;
@@ -134,31 +174,18 @@ const Chat = () => {
       const user = JSON.parse(localStorage.getItem('user'));
       const email = user.email;
 
-      fetch(url + '/put-chat', {
-          method: 'PUT',
-          headers,
-          body: JSON.stringify({
-            'chat': renderChat[0].uuid,
-            'message': inputMsg,
-            'user': email
-          }),
-        }).then(response => response.json())
-          .then(data=> {
-              console.log(data)
-              if (data.status === 200) {
-                setInputMsg("")
-                setRenderChat(data.chats)
-                //renderChat[0] = data.chats[0]
-
-                const index = chats.findIndex((chat) => chat.uuid === data.chats[0].uuid);
-                if (index !== -1) {
-                  chats[index].messages = data.chats[0].messages;
-                }
-              }
-          })
-          .catch(error => {
-          });
-
+      if (connection) {
+        connection.send(JSON.stringify({
+          "action":"sendMessage",
+          "message":inputMsg,
+          "to":getEmail(renderChat[0]),
+          "fr":email,
+          "uuid": renderChat[0].uuid
+        }));
+      }
+      setTimeout(() => {
+        setIsDisabledButton(false);
+      }, 4000); // 4 seconds
     }
 
     const handleMsg = (event) => {
@@ -227,7 +254,7 @@ const Chat = () => {
                   {
                   IsOpen &&
                   <div className="modal" style={{left: logOutPosition.x, top:logOutPosition.y}}>
-                      
+
                       <div className="modal-content">
                           <button className="close-modal" onClick={OpenModal}>Cancelar</button>
                           <button onClick={handleLogout}>Cerrar Sesion</button>
@@ -281,7 +308,9 @@ const Chat = () => {
                 </div>
                 <div className="contenedor-enviar">
                   <input value={inputMsg} onChange={handleMsg} className="input-texto-chat" type="text" />
-                  <img onClick={enviarMsg} src={LogoEnviar} height={25} width={25}/>
+                  <button onClick={enviarMsg} className="boton-enviar-mensaje" disabled={isDisabledButton}>
+                    <img src={LogoEnviar} height={25} width={25}/>
+                  </button>
                 </div>
               </div>
             </div>

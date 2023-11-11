@@ -1,11 +1,12 @@
 import React, { useState, useRef } from 'react';
 import ErrorTextForm from './ErrorTextForm';
 import '../css/LoginContent.css';
-import url from './url.js';
 
 import Img_mentor_match from "../icons/mentor-match.png"
 import ojo_cerrado from "../icons/icons8-closed-eye-100.png"
 import ojo_abierto from "../icons/icons8-eye-100.png"
+
+import { url, headers } from './utils.js'
 
 function limpiarDatos(datos) {
   // Elimina caracteres especiales que puedan ser utilizados para inyectar código SQL
@@ -20,6 +21,7 @@ function limpiarDatos(datos) {
 }
 
 const LoginContent = () => {
+  const [isDisabled, setIsDisabled] = useState(false);
   // Define estados para el correo y la contraseña
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
@@ -48,6 +50,7 @@ const LoginContent = () => {
   // Función para manejar el envío del formulario
   const handleSubmit = (e) => {
     e.preventDefault();
+    setIsDisabled(true);
     // validacion si está ingresando un correo
     if (!email.trim()) {
       alert('Debe ingresar un correo electrónico.');
@@ -65,9 +68,6 @@ const LoginContent = () => {
     };
 
     console.log(body);
-    const headers = {
-      'Content-Type': 'application/json',
-    };
 
     fetch(url + "/login", {
       method: 'POST',
@@ -90,7 +90,7 @@ const LoginContent = () => {
           localStorage.setItem('isLog', true);
 
           window.location.href = '/home';
-        } 
+        }
         if (data.status === 404){
           setCorreoValido(false);
         }
@@ -100,19 +100,21 @@ const LoginContent = () => {
         if (data.status === 429){
           setManyAttemps(true);
         }
-        
       })
       .catch(error => {
         // Muestra un mensaje de error
         alert(error);
       });
+      setTimeout(() => {
+        setIsDisabled(false);
+      }, 4000); // 4 seconds
   };
 
   // logica para el ojito
   const [showPassword, setShowPassword] = useState(false);
   const handleShowPassword = () => {
     setShowPassword(!showPassword);
-  
+
     // Cambia la imagen de ojo cerrado a ojo abierto como una animación
     if (showPassword) {
       const img = document.querySelector(".eye-ac");
@@ -164,21 +166,21 @@ const LoginContent = () => {
                   placeholder = "******************"
                   required
                 />
-                {showPassword ? 
+                {showPassword ?
                   <img onClick={handleShowPassword} className='eye-ac' src={ojo_abierto} alt = "ojo_abierto" /> :
                   <img onClick={handleShowPassword} className='eye-ac' src={ojo_cerrado} alt = "ojo cerrado" />
                 }
               </div>
             </div>
             <ErrorTextForm texto="Contraseña incorrecta" boolean={ contrasenaValida }/>
-            <button className='btn' type="submit">INICIAR SESIÓN</button>
+            <button className='btn' type="submit" disabled={isDisabled}>INICIAR SESIÓN</button>
           </form>
           <ErrorTextForm texto="Has realizado muchos intentos. Intentalo de nuevo en 1 hora" boolean={!manyAttemps}/>
           <div className="form-footer">
             <div className="login-form-diveder">
               <p className="text-diveder">o</p>
             </div>
-            <p className="text-form-footer">Aun no te has registrado? <a href='/register' onClick={handleRegistrarse}>Registrate aquí</a></p>
+            <p className="text-form-footer">Aun no te has registrado? <a className="texto-registrate-aqui" href='/register' onClick={handleRegistrarse}>Registrate aquí</a></p>
           </div>
         </div>
         <div className="panel-login">
