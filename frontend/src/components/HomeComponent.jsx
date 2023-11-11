@@ -11,6 +11,7 @@ import LogoReservas from '../icons/icons8-calendario-64 (1).png';
 import LogoCurses from '../icons/icons8-assignment-64.png';
 import LogoRating from '../icons/icons8-calificación-48.png';
 import LogoLogOut from '../icons/icons8-logout-100.png';
+import DashBoards from '../icons/icons8-dashboards-64.png';
 import { getLogOutPosition } from "./utils.js";
 
 
@@ -67,10 +68,36 @@ const HomeComponent = () => {
     window.open(url, "_blank");
   }
 
+  //boton de dashboards
+  const [isAdmin, setIsAdmin] = useState(false);
+  const UrlMentorMatchUser = "https://fnac3oh84b.execute-api.us-east-1.amazonaws.com/prod/get-users";
+  
+  const user =  JSON.parse(window.localStorage.getItem('user')).email;
+
+  const body = {
+    'emails': [user]
+  }
+
+  fetch( UrlMentorMatchUser, {
+    method: 'POST',
+    body: JSON.stringify(body),
+  }).then(response => response.json())
+    .then(data => {
+      const infoUser = data.users;
+      setIsAdmin(infoUser[0].superuser);
+    })
+  
+  const handleDashboards = () => {
+    window.location.href = '/dashboards';
+  }
+
   return (
     <div className="Home">
       <div className="Frame1-Home"></div>
       <div className="Frame2-Home"></div>
+      {isAdmin && 
+        <img src={DashBoards} alt="boton-dashboards" className="toDashboards-ac" onClick={handleDashboards}/>
+      }
       <div className="HeaderHome">
         <Logo className = 'Logo'/>
         <h1>MentorMatch</h1>

@@ -8,11 +8,10 @@ import '../css/SoporteBtn.css'
 const SoporteBtn = () => {
     
     const goMentoMatchWhatsApp = async () => {
-        const url = 'https://wa.me/message/UXZOS5GAVXXNA1';
+        const url = 'https://api.whatsapp.com/send/?phone=51957214409&text=Hola&type=phone_number&app_absent=0';
         window.open(url, "_blank");
     }
-
-
+    
     return (
         <>
         <div className="soporte-btns-ac">
