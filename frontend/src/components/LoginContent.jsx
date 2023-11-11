@@ -7,6 +7,7 @@ import ojo_cerrado from "../icons/icons8-closed-eye-100.png"
 import ojo_abierto from "../icons/icons8-eye-100.png"
 
 import { url, headers } from './utils.js'
+import SoporteBtn from './SoporteBtn';
 
 function limpiarDatos(datos) {
   // Elimina caracteres especiales que puedan ser utilizados para inyectar código SQL
@@ -226,6 +227,7 @@ const LoginContent = () => {
       </div>
       <div className="Frame3"></div>
       <div className="Frame4"></div>
+      <SoporteBtn />
     </div>
   );
 };

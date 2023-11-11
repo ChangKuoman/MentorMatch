@@ -236,7 +236,7 @@ const Chat = () => {
 
 
     return (
-        <div>
+        <div onMouseLeave={handleMouseLeave}>
           <div className="HeaderHome">
             <Logo className = 'Logo'/>
               <h1>MentorMatch</h1>

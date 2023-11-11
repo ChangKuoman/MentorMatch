@@ -62,8 +62,16 @@
 }
 
 .contenedor-mas-grande-chat {
+    position: absolute;
+    top: 20%;
+    left: 10%;
+    width: 80%;
+    height: 70%;
+    margin: 0;
     display: flex;
     justify-content: center;
+    display: flex;
+    flex-direction: row;
 }
 
 .contenedor-grande-chat {
@@ -72,23 +80,32 @@
     padding: 10px;
     background-color: #c0f6fa;
     border-radius: 10px;
-    width: 800px;
-    height: 500px;
+    width: 100%;
+    height: 100%;
+    margin: 0;
 }
 
+
 .contenedor-izq-chat {
-    width: 250px;
+    width: 18%;
     padding: 10px;
     background-color: #defdff;
     border-radius: 10px;
+    margin: 0;
     margin-right: 10px;
 }
 
 .contenedor-der-chat {
-    width: 500px;
+    width: 80%;
     background-color: #defdff;
     border-radius: 10px;
     padding: 10px;
+    margin: 0;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
 }
 
 .texto-chats-chat {
@@ -107,20 +124,28 @@
 
 .email-seleccionado {
     font-weight: bold;
-    background-color: white;
+    background-color: rgb(77, 72, 72);
     padding: 10px;
+    color: aliceblue;
     border-radius: 10px;
 }
 
 .contenedor-enviar {
+    width: 90%;
     margin-bottom: 0;
     display: flex;
+
+    align-items: center;
+    justify-content: center;
 }
 
 .input-texto-chat {
-    width: 470px;
-    height: 20px;
+    width: 80%;
+    height: 100%;
     font-size: 15px;
+    border-radius: 8px;
+    padding-left: 10px;
+    padding-right: 10px;
 }
 
 .vacio-chat {
@@ -131,8 +156,11 @@
 
 .contenedor-vacio-chat {
     margin-bottom: 0px;
+    width: 90%;
+    height: 80%;
     display: flex;
     flex-direction: row;
+    
 }
 
 .contenedor-email-mensajes {
@@ -144,4 +172,60 @@
     border: none;
     margin: 0;
     background-color: transparent;
+}
+
+@media screen and (max-width: 1150px) {
+    .boton-chat{
+        font-size: 10px;
+    }
+    .contenedor-izq-chat{
+        width: 20%;
+    }
+    .contenedor-der-chat{
+        width: 78%;
+    }
+}
+
+@media screen and (max-width: 700px) {
+    .contenedor-mas-grande-chat{
+        top: 22%;
+    }
+    
+}
+
+@media screen and (max-width:450px) {
+    .contenedor-mas-grande-chat{
+        top: 22%;
+        left: 5% !important;
+        width: 90%;
+    }
+    .contenedor-grande-chat{
+        width: 100%;
+    }
+    .contenedor-der-chat{
+        width: 60%;
+    }
+    .email-seleccionado{
+        font-size: 12px;
+    }
+}
+
+@media screen and (max-width:370px) {
+    .contenedor-mas-grande-chat{
+        top: 25%;
+    }
+    .contenedor-mensajes{
+        height: 80%;
+        overflow: scroll;
+    }
+}
+
+@media screen and (max-width:330px) {
+    .contenedor-mas-grande-chat{
+        top: 27%;
+    }
+    .contenedor-mensajes{
+        height: 80%;
+        overflow: scroll;
+    }
 }
