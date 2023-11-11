@@ -1,6 +1,6 @@
 # Mentor Match 👩‍🏫📚
 
-![Logo](/frontend/src/css/LogoBlanco-removebg-preview.png)
+![Logo](frontend/src/icons/LogoBlanco-removebg-preview2.png)
 
 Mentor Match is a project developed by students from UTEC as a course project for PI3103. Mentor Match revolutionizes knowledge sharing among students with complementary skills and needs through an intuitive web application. With a sleek user interface inspired by Tinder's swipe feature, finding the perfect mentor becomes a highly engaging and interactive experience.
 
