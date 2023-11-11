@@ -8,6 +8,22 @@
     height: 100vh;
 }
 
+.toDashboards-ac{
+    position: absolute;
+    width: 50px;
+    height: 50px;
+    background: #001B48;
+    border-radius: 10px;
+    top: 15%;
+    left: 0.7%;
+    z-index: 15;
+    cursor: pointer;
+}
+
+.toDashboards-ac:hover{
+    background: #bec8da79;
+}
+
 .BloqueMid{
     width: 90%;
     height: 50%;
