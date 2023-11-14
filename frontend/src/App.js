@@ -35,6 +35,7 @@ function App() {
           <Route path='/feedback' element={isLog ? <Feedback/> : <Navigate to="/" />} />
           <Route path='/subscripciones' element={isLog ? <Subscription/> : <Navigate to="/" />} />
           <Route path='/admin' element={isLog ? <Admin/> : <Navigate to="/" />} />
+          <Route path='/dashboards' element={isLog ? <dashboards/> : <Navigate to="/" />} />
           <Route path='/*' element={<PageNotFound/>} />
         </Routes >
     </div>
