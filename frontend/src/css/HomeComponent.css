@@ -14,7 +14,7 @@
     height: 50px;
     background: #001B48;
     border-radius: 10px;
-    top: 15%;
+    top: 20%;
     left: 0.7%;
     z-index: 15;
     cursor: pointer;
@@ -85,7 +85,7 @@
 }
 
 .HeaderHome{
-    position: absolute;
+    position: fixed;
     width: 100%;
     height: 10%;
     top: 0;
@@ -209,7 +209,7 @@
 }
 
 .premiun-bar{
-    position: absolute;
+    position: fixed;
     width: 30%;
     height: 5%;
     bottom: 3%;
@@ -292,6 +292,10 @@
         top: 107% !important;
         left: 60% !important ;
     }
+    .toDashboards-ac{
+        top: 22%;
+        left: 1.2%;
+    }
 }
 
 @media screen and (min-width: 501px) and (max-width: 700px){
@@ -306,10 +310,21 @@
     }
 }
 
+@media screen and (min-width: 688px) and (max-height: 1031px) {
+    .toDashboards-ac{
+        top:15%
+    }
+}
+
 @media screen and (max-width: 375px){
     .premiun-bar{
         font-size: 15px !important;
         width: auto;
         padding-right: 10px;
+    }
+
+    .toDashboards-ac{
+        top: 25%;
+        left: 2%;
     }
 }
