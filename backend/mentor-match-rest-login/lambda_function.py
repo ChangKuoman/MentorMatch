@@ -21,8 +21,8 @@ def verify_password(password, hashed_password):
     hash_object.update(password.encode('utf-8'))
     hashed_password_new = hash_object.hexdigest()
     return hashed_password_new == hashed_password
-
-
+ 
+ 
 def check_attributes(event, list_attributes):
     map = {
         "ok": True,
@@ -33,8 +33,8 @@ def check_attributes(event, list_attributes):
             map["needed"].append(attribute)
             map["ok"] = False
     return map
-
-
+ 
+ 
 def lambda_handler(event, context):
     try:
         # CHECK ATTRIBUTES IN EVENT
@@ -47,15 +47,15 @@ def lambda_handler(event, context):
                 "text": "Bad Request",
                 "error": error
             }
-
+            
         # OBTAIN ATTRIBUTES OF EVENT
         email = event["email"]
         password = event["password"]
-
+        
         # DYNAMODB CONNECTION
         dynamodb = boto3.resource('dynamodb')
         table_user = dynamodb.Table('mentor-match-user')
-
+        
         # VERIFIES IF EMAIL EXISTS
         response = table_user.get_item(Key={'email': email})
         if 'Item' not in response:
@@ -64,7 +64,7 @@ def lambda_handler(event, context):
                 "text": "Not Found",
                 "error": "Invalid email"
             }
-
+        
         item = response["Item"]
 
         # CHECK IF USER NOT IS BLOCKED
@@ -82,6 +82,7 @@ def lambda_handler(event, context):
                 table_user.put_item(Item=item)
                 table_user_data = dynamodb.Table('mentor-match-user-data')
                 response = table_user_data.get_item(Key={'email': email})
+                print(f"INF,{email}")
                 return {
                     "status": 200,
                     "text": "Ok",
@@ -98,7 +99,7 @@ def lambda_handler(event, context):
                     item["unlockDate"] = timestamp_to_str(current_timestamp_plus_one)
                 # UPDATE ATTEMPS
                 table_user.put_item(Item=item)
-
+                
                 return {
                     "status": 401,
                     "text": "Unauthorized",
