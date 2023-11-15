@@ -321,42 +321,7 @@ const Register = () => {
                 <p className="mentor-match-title">MENTOR MATCH</p>
                 <img src={Img_mentor_match} alt = "Imagen de Login" className="img-login"/>
             </div>
-            <div className="inf-mentor-match-r">
-                <section className="inf-bloque">
-                    <section className="inf-header">
-                        <p>¿Qué es Mentor Match?</p>
-                    </section>
-                    <section className="inf-content">
-                        <p>
-                            MentorMatch es una plataforma web diseñada para fomentar la colaboración entre estudiantes en el intercambio de conocimientos, en base a sus fortalezas académicas.
-                        </p>
-                    </section>
-                </section>
-                <section className="inf-bloque">
-                    <section className="inf-header">
-                        <p>¿Quiénes somos?</p>
-                    </section>
-                    <section className="inf-content">
-                        <p>
-                            Somos un equipo interdiciplinario que buscamos eliminar las barreras de aprendizaje de nuestros compañeros por intermedio de un aplicativo.
-                        </p>
-                    </section>
-                </section>
-                <section className="inf-bloque">
-                    <section className="inf-header">
-                        <p>Beneficios de Mentor Match</p>
-                    </section>
-                    <section className="inf-content">
-                    <p>
-                        Algunos de los beneficios que se obtiene por el uso de la aplicación son:</p>
-                    <ul>
-                        <li>Aprendizaje colaborativo gratuito.</li>
-                        <li>Fácil acceso de asesorías.</li>
-                        <li>Se adapta al cronograma personal.</li>
-                    </ul>
-                    </section>
-                </section>
-            </div>
+
         </div>
     )
 }

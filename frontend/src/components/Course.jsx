@@ -229,7 +229,7 @@ const Course = () => {
                                     <div className="contenedor-descripcion">{user.description}</div>
 
                                     <div className="tag-title">Cursos que domino</div>
-                                    <div className="contenedor-tags">
+                                    <div className="contenedor-tags control-overflow">
                                         {user.tags.map((tag) => (
                                             <div key= {tag} className="tag">
                                                 {tag}
