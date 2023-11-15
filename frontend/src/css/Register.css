@@ -260,3 +260,42 @@ div {
     height: auto;
   }
 }
+
+@media screen and (max-width: 376px) {
+  .login-form-group{
+    top: 75%;
+  }
+  .panel-login{
+    top: 26%;
+  }
+  .inf-mentor-match-r{
+    top: 160%;
+  }
+}
+
+@media screen and (max-width: 384px) {
+  .inf-mentor-match-r{
+    top: 165%;
+  }
+}
+
+@media screen and (max-width:285px) {
+  .title1{
+    font-size: 32px;
+  }
+  .mentor-match-title{
+    font-size: 32px;
+  }
+  .contenedor-formulario{
+    top: 80%;
+  }
+  .inf-mentor-match-r{
+    top: 207% !important;
+  }
+}
+
+@media screen and (max-height: 715px) and (max-width:1536px) {
+  .inf-mentor-match-r{
+    top: 120%;
+  }
+}
