@@ -37,8 +37,9 @@ function Admin() {
               onClick={() => setShow(false)}
               className='boton-descarga-15'
               data={csvData}
-              enclosingCharacter={`'`}
+              enclosingCharacter={`"`}
               filename={filename}
+              separator={"%%%"}
             >Descargar .cvs</CSVLink>
           </div>
         }
