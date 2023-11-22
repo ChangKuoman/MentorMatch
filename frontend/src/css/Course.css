@@ -71,6 +71,9 @@ h1{
     padding: 5px;
 
     font-size: 14px;
+
+    max-height: 100px;
+    overflow: auto;
 }
 
 .contenedor-grande {
@@ -384,7 +387,7 @@ select.classic:focus {
     .contenedor-filtro{
         width: auto;
     }
-    
+
 }
 
 @media screen and (max-width:450px) {
