@@ -9,6 +9,7 @@ import BotonBack from '../icons/deshacer 1boton-back.png';
 import BotonHome from '../icons/boton-home.png';
 import LogoLogOut from '../icons/icons8-logout-100.png';
 import LogoUser from '../icons/icons8-user-64.png';
+import ReportFlag from '../icons/report-flag.png';
 
 import { url, headers, listaCursos, setQualification, calcularEdad, hallarImagen, getLogOutPosition } from './utils.js';
 
@@ -158,6 +159,36 @@ const Course = () => {
         }
     }, [validUsers]);
 
+    function llamada(email) {
+        setExecuted(true);
+
+        setUsers(users.filter(user => user !== validUsers[validUsers.length - 1]))
+        setValidUsers(validUsers.slice(0, validUsers.length - 1));
+
+        const user = JSON.parse(localStorage.getItem('user'));
+        const my_email = user.email;
+
+        fetch(url + "/report", {
+            method: 'POST',
+            headers,
+            body: JSON.stringify({
+                'email': my_email,
+                'email_report': email
+            }),
+            }).then(response => response.json())
+            .then(data=> {
+                if (data.status === 200){
+                    console.log(data);
+                    alert("Usuario reportado con éxito")
+                } else {
+                }
+            })
+            .catch(error => {
+            });
+
+        console.log(email);
+    }
+
     return (
         <div onMouseLeave={handleMouseLeave}>
             <div className="HeaderHome">
@@ -212,7 +243,7 @@ const Course = () => {
                     {validUsers.map((user) => (
                         <div key={user.email} className="swipe" ref={user.email === users[users.length - 1].email ? lastItemRef : null}>
                             <div className="card">
-
+                            <div className="report-flag" onClick={() => llamada(user.email)}><img className="image-report-flag" src={ReportFlag} width={20} height={20}/></div>
                             <div className="contenedor-grande">
                                 <div className="div-izquierda">
 

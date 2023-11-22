@@ -409,3 +409,16 @@ select.classic:focus {
         top: 27%;
     }
 }
+
+.report-flag {
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 30px;
+    height: 30px;
+    margin-bottom: 0px;
+}
+
+.image-report-flag {
+    margin-top: 10px;
+}
