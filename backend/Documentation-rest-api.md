@@ -658,3 +658,26 @@ Error Handling: 400, 500
 | status | int | |
 | text | string | |
 | error | string | |
+
+
+### Report
+
+Endpoint: **/report** <br>
+HTTP Request: **POST** <br>
+Lambda Function Associated: mentor-match-rest-report <br>
+Description:
+- Adds report to mentor-match-report table
+
+Payload:
+
+| Key | Value | Restrictions |
+| :-- | :-- | --: |
+| email | string | |
+| email_report | string | |
+
+Response Examples:
+
+| Key | Value | Restrictions |
+| :-- | :-- | --: |
+| status | int | 200 |
+| text | string | "Ok" |

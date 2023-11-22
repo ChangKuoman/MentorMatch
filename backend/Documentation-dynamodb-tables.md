@@ -93,3 +93,13 @@ Table Name: **mentor-match-websocket-connection**
 | Field | Type | Description |
 |:---|:---|---:|
 | connectionId | string | Partition Key |
+
+## Table Report
+
+Table Name: **mentor-match-report**
+
+| Field | Type | Description |
+|:---|:---|---:|
+| uuid | string | Partition Key |
+| email_reported | string | |
+| email_report | string | |

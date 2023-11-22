@@ -160,10 +160,7 @@ const Course = () => {
     }, [validUsers]);
 
     function llamada(email) {
-        setExecuted(true);
 
-        setUsers(users.filter(user => user !== validUsers[validUsers.length - 1]))
-        setValidUsers(validUsers.slice(0, validUsers.length - 1));
 
         const user = JSON.parse(localStorage.getItem('user'));
         const my_email = user.email;
@@ -177,9 +174,12 @@ const Course = () => {
             }),
             }).then(response => response.json())
             .then(data=> {
+                console.log(data)
                 if (data.status === 200){
-                    console.log(data);
                     alert("Usuario reportado con éxito")
+                    setExecuted(true);
+                    setUsers(users.filter(user => user !== validUsers[validUsers.length - 1]))
+                    setValidUsers(validUsers.slice(0, validUsers.length - 1));
                 } else {
                 }
             })
