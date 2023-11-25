@@ -413,12 +413,26 @@ select.classic:focus {
 .report-flag {
     position: absolute;
     top: 0;
-    right: 0;
+    right: 1%;
     width: 30px;
     height: 30px;
     margin-bottom: 0px;
+    margin: 2px;
+    padding: 3px;
+
+    border-radius: 20%;
+
+    background: rgb(219, 86, 86);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+}
+
+.report-flag:hover{
+    background: rgba(177, 59, 59, 0.938);
 }
 
 .image-report-flag {
-    margin-top: 10px;
+    
 }
